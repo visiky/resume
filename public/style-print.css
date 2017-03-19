@@ -1,0 +1,247 @@
+@page {size: A4}
+
+body {
+  margin: 25px;
+  background:#fff;
+  line-height: 1;
+  font-family: 'Pingfang SC', 'Lantinghei SC', 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  -webkit-print-color-adjust: exact;
+  letter-spacing: 1px;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: inherit;
+}
+
+ul, ol {
+  list-style-type: none;
+}
+
+img {
+  border: none;
+  /* vertical-align: top; */
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: #000;
+}
+
+/*公共样式*/
+section{
+    margin:8px;
+}
+.section-header {
+  margin-bottom: 5px;
+  line-height: 1;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  font-size: 16px;
+  border-bottom: 1px solid rgb(221, 221, 221);
+}
+.section-header_title,
+.section-header_subtitle {
+  display: inline-block;
+  font-weight: 600;
+  font-family: 'Microsoft JhengHei', 'Microsoft YaHei', 'STHeiti SC', 'SimHei';
+}
+.section-header_subtitle{
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #999;
+}
+.section-body{
+   display: flex;
+}
+
+.list > li {
+  list-style: none;
+  margin-left: 1.3em;
+}
+.list > li  i {
+  margin:0 5px 0 -9px;
+}
+.content {
+  margin: 8px 20px 8px 0;
+  line-height: 1.5;
+  text-align: justify;
+}
+a:after{
+  content:'    ' attr(href) '';
+}
+/*基本信息*/
+.header-logo {
+  height: 40px;
+  line-height: 40px;
+  margin-bottom:5px;
+}
+
+.header-logo_fullname {
+  font-size: 38px;
+  font-family: 'PingHei', 'STHeiti SC', 'SimHei';
+  margin-left:10px;
+}
+
+.header-logo_jobtitle {
+  padding-left: 10px;
+  font-size: 18px;
+  color: #888;
+}
+.primary-info{
+  display: flex;
+  position: relative;
+  margin-left:30px;
+  margin-bottom:5px;
+}
+.primary-info-list{
+  flex:1;
+}
+.primary-info-list::before {
+  width: 1px;
+  content: '';
+  position: absolute;
+  height: 24px;
+  background: linear-gradient(to bottom,rgb(255, 255, 255) 80%,rgba(158, 158, 158, 0.05) 95%,rgba(158, 158, 158, 0.41));
+  top: -14px;
+  left: 0;
+}
+.primary-info-list::after {
+  width: 1px;
+  content: '';
+  position: absolute;
+  height: 22px;
+  background: linear-gradient(to bottom,rgb(255, 255, 255) 80%,rgba(241, 238, 238, 0.05) 95%,rgba(158, 158, 158, 0.41));
+  top: -12px;
+  z-index: 99;
+}
+.primary-info-list_contact{
+
+}
+.primary-info-list-item{
+ border-left: 1px solid rgba(158, 158, 158, 0.66);
+  position: relative;
+  padding: 10px 8px 0;
+  line-height: 14px;
+}
+.primary-info-list-item_blog a:after{
+  content:'';
+}
+.primary-info-list>li::before {
+  position: absolute;
+  content: "";
+  top: 16px;
+  left: -2.5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.primary-info-list>li:nth-child(n+1)::before {
+  background: rgb(63, 81, 181);
+}
+
+.primary-info-list>li:nth-child(n+2)::before {
+  background: rgb(0, 188, 212);
+}
+
+.primary-info-list>li:nth-child(n+3)::before {
+  background: rgb(255, 87, 34);
+}
+/*图标*/
+i.fa.fa-phone-square {
+  color: rgb(154, 205, 50);
+}
+
+i.fa.fa-envelope {
+  color: rgb(244, 67, 54);
+}
+i.fa.fa-rss-square {
+    color: rgb(65, 105, 225);
+}
+
+/*技能*/
+.skill-list--master{
+  flex:3;
+}
+.skill-list--practised{
+  flex:2;
+}
+.skill-list-item_name{
+  height: 20px;
+  line-height: 20px;
+  padding-left: 10px;
+  border-left: 3px solid;
+  background-color: #fff6dd;
+  border-color: #fdbc40;
+  overflow: hidden;
+  color: #ff742a;
+}
+.skill-list-item{
+  margin-right:15px;
+  font-size:14px;
+  line-height: 16px;
+}
+
+.skill-list--practised .skill-list-item_name{
+  color: #6e9c0f;
+  background-color: #eaf6d0;
+  border-color: #80bd01;
+}
+
+/*经验*/
+.experience{
+
+}
+.experience-list-item{
+  display: flex;
+  align-items: center;
+}
+.experience-list-item_img{
+  width: 64px;
+  margin: -30px 20px 0 -25px;
+}
+.experience-list-item_title{
+ position: relative;
+  margin-bottom: 2px;
+  line-height: 16px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.experience-list-item_title i{
+  margin:0 10px 0 10px;
+}
+.experience-list-item_detail p{
+  font-size:12px;
+  line-height: 15px;
+   text-indent:30px;
+}
+.experience-list-item .ref{
+   color: rgb(74, 72, 72);
+  font-style: italic;
+  font-size:10px;
+  margin:5px;
+}
+/*自我评价*/
+#appraisal p{
+  text-indent: 25px;
+  line-height: 20px;
+}
+
+@media print{
+  .toolBox{
+    display: none;
+  }
+  i.hidden_for_print{
+    display: inline-block;
+  }
+}
