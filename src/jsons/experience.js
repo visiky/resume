@@ -25,7 +25,7 @@ refLink:"http://139.199.178.135:8080"
   type:'resume_generator',
   title:'在线简历生成器',
   description:`从一个类似JSON数据的js文件读取数据,然后生成静态网页的简历生成器,使用了webpack和react技术`,
-refLink:"http://www.test.com"  
+refLink:"https://me-momo.github.io/resume/dist/"  
 },{
   imgUrl:'../public/swipe.svg',
   type:'jquery_plugin',
