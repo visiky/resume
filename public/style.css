@@ -1,5 +1,5 @@
 body {
-      margin: 50px auto;
+         padding: 50px;
     background: rgba(158, 158, 158, 0.23);
   line-height: 1;
   font-family: 'Pingfang SC', 'Lantinghei SC', 'Helvetica Neue', Helvetica, sans-serif;
@@ -13,7 +13,6 @@ body {
 div#root {
     background: rgb(255, 255, 255);
     padding: 80px 64px;
-    width: 1211px;
     margin: 0 auto;
 }
 h1, h2, h3, h4, h5, h6, p, ul, ol {
