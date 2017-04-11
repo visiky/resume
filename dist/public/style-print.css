@@ -4,6 +4,7 @@
 
 @media print {
   body {
+    margin:16 5px;
     background: #fff;
     line-height: 1;
     font-family: 'Pingfang SC', 'Lantinghei SC', 'Helvetica Neue', Helvetica, sans-serif;

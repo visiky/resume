@@ -26,7 +26,7 @@ const skills = {
         type: 'other',
         title: '其他',
         level: '',
-        description: ['掌握基本的数据结构和算法', '熟悉MySQL的使用,能编写简单的存储过程和触发器。', '了解基本的java语言,jsp开发', '了解基本的python知识，能够使用python进行爬虫开发']
+        description: ['掌握基本的数据结构和算法', '了解基本的java语言,jsp开发', '了解基本的python知识，能够使用python进行爬虫开发']
     }]
 }
 

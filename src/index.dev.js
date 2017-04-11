@@ -2,6 +2,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from './App';
+// import ProjectBox from './components/projectBox/index'
+
+
+// 引入css
+// require("../public/style.css");
+// require("../public/style-print.css");
 
 const rootEl = document.getElementById('root');
 render(
@@ -10,6 +16,13 @@ render(
     </AppContainer>,
     rootEl
 );
+// render(
+//     <AppContainer>
+//         <ProjectBox />
+//     </AppContainer>,
+//     rootEl
+// );
+
 
 if (module.hot) {
     module.hot.accept('./App', () => {
@@ -24,3 +37,14 @@ if (module.hot) {
         );
     });
 }
+// if (module.hot) {
+//     module.hot.accept('./components/projectBox/index', () => {
+//         const NextApp = require('./components/projectBox/index').default;
+//         render(
+//             <AppContainer>
+//                 <NextApp />
+//             </AppContainer>,
+//             rootEl
+//         );
+//     });
+// }
