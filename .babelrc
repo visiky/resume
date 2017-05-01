@@ -2,10 +2,12 @@
     "presets": [
         "es2015",
         "stage-0",
+        "stage-1",
         "react"
     ],
     "plugins": [
-        "react-hot-loader/babel"
+        "transform-class-properties",
+        "react-hot-loader/babel"        
     ],
     "env": {
         "production": {
@@ -17,6 +19,9 @@
             "plugins": [
                 "transform-react-jsx-source"
             ]
+        },
+        "test": {
+            "plugins": ["transform-es2015-modules-commonjs"]
         }
     }
 }

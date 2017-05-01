@@ -16,13 +16,6 @@ render(
     </AppContainer>,
     rootEl
 );
-// render(
-//     <AppContainer>
-//         <ProjectBox />
-//     </AppContainer>,
-//     rootEl
-// );
-
 
 if (module.hot) {
     module.hot.accept('./App', () => {
@@ -37,14 +30,3 @@ if (module.hot) {
         );
     });
 }
-// if (module.hot) {
-//     module.hot.accept('./components/projectBox/index', () => {
-//         const NextApp = require('./components/projectBox/index').default;
-//         render(
-//             <AppContainer>
-//                 <NextApp />
-//             </AppContainer>,
-//             rootEl
-//         );
-//     });
-// }

@@ -1,14 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin'),
+  OpenBrowserPlugin = require('open-browser-webpack-plugin');
+
+require('babel-polyfill');
 
 module.exports = {
   devtool: '#cheap-module-eval-source-map',
   entry: [
-    `webpack-dev-server/client?http://${process.env.npm_package_config_host}:${process.env.npm_package_config_port}`,
-    'webpack/hot/only-dev-server',
+    `webpack-dev-server/client?http://localhost:3000`,
+    'webpack/hot/dev-server',
     'react-hot-loader/patch',
-    './src/index.dev'
+    './src/app/main'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -23,19 +26,22 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html', // Load a custom template
       inject: 'body' // Inject all scripts into the body 
-    })
+    }),
+    new OpenBrowserPlugin({url: 'http://localhost:3000/',browser:'Google Chrome'})
   ],
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loaders: ['babel?retainLines=true'],
-      include: path.join(__dirname, 'src')
-    }, {
+      // loaders: ['babel-loader?retainLines=true'],
+      loaders: ['react-hot-loader/webpack','babel-loader?presets[]=es2015,presets[]=react'],
+      include: path.join(__dirname, 'src'),
+      exclude: /node_modules/
+    },{
       test: /\.css$/, // Only .css files
-      loader: 'style!css' // Run both loaders
-    }, {
+      loader: 'style-loader!css-loader' // Run both loaders
+    },{
       test: /\.less$/, // Only .css files
-      loader: 'style!css!less' // Run both loaders
+      loader: 'style-loader!css-loader!less-loader' // Run both loaders
     }]
   }
 };
