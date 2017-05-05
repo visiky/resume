@@ -4,33 +4,41 @@ import { setVisibilityForm } from '../actions';
 
 import LeftSection from './LeftSection';
 import RightSection from './RightSection';
+import ButtonGroup from './ButtonGroup';
 
-const FullWidthSection = ()=>{
-  return (
-    <div className="fullSection">
-      <LeftSection />
-      <RightSection />
-    </div>  
-  )
+
+class FullWidthSection extends Component{
+
+  constructor(){
+    super();
+    this.state = {
+      isPreview: false
+    }
+  }
+  handlePreview(){
+    this.setState({
+      isPreview: true
+    })
+  }
+  handleCanclePreview(){
+    this.setState({
+      isPreview: false
+    })
+  }
+  handlePrint(){
+      window.print(); 
+  }
+  render(){
+    return (
+      <div className="fullSection">
+        { !this.state.isPreview && <LeftSection ref="leftSection"/> }
+        <RightSection />
+        <ButtonGroup handlePreview = {this.handlePreview.bind(this)} handleCanclePreview = {this.handleCanclePreview.bind(this)} handlePrint = {this.handlePrint.bind(this)} isPreview = {this.state.isPreview}/> 
+      </div>  
+    )
+  } 
 }
 
 
-
-// const mapStateToProps = (state, ownProps) => {
-//     return {
-//       formSchema: state.formSchema
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch, ownProps) => ({
-//   setVisibilityForm: (index) => {
-//     dispatch(setVisibilityForm(index))
-//   }
-// })
-
-// const FullWidthSection = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(LeftSection)
 
 export default FullWidthSection;

@@ -3,19 +3,19 @@ import _ from 'lodash'
 
 
 const AppraisalBox = (props) => {
+    const customStyle = {
+        p :{
+            textIndent: "39px" ,lineHeight: "1.5em"
+        }
+    }
     return ( 
-        <section id = "appraisal"> 
-            <div className = "section-header" > 
-                <h2 className = "section-header_title"> 自我评价 </h2>
-            </div> 
-            <div className = "section-body"> 
-                { 
-                    props.appraisals.map((appraisal,index) => {
-                        return <p key={appraisal+'-'+index}>{ appraisal }</p>
-                    })
-                }
-            </div> 
-        </section>
+        <div>
+        {
+            props.appraisals.map((appraisal,index) => {
+                return <p key={appraisal+'-'+index} style={ customStyle.p }>{ appraisal }</p>
+            })
+        }
+        </div>
     )
 }
 

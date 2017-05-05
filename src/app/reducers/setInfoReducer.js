@@ -1,61 +1,160 @@
-// author：kasmine
-// [Reducer 的最佳实践](http://www.jianshu.com/p/938f8121ba0f)
-// 几个注意点： createReducer should be pure function,每一个函数只实现一个功能
+// author：kasmine [Reducer 的最佳实践](http://www.jianshu.com/p/938f8121ba0f) 几个注意点：
+// createReducer should be pure function,每一个函数只实现一个功能
+
+import {ActionTypes} from '../constants/actionTypes';
+import {isArray, isObject} from 'utils';
+import initialInfo from '../datas/resumeInfo';
 
 
-import { ActionTypes} from '../constants/actionTypes';
-import { isArray, isObject } from '../utils/filter';
+const setBasicInfo = (state, action) => {
+    let basicInfo = state.basicInfo;
 
-
-// /**
-//  * Reducer 生成器
-//  * 
-//  * @param {object|array} initialState 
-//  * @param {string} payload 
-//  * @returns 
-//  */
-// function createReducer(initialState,payload){
+    var nextStateItem = action.basicInfo,
+        prevStateItem = basicInfo;
     
-//     if(isArray(initialState)){
-//         // 两种情况：操作当前项 && 新添一项 判断action.type
-//         // 则此时 action[payload] 是state 中的一项
-//         return (state = initialState,action)=>{
-//             const actionType = action.type;
-//             if(/NEW/.test(actionType)){
-//                 // 新添操作                
-//                 return [...state,null];
-//             }else{
-//                 // 修改操作
-//                 var nextStateItem = action[payload],
-//                     prevStateItem = state[state.length-1];
-//                 if(!nextStateItem||prevStateItem===nextStateItem) return state;
-//                 // 修改state的最后一项，不是简单的替换，判断 action[payload]是否为对象
-//                 if(isObject(action[payload])){
-//                     nextStateItem = {...prevStateItem,...nextStateItem};
-//                 }
-//                 // 注意不要使用 splice 修改原变量 state 
-//                 return [...state.slice(0,-1),nextStateItem];
-//             }
-//         }
-//     }  
-//     return (state = initialState,action)=>{
-//         // 这里可以根据action.type 进行变换
-//         // 当发起的action错误时，不执行 TODO:? initialState 不可以返回 undefined
-//         if(!ActionTypes.hasOwnProperty(action.type)) return state;        
-//         if(!action[payload]||state===action[payload]) return state; 
-//         // 重写 state，覆盖相同属性
-//         return {...state,...action[payload]}
-//     }
-// }
+    if (nextStateItem == prevStateItem) 
+        return state;
+    if(nextStateItem == null) basicInfo = nextStateItem;
+    else {
+        basicInfo = {
+            ...prevStateItem,
+            ...nextStateItem
+        };
+    }    
+    return {
+        ...state,
+        basicInfo
+    };
+}
+
+const setExperience = (state, action) => {
+    let experiences = state.experiences;
+    // if(!action.payload||state===action.payload) return state; 重写 state，覆盖相同属性
+    var nextStateItem = action.experiences,
+        prevStateItem = experiences[experiences.length - 1];
+    if (prevStateItem === nextStateItem) 
+        return state;
+    
+    // 修改state的最后一项，不是简单的替换，判断 action.payload是否为对象
+    if (isObject(nextStateItem)) {
+        nextStateItem = {
+            ...prevStateItem,
+            ...nextStateItem
+        };
+    }
+    // 注意不要使用 splice 修改原变量 state
+    experiences = [
+        ...experiences.slice(0, -1),
+        nextStateItem
+    ];
+    return {
+        ...state,
+        experiences
+    };
+}
+
+const setSkill = (state, action) => {
 
 
+    let skills = state.skills;
+    var nextStateItem = action.skills,
+        prevStateItem = skills[skills.length - 1];
+    if (prevStateItem === nextStateItem) 
+        return state;
+    if (isObject(nextStateItem)) {
+        nextStateItem = {
+            ...prevStateItem,
+            ...nextStateItem
+        };
+    }
+    skills = [
+        ...skills.slice(0, -1),
+        nextStateItem
+    ];
+    return {
+        ...state,
+        skills
+    };
+}
+
+const setAppraisal = (state, action) => {
+
+    let appraisals = state.appraisals;
+    var nextStateItem = action.appraisals,
+        prevStateItem = appraisals[appraisals.length - 1];
+    if (prevStateItem === nextStateItem) 
+        return state;
+    
+    // if(nextStateItem === null)
+    appraisals = [
+        ...appraisals.slice(0, -1),
+        nextStateItem
+    ];
+    return {
+        ...state,
+        appraisals
+    };
+}
+
+// TODO: 进一步抽象
+const setNewExperience = (state, action) => {
+    let experiences = state.experiences;
+    if(experiences[experiences.length-1]==null){
+        return state;
+    }
+    experiences = [
+        ...experiences,
+        null
+    ];
+    return {
+        ...state,
+        experiences
+    };
+}
+
+const setNewSkill = (state, action) => {
+    let skills = state.skills;
+    if(skills[skills.length-1]==null){
+        return state;
+    }
+    skills = [
+        ...skills,
+        null
+    ];
+    return {
+        ...state,
+        skills
+    };
+}
+
+const setNewAppraisal = (state, action) => {
+    let appraisals = state.appraisals;
+    if(appraisals[appraisals.length-1]==null){
+        return state;
+    }
+    appraisals = [
+        ...appraisals,
+        null
+    ];
+    return {
+        ...state,
+        appraisals
+    };
+}
+
+const deleteInfo = (state, action) => {
+    let payload = action.payload;
+    if(!isObject(payload)) return state;
+    return { ...state,...payload };
+}
 
 
-// // 导出的是 slice reducer
-// export const basicInfo = createReducer({},'basicInfo');
-// export const experiences = createReducer([],'experiences');
-// export const skills = createReducer([],'skills');
-// export const appraisals = createReducer([],'appraisals'); 
+// 添加拖拽调整
+const adjustInfo = (state, action) => {
+    let payload = action.payload;
+    if(!isObject(payload)) return state;
+    return { ...state,...payload };
+}
 
 
 // 减少ruducer样板代码
@@ -69,76 +168,26 @@ function createReducer(initialState, handlers) {
     }
 }
 
-
-
-const setBasicInfo = (state,action) =>{
-    console.dir(state)
-    // if(!action[payload]||state===action[payload]) return state; 
-    // 重写 state，覆盖相同属性
-    let basicInfo = {...state,...action[payload]};
-    return basicInfo;
-}
-
-const setExperience = (state,action) =>{
-    console.dir(state)
-    // if(!action[payload]||state===action[payload]) return state; 
-    // 重写 state，覆盖相同属性
-    var nextStateItem = action[payload],
-        prevStateItem = state[state.length-1];
-    if(!nextStateItem||prevStateItem===nextStateItem) return state;
-    // 修改state的最后一项，不是简单的替换，判断 action[payload]是否为对象
-    if(isObject(action[payload])){
-        nextStateItem = {...prevStateItem,...nextStateItem};
-    }
-    // 注意不要使用 splice 修改原变量 state 
-    let experiences = [...state.slice(0,-1),nextStateItem];
-    return experiences;
-}
-
-const setSkill = (state,action) =>{
-    console.dir(state)
-    // if(!action[payload]||state===action[payload]) return state; 
-    // 重写 state，覆盖相同属性
-    var nextStateItem = action[payload],
-        prevStateItem = state[state.length-1];
-    if(!nextStateItem||prevStateItem===nextStateItem) return state;
-    // 修改state的最后一项，不是简单的替换，判断 action[payload]是否为对象
-    if(isObject(action[payload])){
-        nextStateItem = {...prevStateItem,...nextStateItem};
-    }
-    // 注意不要使用 splice 修改原变量 state 
-    let skills = [...state.slice(0,-1),nextStateItem];
-    return skills;
-}
-
-const setAppraisal = (state,action) =>{
-    console.dir(state)
-    // if(!action[payload]||state===action[payload]) return state; 
-    // 重写 state，覆盖相同属性
-    var nextStateItem = action[payload],
-        prevStateItem = state[state.length-1];
-    if(!nextStateItem||prevStateItem===nextStateItem) return state;
-    // 修改state的最后一项，不是简单的替换，判断 action[payload]是否为对象
-    if(isObject(action[payload])){
-        nextStateItem = {...prevStateItem,...nextStateItem};
-    }
-    // 注意不要使用 splice 修改原变量 state 
-    let appraisals = [...state.slice(0,-1),nextStateItem];
-    return appraisals;
-}
-
-const initialState = {
+let initialState = {
     basicInfo: {},
     experiences: [],
     skills: [],
     appraisals: []
 };
 
+// 注入我的个人信息
+initialState = initialInfo;
+
 const resumeInfo = createReducer(initialState, {
     'SET_BASIC_INFO': setBasicInfo,
     'SET_EXPERIENCE': setExperience,
     'SET_SKILL': setSkill,
-    'SET_APPRAISAL': setAppraisal
+    'SET_APPRAISAL': setAppraisal,
+    'SET_NEW_EXPERIENCE': setNewExperience,
+    'SET_NEW_SKILL': setNewSkill,
+    'SET_NEW_APPRAISAL': setNewAppraisal,
+    'DELETE_INFO': deleteInfo,
+    'ADJUST_INFO': adjustInfo
 });
 
 export default resumeInfo;

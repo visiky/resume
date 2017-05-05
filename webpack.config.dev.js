@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
-  OpenBrowserPlugin = require('open-browser-webpack-plugin');
+  OpenBrowserPlugin = require('open-browser-webpack-plugin'),
+  CopyWebpackPlugin = require('copy-webpack-plugin');
 
 require('babel-polyfill');
 
@@ -15,7 +16,15 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
+    // publicPath: "/dist/",
     filename: 'bundle.js'
+  },
+  resolve: {
+    alias: {
+      "less": path.join(__dirname,'./src/app/less'),
+      "constants": path.join(__dirname,'./src/app/constants'),
+      "utils": path.join(__dirname,'./src/app/utils')
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -27,7 +36,10 @@ module.exports = {
       template: 'src/index.html', // Load a custom template
       inject: 'body' // Inject all scripts into the body 
     }),
-    new OpenBrowserPlugin({url: 'http://localhost:3000/',browser:'Google Chrome'})
+    new OpenBrowserPlugin({url: 'http://localhost:3000/',browser:'Google Chrome'}),
+    new CopyWebpackPlugin([{
+      from: path.join(__dirname,'/public')   // 打包public静态资源
+    }])
   ],
   module: {
     loaders: [{
@@ -42,6 +54,9 @@ module.exports = {
     },{
       test: /\.less$/, // Only .css files
       loader: 'style-loader!css-loader!less-loader' // Run both loaders
+    },{
+      test: /\.(png|jpg)$/, 
+      loader: 'url-loader?limit=8196' 
     }]
   }
 };

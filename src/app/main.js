@@ -14,9 +14,9 @@ import rootReducer from './reducers';
 injectTapEventPlugin();
 
 // 添加样式
-import './less/layout.less';
-import './less/style.less';
-import './less/style-print.less';
+import 'less/layout.less';
+// import 'less/style.less';
+// import 'less/style-print.less';
 
 
 

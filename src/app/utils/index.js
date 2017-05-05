@@ -11,6 +11,10 @@ export const isObject = (obj) =>{
     return Object.prototype.toString.call(obj)==='[object Object]';
 }
 
+export const isString = (obj) =>{    
+    return Object.prototype.toString.call(obj)==='[object String]';
+}
+
 const TOOLS = {
     isArray: isArray,
     isObject: isObject

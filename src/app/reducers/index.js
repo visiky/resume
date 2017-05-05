@@ -15,9 +15,20 @@ const actionType = (state = 'SET_BASIC_INFO', action) => {
     }
 }
 
+const styleColor = (state = "#273F75", action) => {
+    switch (action.type) {
+        case 'SET_STYLE_COLOR':
+            return action.color;
+        default:
+            return state
+    }
+}
+
+
+
 
 const rootReducer = combineReducers({
-  resumeInfo,formSchema,actionType
+  resumeInfo,formSchema,actionType,styleColor
 });
 
 // here,this.state = {...,formSchema,actionType}

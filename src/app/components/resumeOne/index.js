@@ -1,31 +1,26 @@
 import React, { Component }from 'react';
-import SkillBox from './skillBox';
-import ExperienceBox from './experienceBox';
-import BasicInfoBox from './baseInfoBox';
-import AppraisalBox from './appraisalBox';
-import PrintButton from '../printButton';
+import _ from 'lodash';
+import EnhancedComponent from './EnhancedComponent';
+import SkillBox from './SkillBox';
+import ExperienceBox from './ExperienceBox';
+import BasicInfoBox from './BaseInfoBox';
+import AppraisalBox from './AppraisalBox';
 
-function Wrapper(props){
-	return <section id = {props.id} > 
-				<div className = "section-header" > 
-					<h2 className = "section-header_title" > {props.title} </h2> 
-					<h4 className = "section-header_subtitle" > {props.subtitle} </h4> 
-				</div> 
-				<div className = "section-body" >
-						{ props.children }
-				</div> 
-			</section>
-}
-
+import 'less/resumeOne.less';
 
 class ResumeOne extends Component {
 
 	constructor(props){
 		super(props);
 	}
+	
 
 	render(){
-		const { basicInfo, skills, appraisals, experiences } =this.props;
+		const { basicInfo, skills, appraisals, experiences } = this.props;
+		// 注意直接传入 SkillBox 即可
+		const EnhancedSkillBox = EnhancedComponent(SkillBox),
+			EnhancedAppraisalBox = EnhancedComponent(AppraisalBox),
+			EnhancedExperienceBox = EnhancedComponent(ExperienceBox);
 		return (
 			<div className = 'main' >
 				<header>
@@ -35,30 +30,9 @@ class ResumeOne extends Component {
 					</h1> 
 				</header> 
 				<BasicInfoBox basicInfo = {basicInfo} /> 
-				<Wrapper id="skill" title="技能" subtitle="">
-					<ul className='skill-list--master'>
-						{
-							skills.map(skill => {
-								<SkillBox  
-								skill = { skill }/>
-							})
-						} 
-					</ul> 	
-				</Wrapper>
-				<Wrapper id="experience" title="项目经验" subtitle="">
-					<ul className = 'list'>
-						{
-							experiences.map(experience => {
-								<ExperienceBox  
-								experience = { experience }/>
-							})
-						} 
-					</ul> 	
-				</Wrapper>
-				<AppraisalBox  
-					appraisals = { appraisals } 
-				/> 
-				<PrintButton />
+				<EnhancedSkillBox id="skill" title="技能" subtitle="" skills={skills}/>
+				<EnhancedExperienceBox id="experienceBox" title = "经历 && 经验" experiences = {experiences} />
+				<EnhancedAppraisalBox id = "appraisal" title = "自我评价" appraisals = { appraisals } /> 
 			</div>
 		)
 	}

@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
+import { isObject, isArray } from 'utils';
 
 const styles = {
-   button:{ margin: 12 }
+   button:{ margin: 5 }
 };
 class ButtonGroup extends Component{
   constructor(props){
@@ -22,20 +23,23 @@ class ButtonGroup extends Component{
 	// 				/>
     return (
 		<div>
-			<RaisedButton
-				onClick={this.props.handleClear}
-				label="清空"
-				labelPosition="before"
-				style={styles.button}
-				icon={<FontIcon className="fa fa-save" />}
-			/>
-			<RaisedButton
-				onClick={this.props.handleAdd}
-				label="新添"
-				labelPosition="before"
-				style={styles.button}
-				icon={<FontIcon className="fa fa-plus-square" />}
-			/>	
+				<RaisedButton
+					onClick={this.props.handleClear}
+					label="清空"
+					labelPosition="before"
+					style={styles.button}
+					icon={<FontIcon className="fa fa-save" />}
+				/>
+				{ 
+					(this.props.actionType !=='SET_BASIC_INFO') &&
+					 <RaisedButton
+							onClick={this.props.handleAdd}
+							label="新添"
+							labelPosition="before"
+							style={styles.button}
+							icon={<FontIcon className="fa fa-plus-square" />}
+						/>	
+				}
 		</div>
     )
   }
@@ -45,21 +49,26 @@ class InfoForm extends Component{
 	constructor(props){
 		super(props);
 
-		this.inputs = [];
 		this.handleChange = this.handleChange.bind(this);
 		// this.handleSave = this.handleSave.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
 		this.handleClear = this.handleClear.bind(this);
+		this.clearInputs = this.clearInputs.bind(this);
 	}
+	
+
 
 	getStyle(){
 		return {
-			display:'block'
+			display:'block',
+			width: '100%'
 		}
 	}
 
 	handleChange(e){
-		var payload = null,name = e.target.name,value = e.target.value;
+		var payload = null,
+			name = e.target.name,
+			value = e.target.value;
 		if(name){
 			payload = Object.assign({},payload,{[name]:value})        
 		}else{
@@ -69,33 +78,57 @@ class InfoForm extends Component{
 		this.props.setFormInfo({type,payload});
 	}
 	handleAdd(){
-
+		let type = 'NEW_SET', // 统一
+			payload = this.props.actionType;
+		this.props.newSetFormInfo({type,payload});
+		this.clearInputs();			
 	}
-	handleSave(){
-
+	clearInputs(){
+		for(let comp in this.refs){
+				if(!this.refs.hasOwnProperty(comp)) return;
+				let textFieldComp = this.refs[comp];
+				let $input = textFieldComp.input;
+				// 此处 当refs[comp]的input不是多个的时候，引用不到
+				if($input.nodeName !== 'INPUT'){
+						$input = $input.refs.input;
+				}
+				$input.value = null;
+				textFieldComp.state.hasValue = false;		
+			}			
 	}
 	handleClear(){
-		let type = 'CLEAR_'+this.props.actionType,
-				formSchema = this.props.formSchema,
-				payload = null;	
-		formSchema.map(fieldSchema => {
-        var name = fieldSchema["name"];			
-				payload = Object.assign({},payload,{[name]:''});
-		})
+		let type = 'CLEAR_SET', // 统一
+			payload = null,
+			actionType = this.props.actionType,
+			content = this.props.formDefaultValue;
+			
+		// if(isObject(content)){
+		// 	for(let key in content){
+		// 		content[key] = null;
+		// 	}
+		// }else{
+		// 	content = null;
+		// }
+		// 此处修复上方，修改状态后 无法实时更新的bug
+		content = null;
+		payload = {actionType,content};
+		
 		this.props.clearFormInfo({type,payload});
+		this.clearInputs();
 	}
 
 	// NOTE: TextFiled 的key很重要，影响是否重新渲染，不要选择index值
 	renderField(){
      const style = this.getStyle(),
-          formDefaultValue = this.props.formDefaultValue;         
+          formDefaultValue = this.props.formDefaultValue;  
       return (
         this.props.formSchema && this.props.formSchema.map((fieldSchema,index) => {
-              var name = fieldSchema["name"];
-              var defaultValue = formDefaultValue?formDefaultValue[name]:'';
-              fieldSchema = {...fieldSchema,name,defaultValue};
+              var name = fieldSchema["name"]||'';
+              var defaultValue = formDefaultValue && formDefaultValue[name] || (isArray(formDefaultValue) && formDefaultValue.join(",")) || formDefaultValue;
+							defaultValue = !isObject(defaultValue) ? defaultValue : '';
+							fieldSchema = { ...fieldSchema, name, defaultValue};
               return  <TextField key={'text-field-'+name} style={style} 
-                         {...fieldSchema} onChange={this.handleChange} 
+                         {...fieldSchema} onChange={this.handleChange} ref = {'text-field-'+name}
                        />
             })
           
@@ -103,13 +136,13 @@ class InfoForm extends Component{
    }
    render(){
      return (
-       <div style={{maxWidth:'380px',padding:'0 42px'}}>
+       <div style={{padding:'0 10px'}}>
           {
             this.renderField()
           }
-         <ButtonGroup 
-        	// handleAdd = { ()=>{console.log("add")} }
-					handleSave = { ()=>{} }
+         <ButtonGroup actionType = { this.props.actionType }
+        	handleAdd = { this.handleAdd }
+					// handleSave = { ()=>{} }
 					handleClear = { this.handleClear }
 			/>
       </div>
