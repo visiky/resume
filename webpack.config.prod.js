@@ -19,7 +19,7 @@ module.exports = {
       minChunks: Infinity,
       filename: 'vendor.bundle.js'
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(), // optimize
     new webpack.DefinePlugin({
       '__DEV__': false,
       'process.env': {

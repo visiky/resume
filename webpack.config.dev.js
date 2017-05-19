@@ -12,7 +12,7 @@ module.exports = {
     `webpack-dev-server/client?http://localhost:3000`,
     'webpack/hot/dev-server',
     'react-hot-loader/patch',
-    './src/app/main'
+    './src/main'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -21,9 +21,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "less": path.join(__dirname,'./src/app/less'),
-      "constants": path.join(__dirname,'./src/app/constants'),
-      "utils": path.join(__dirname,'./src/app/utils')
+      "less": path.join(__dirname,'./src/less'),
+      "constants": path.join(__dirname,'./src/constants'),
+      "utils": path.join(__dirname,'./src/utils'),
+      "components": path.join(__dirname,'./src/components')
     }
   },
   plugins: [
@@ -31,7 +32,7 @@ module.exports = {
       '__DEV__': true
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html', // Load a custom template
       inject: 'body' // Inject all scripts into the body 
@@ -52,7 +53,7 @@ module.exports = {
       test: /\.css$/, // Only .css files
       loader: 'style-loader!css-loader' // Run both loaders
     },{
-      test: /\.less$/, // Only .css files
+      test: /\.less$/, // Only .lcss files
       loader: 'style-loader!css-loader!less-loader' // Run both loaders
     },{
       test: /\.(png|jpg)$/, 

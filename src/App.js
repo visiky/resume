@@ -1,27 +1,18 @@
-import React,{ Component } from 'react';
-import { render } from 'react-dom';
+import React,{Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-// import Sidebar from './common/sidebar';
-
-import InfoForm from './app/components/infoForm';
+import FullWidthSection from './containers/FullWidthSection';
 
 
 class App extends Component{
-   
-   constructor(){
-     super();
-     this.state = {
-        formSchema: []
-     }
-   }
-   render(){
-     return (
-       <MuiThemeProvider>
-          <InfoForm formSchema={this.state.formSchema}/>
-      </MuiThemeProvider>
-     )
-   }
+    
+	render () {
+		return (
+            <MuiThemeProvider>           
+                <FullWidthSection />
+            </MuiThemeProvider>
+		);
+	}
 }
 
 export default App;
