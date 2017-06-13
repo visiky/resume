@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import EnhancedComponent from './EnhancedComponent';
-import SkillBox from './SkillBox';
-import ExperienceBox from './ExperienceBox';
-import BasicInfoBox from './BaseInfoBox';
-import AppraisalBox from './AppraisalBox';
-import 'less/resumeOne.less';
+import SkillBox from './components/SkillBox';
+import ExperienceBox from './components/ExperienceBox';
+import BasicInfoBox from './components/BaseInfoBox';
+import AppraisalBox from './components/AppraisalBox';
+import './index.less';
+import 'less/style.less';
+import 'less/style-print.less';
 
 class ResumeOne extends Component {
 

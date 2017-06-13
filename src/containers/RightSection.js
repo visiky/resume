@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import ResumeThree from '../components/resumeThree';
+import ResumeOne from 'components/resumeOne';
 import ResumeTwo from 'components/resumeTwo';
 import { deleteInfo, adjustInfo } from '../actions';
 
@@ -26,8 +26,8 @@ class RightSection extends Component {
 		return (
             <div className="rightSection">
 				{
+					(templateId == 1 && <ResumeOne {...this.props.resumeInfo} styleColor={this.props.styleColor} /> )||
 					(templateId == 2 && <ResumeTwo {...this.props.resumeInfo} styleColor={this.props.styleColor} />)
-				|| (templateId == 3 && <ResumeThree {...this.props.resumeInfo} styleColor={this.props.styleColor} /> )
 				}
             </div>
 		);

@@ -54,10 +54,10 @@ class SiderBarDrawer extends React.Component {
 					<span onClick={this.handleChangeStyleColor.bind(this,'#4edbe6')} style={{background:'#4edbe6'}}></span>
 					<span onClick={this.handleChangeStyleColor.bind(this,'#e63974')} style={{background:'#e63974'}}></span>  
 				</div>
-				<MenuItem>选择颜色风格</MenuItem> 
+				<MenuItem>选择简历风格</MenuItem> 
 				<div className='template-group' style={{ padding:'5px 16px'}}>
+					<span onClick={this.handleChangeTemplate.bind(this,'1')}>1</span>
 					<span onClick={this.handleChangeTemplate.bind(this,'2')}>2</span>
-					<span onClick={this.handleChangeTemplate.bind(this,'3')}>3</span>
 				</div>
 				</Drawer>
 			</div>
