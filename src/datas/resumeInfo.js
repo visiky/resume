@@ -1,14 +1,14 @@
 export default {
   basicInfo: {
     // 建议不超过20个词
-    fullname: 'wuming',
+    fullname: '无名儿',
     jobTitle: '前端开发工程师',
-    profile1: '华南理工大学 网络工程专业 2018届毕业生',
-    profile2: '2014-2016连续两年校三等奖学金·成绩排名13%',
-    profile3: '英语水平：CET6(515)',
+    profile1: '无名儿大学 网络工程专业 xxx届毕业生',
+    profile2: '2014-2016xxxx奖学金·成绩排名xx%',
+    profile3: '英语水平：CET6(xxx)',
     phone: '156****7119',
     email: '736****86@qq.com',
-    blog: 'http://www.cnblogs.com/kasmine/',
+    blog: 'http://www.xxx.com/xxx/',
     github: 'github.com/me-momo'
   },
   experiences: [
@@ -71,7 +71,6 @@ export default {
     }
   ],
   appraisals: [
-    '我是一个充满活力、积极向上的人。对前端领域由衷热爱。自学能力强，愿拼搏的人。具有良好的团队合作意识，工作态度认真，乐于专研新技术。期待能够加入一个具有geek氛' +
-      '围团队，和更多优秀的人一起学习'
+    '个人介绍～～～～～～～～～～～～'
   ]
 };
