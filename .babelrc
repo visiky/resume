@@ -7,7 +7,6 @@
     ],
     "plugins": [
         "transform-class-properties",
-        "react-hot-loader/babel",
         ["import", {
           "libraryName": "antd",
           "style": "css"

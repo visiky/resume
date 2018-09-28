@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
-import { isObject, isArray } from 'utils';
+import { isObject, isArray } from '../../utils';
 
 const styles = {
    button:{ margin: 5 }

@@ -24,7 +24,7 @@ class ResumeOne extends Component {
       EnhancedAppraisalBox = EnhancedComponent(AppraisalBox),
       EnhancedExperienceBox = EnhancedComponent(ExperienceBox);
     return (
-      <div className = 'main' >
+      <div className = 'main resume-one' >
         <header>
           <h1 className = "header-logo" >
             <span className = "header-logo_fullname" > { basicInfo.fullname } </span>

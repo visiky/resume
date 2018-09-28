@@ -50,14 +50,10 @@ class SiderBarDrawer extends React.Component {
 				<MenuItem>选择颜色风格</MenuItem> 
 				<div className='color-group' style={{ padding:'5px 16px'}}>
 					<span onClick={this.handleChangeStyleColor.bind(this,'#273f75')} style={{background:'#273f75'}}></span>
+					<span onClick={this.handleChangeStyleColor.bind(this,'#2B455F')} style={{background:'#2B455F'}}></span>  
 					<span onClick={this.handleChangeStyleColor.bind(this,'#398fe6')} style={{background:'#398fe6'}}></span>
-					<span onClick={this.handleChangeStyleColor.bind(this,'#4edbe6')} style={{background:'#4edbe6'}}></span>
-					<span onClick={this.handleChangeStyleColor.bind(this,'#e63974')} style={{background:'#e63974'}}></span>  
-				</div>
-				<MenuItem>选择简历风格</MenuItem> 
-				<div className='template-group' style={{ padding:'5px 16px'}}>
-					<span onClick={this.handleChangeTemplate.bind(this,'1')}>1</span>
-					<span onClick={this.handleChangeTemplate.bind(this,'2')}>2</span>
+					<span onClick={this.handleChangeStyleColor.bind(this,'#F79B13')} style={{background:'#F79B13'}}></span>
+					<span onClick={this.handleChangeStyleColor.bind(this,'#E32914')} style={{background:'#E32914'}}></span>  
 				</div>
 				</Drawer>
 			</div>
