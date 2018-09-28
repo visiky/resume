@@ -53,8 +53,6 @@
   "scripts": {
     "start": "node devServer.js",
     "clean": "rimraf dist",
-    "build:webpack": "webpack --progress --colors --config webpack.config.prod.js",
-    "build": "npm run clean && npm run build:webpack",
     "eslint": "eslint --ext *.js src",
     "test": "jest"
   },
