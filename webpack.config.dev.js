@@ -37,7 +37,7 @@ module.exports = {
       template: 'src/index.html', // Load a custom template
       inject: 'body' // Inject all scripts into the body 
     }),
-    new OpenBrowserPlugin({url: 'http://localhost:3000/',browser:'Google Chrome'}),
+    new OpenBrowserPlugin({url: 'http://localhost:3000/'}),
     new CopyWebpackPlugin([{
       from: path.join(__dirname,'/public')   // 打包public静态资源
     }])
