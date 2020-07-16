@@ -5,7 +5,7 @@
   "dependencies": {
     "antd": "^2.9.3",
     "babel-polyfill": "^6.23.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-event-listener": "^0.4.5",
@@ -35,7 +35,7 @@
     "jest-cli": "^19.0.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "material-ui": "^0.17.4",
     "open-browser-webpack-plugin": "0.0.5",
     "prop-types": "^15.5.8",
