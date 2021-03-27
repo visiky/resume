@@ -1,11 +1,12 @@
 @media print {
   @page {
-    size: A4
-  } 
+    size: A4;
+  }
   body {
     background: #fff;
     line-height: 1;
-    font-family: 'Pingfang SC', 'Lantinghei SC', 'Helvetica Neue', Helvetica, sans-serif;
+    font-family: 'Pingfang SC', 'Lantinghei SC', 'Helvetica Neue', Helvetica,
+      sans-serif;
     font-size: 14px;
     color: #333;
     -webkit-font-smoothing: antialiased;
@@ -74,11 +75,11 @@
   .section-body {
     display: flex;
   }
-  .list>li {
+  .list > li {
     list-style: none;
     margin-left: 1.3em;
   }
-  .list>li i {
+  .list > li i {
     margin: 0 5px 0 -9px;
   }
   .content {
@@ -119,7 +120,12 @@
     content: '';
     position: absolute;
     height: 24px;
-    background: linear-gradient(to bottom, rgb(255, 255, 255) 80%, rgba(158, 158, 158, 0.05) 95%, rgba(158, 158, 158, 0.41));
+    background: linear-gradient(
+      to bottom,
+      rgb(255, 255, 255) 80%,
+      rgba(158, 158, 158, 0.05) 95%,
+      rgba(158, 158, 158, 0.41)
+    );
     top: -14px;
     left: 0;
   }
@@ -128,11 +134,17 @@
     content: '';
     position: absolute;
     height: 22px;
-    background: linear-gradient(to bottom, rgb(255, 255, 255) 80%, rgba(241, 238, 238, 0.05) 95%, rgba(158, 158, 158, 0.41));
+    background: linear-gradient(
+      to bottom,
+      rgb(255, 255, 255) 80%,
+      rgba(241, 238, 238, 0.05) 95%,
+      rgba(158, 158, 158, 0.41)
+    );
     top: -12px;
     z-index: 99;
   }
-  .primary-info-list_contact {}
+  .primary-info-list_contact {
+  }
   .primary-info-list-item {
     border-left: 1px solid rgba(158, 158, 158, 0.66);
     position: relative;
@@ -142,22 +154,22 @@
   .primary-info-list-item_blog a:after {
     content: '';
   }
-  .primary-info-list>li::before {
+  .primary-info-list > li::before {
     position: absolute;
-    content: "";
+    content: '';
     top: 16px;
     left: -2.5px;
     width: 5px;
     height: 5px;
     border-radius: 50%;
   }
-  .primary-info-list>li:nth-child(n+1)::before {
+  .primary-info-list > li:nth-child(n + 1)::before {
     background: rgb(63, 81, 181);
   }
-  .primary-info-list>li:nth-child(n+2)::before {
+  .primary-info-list > li:nth-child(n + 2)::before {
     background: rgb(0, 188, 212);
   }
-  .primary-info-list>li:nth-child(n+3)::before {
+  .primary-info-list > li:nth-child(n + 3)::before {
     background: rgb(255, 87, 34);
   }
   /*图标*/
@@ -198,7 +210,8 @@
     border-color: #80bd01;
   }
   /*经验*/
-  .experience {}
+  .experience {
+  }
   .experience-list-item {
     display: flex;
     align-items: center;

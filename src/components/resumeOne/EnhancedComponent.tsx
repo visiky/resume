@@ -25,9 +25,9 @@ function EnhancedComponent(WrappedComponent){
 							<WrappedComponent {...passProps} />
 					</div> 
 				</section>
-			)
+			);
 		}
-	}
+	};
 }
 
 export default EnhancedComponent;

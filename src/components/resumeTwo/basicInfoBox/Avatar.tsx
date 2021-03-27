@@ -15,17 +15,17 @@ class Avatar extends React.Component {
             status: 'done',
             url: '/images/avatar.png',
           }]
-      }
+      };
       this.handleChange = this.handleChange.bind(this);
   }
   handleChange({ file, fileList}){
     if (file.status === 'error') {
-       console.log("here")
+       console.log('here');
     }
     this.setState({
         fileList:fileList,
         file:file
-    })
+    });
   }
 
   render() {
@@ -35,7 +35,7 @@ class Avatar extends React.Component {
             fileList={this.state.fileList}
             onChange={this.handleChange}>
             { this.state.fileList.length <= 0 && 
-            <div style={{ color: "rgba(0, 0, 0, 0.85)",fontWeight: 600,marginTop: "10px" }}>
+            <div style={{ color: 'rgba(0, 0, 0, 0.85)',fontWeight: 600,marginTop: '10px' }}>
                 <Icon type="plus"/>
                 <div className="ant-upload-text">Upload</div>
             </div>}
