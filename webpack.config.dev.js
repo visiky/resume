@@ -4,16 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
   OpenBrowserPlugin = require('open-browser-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin');
 
-require('babel-polyfill');
-
 module.exports = {
+  mode: 'development',
   devtool: '#cheap-module-eval-source-map',
-  entry: [
-    `webpack-dev-server/client?http://localhost:3000`,
-    'webpack/hot/dev-server',
-    'react-hot-loader/patch',
-    './src/main'
-  ],
+  entry: './src/main.tsx',
   output: {
     path: path.join(__dirname, 'dist'),
     // publicPath: "/dist/",
@@ -21,43 +15,46 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "less": path.join(__dirname,'./src/less'),
-      "constants": path.join(__dirname,'./src/constants'),
-      "utils": path.join(__dirname,'./src/utils'),
-      "components": path.join(__dirname,'./src/components')
-    }
+      "less": path.join(__dirname, './src/less'),
+      "constants": path.join(__dirname, './src/constants'),
+      "utils": path.join(__dirname, './src/utils'),
+      "components": path.join(__dirname, './src/components')
+    },
+    extensions: ['.tsx', '.ts', '.js', '.json', '.less', '.css']
   },
   plugins: [
     new webpack.DefinePlugin({
       '__DEV__': true
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html', // Load a custom template
       inject: 'body' // Inject all scripts into the body 
     }),
-    new OpenBrowserPlugin({url: 'http://localhost:3000/'}),
+    new OpenBrowserPlugin({ url: 'http://localhost:3000/' }),
     new CopyWebpackPlugin([{
-      from: path.join(__dirname,'/public')   // 打包public静态资源
+      from: path.join(__dirname, '/public')   // 打包public静态资源
     }])
   ],
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      // loaders: ['babel-loader?retainLines=true'],
-      loaders: ['react-hot-loader/webpack','babel-loader?presets[]=es2015,presets[]=react'],
-      include: path.join(__dirname, 'src'),
-      exclude: /node_modules/
-    },{
-      test: /\.css$/, // Only .css files
-      loader: 'style-loader!css-loader' // Run both loaders
-    },{
-      test: /\.less$/, // Only .lcss files
-      loader: 'style-loader!css-loader!less-loader' // Run both loaders
-    },{
-      test: /\.(png|jpg)$/, 
-      loader: 'url-loader?limit=8196' 
-    }]
+    rules: [
+      {
+        test: /\.tsx?$/,
+        // loaders: ['babel-loader?retainLines=true'],
+        use: 'babel-loader',
+        include: /src/,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.less$/i,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: 'url-loader?limit=8196'
+      }]
   }
 };
