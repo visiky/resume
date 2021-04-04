@@ -31,7 +31,6 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-react": "^7.23.1",
     "html-webpack-plugin": "^4.5.2",
-    "jest-cli": "^26.6.3",
     "less": "^3.7.1",
     "less-loader": "^4.1.0",
     "open-browser-webpack-plugin": "0.0.5",
@@ -55,22 +54,13 @@
   "scripts": {
     "start": "node devServer.js",
     "clean": "rimraf dist",
-    "eslint": "eslint --ext *.js src",
-    "test": "jest"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "modulePathIgnorePatterns": [
-      "<rootDir>/node_modules/"
-    ]
+    "eslint": "eslint --ext *.js src"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "devServer.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Me-Momo/resume.git"
+    "url": "git@github.com:visiky/resume.git"
   },
   "keywords": [
     "resume"
@@ -78,7 +68,7 @@
   "author": "kasmine <momo736929286@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Me-Momo/resume/issues"
+    "url": "https://github.com/visiky/resume/issues"
   },
-  "homepage": "https://github.com/Me-Momo/resume#readme"
+  "homepage": "https://github.com/visiky/resume#readme"
 }
