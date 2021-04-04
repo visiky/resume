@@ -1,13 +1,13 @@
-import React from 'react'
-import _ from 'lodash'
+import React from 'react';
+import _ from 'lodash';
 
-const AppraisalBox = (props) => {
+const AppraisalBox = props => {
   const customStyle = {
     p: {
       textIndent: '39px',
       lineHeight: '1.5em',
     },
-  }
+  };
   return (
     <div>
       {props.appraisals.map((appraisal, index) => {
@@ -15,10 +15,10 @@ const AppraisalBox = (props) => {
           <p key={appraisal + '-' + index} style={customStyle.p}>
             {appraisal}
           </p>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default AppraisalBox
+export default AppraisalBox;

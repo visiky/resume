@@ -1,26 +1,25 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import { isString } from 'utils'
+import React, { Component } from 'react';
+import _ from 'lodash';
 
 class BasicInfoList extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   normalizeConnectUrl(url) {
     let pattern1 = /(^(https:)?(\/\/)?www\.)/,
-      pattern2 = /(^(http:)?(\/\/)?www\.)/
+      pattern2 = /(^(http:)?(\/\/)?www\.)/;
     url =
       (pattern1.test(url) && url.replace(pattern1, '')) ||
       (pattern2.test(url) && url.replace(pattern2, '')) ||
-      url
-    return url
+      url;
+    return url;
   }
   render() {
-    const props = this.props
+    const props = this.props;
     const personalSkill = this.props.personalSkill
       ? this.props.personalSkill.split(',')
-      : []
+      : [];
     return (
       <div className="basic-info-list">
         <div className="basic-info-list-item">
@@ -82,15 +81,15 @@ class BasicInfoList extends Component {
           </div>
           <div className="content">
             <ul>
-              {[].map.call(personalSkill, (item) => {
+              {[].map.call(personalSkill, item => {
                 return (
                   item &&
-                  isString(item) && (
+                  _.isString(item) && (
                     <li className="list-item-md" key={'personal-skill-' + item}>
                       <img src="/images/cute.png" alt="" /> {item}
                     </li>
                   )
-                )
+                );
               })}
             </ul>
           </div>
@@ -136,8 +135,8 @@ class BasicInfoList extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default BasicInfoList
+export default BasicInfoList;

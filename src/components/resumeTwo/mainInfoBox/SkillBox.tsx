@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import showConfirm from 'components/common/Confirm'
-import DragWrapper from 'components/common/DragWrapper'
-import colorMap from 'constants/colorMap'
-import { Tooltip } from 'antd'
+import React, { Component } from 'react';
+import { Tooltip } from 'antd';
+import PropTypes from 'prop-types';
+import showConfirm from '../../common/Confirm';
+import DragWrapper from '../../common/DragWrapper';
+import colorMap from '../../../constants/colorMap';
 
-const statGroup = (number) => {
+const statGroup = number => {
   return (
     <span className="star-group">
       <i
@@ -30,11 +29,11 @@ const statGroup = (number) => {
         style={{ color: number >= 100 ? '#ffc300' : '#fff' }}
       ></i>
     </span>
-  )
-}
+  );
+};
 class SkillItem extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   render() {
     const {
@@ -46,12 +45,12 @@ class SkillItem extends Component {
       skillDescription3,
       skillDescription4,
       skillType,
-    } = this.props || {}
+    } = this.props || {};
     return skillType ? (
       <Tooltip placement="right" title={'右键删除,拖拽移动'}>
         <div
           className="section-list-item"
-          onContextMenu={(e) => this.props.handleContextMenu(index, e)}
+          onContextMenu={e => this.props.handleContextMenu(index, e)}
         >
           <h3
             className="section-list-item__title"
@@ -111,40 +110,40 @@ class SkillItem extends Component {
           </div>
         </div>
       </Tooltip>
-    ) : null
+    ) : null;
   }
 }
 
 class SkillBox extends Component {
   constructor(props) {
-    super(props)
-    this.moveItem = this.moveItem.bind(this)
-    this.handleContextMenu = this.handleContextMenu.bind(this)
+    super(props);
+    this.moveItem = this.moveItem.bind(this);
+    this.handleContextMenu = this.handleContextMenu.bind(this);
   }
 
   handleContextMenu(index, e) {
-    e.preventDefault()
+    e.preventDefault();
     showConfirm(null, '确定删除？').then(
-      (message) => {
-        let nextSkills = this.props.skills
-        nextSkills.splice(index, 1)
-        this.context.deleteInfo({ skills: nextSkills })
+      message => {
+        let nextSkills = this.props.skills;
+        nextSkills.splice(index, 1);
+        this.context.deleteInfo({ skills: nextSkills });
       },
-      (message) => {}
-    )
+      message => {}
+    );
   }
   moveItem(fromIndex, toIndex) {
-    let nextSkills = this.props.skills
-    ;[nextSkills[fromIndex], nextSkills[toIndex]] = [
+    let nextSkills = this.props.skills;
+    [nextSkills[fromIndex], nextSkills[toIndex]] = [
       nextSkills[toIndex],
       nextSkills[fromIndex],
-    ]
-    this.context.adjustInfo({ skills: nextSkills })
+    ];
+    this.context.adjustInfo({ skills: nextSkills });
   }
   render() {
     const styleColor = colorMap[this.props.styleColor],
       skills = this.props.skills,
-      DragItem = DragWrapper(SkillItem)
+      DragItem = DragWrapper(SkillItem);
     return (
       <div className="skill-box">
         {skills.map((skill, index) => {
@@ -157,14 +156,14 @@ class SkillBox extends Component {
               handleContextMenu={this.handleContextMenu}
               moveItem={this.moveItem}
             />
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 }
 SkillBox.contextTypes = {
   deleteInfo: PropTypes.func,
   adjustInfo: PropTypes.func,
-}
-export default SkillBox
+};
+export default SkillBox;

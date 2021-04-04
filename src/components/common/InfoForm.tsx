@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
-import _ from 'lodash'
-import PropTypes from 'prop-types'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import FontIcon from 'material-ui/FontIcon'
-import { isObject, isArray } from 'utils'
+import React, { Component } from 'react';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
 
 const styles = {
   button: { margin: 5 },
-}
+};
 class ButtonGroup extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   render() {
     //   const saveBtn = <RaisedButton
@@ -40,93 +39,86 @@ class ButtonGroup extends Component {
           />
         )}
       </div>
-    )
+    );
   }
 }
 
 class InfoForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
     // this.handleSave = this.handleSave.bind(this);
-    this.handleAdd = this.handleAdd.bind(this)
-    this.handleClear = this.handleClear.bind(this)
-    this.clearInputs = this.clearInputs.bind(this)
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleClear = this.handleClear.bind(this);
+    this.clearInputs = this.clearInputs.bind(this);
   }
 
   getStyle() {
     return {
       display: 'block',
       width: '100%',
-    }
+    };
   }
 
   handleChange(e) {
     var payload = null,
       name = e.target.name,
-      value = e.target.value
+      value = e.target.value;
     if (name) {
-      payload = Object.assign({}, payload, { [name]: value })
+      payload = Object.assign({}, payload, { [name]: value });
     } else {
-      payload = value
+      payload = value;
     }
-    const type = this.props.actionType
-    this.props.setFormInfo({ type, payload })
+    const type = this.props.actionType;
+    this.props.setFormInfo({ type, payload });
   }
   handleAdd() {
     let type = 'NEW_SET', // 统一
-      payload = this.props.actionType
-    this.props.newSetFormInfo({ type, payload })
-    this.clearInputs()
+      payload = this.props.actionType;
+    this.props.newSetFormInfo({ type, payload });
+    this.clearInputs();
   }
   clearInputs() {
     for (let comp in this.refs) {
-      if (!this.refs.hasOwnProperty(comp)) return
-      let textFieldComp = this.refs[comp]
-      let $input = textFieldComp.input
+      if (!this.refs.hasOwnProperty(comp)) return;
+      let textFieldComp = this.refs[comp];
+      let $input = textFieldComp.input;
       if ($input.nodeName !== 'INPUT') {
-        $input = $input.refs.input
+        $input = $input.refs.input;
       }
-      $input.value = null
-      textFieldComp.state.hasValue = false
+      $input.value = null;
+      textFieldComp.state.hasValue = false;
     }
   }
   handleClear() {
     let type = 'CLEAR_SET', // 统一
       payload = null,
       actionType = this.props.actionType,
-      content = this.props.formDefaultValue
+      content = this.props.formDefaultValue;
 
-    // if(isObject(content)){
-    // 	for(let key in content){
-    // 		content[key] = null;
-    // 	}
-    // }else{
-    // 	content = null;
-    // }
     // 此处修复上方，修改状态后 无法实时更新的bug
-    content = null
-    payload = { actionType, content }
+    content = null;
+    payload = { actionType, content };
 
-    this.props.clearFormInfo({ type, payload })
-    this.clearInputs()
+    this.props.clearFormInfo({ type, payload });
+    this.clearInputs();
   }
 
   // NOTE: TextFiled 的key很重要，影响是否重新渲染，不要选择index值
   renderField() {
     const style = this.getStyle(),
-      formDefaultValue = this.props.formDefaultValue
+      formDefaultValue = this.props.formDefaultValue;
     return (
       this.props.formSchema &&
       this.props.formSchema.map((fieldSchema, index) => {
-        var name = fieldSchema['name'] || ''
+        var name = fieldSchema['name'] || '';
         var defaultValue =
           (formDefaultValue && formDefaultValue[name]) ||
-          (isArray(formDefaultValue) && formDefaultValue.join(',')) ||
-          formDefaultValue
-        defaultValue = !isObject(defaultValue) ? defaultValue : ''
-        fieldSchema = { ...fieldSchema, name, defaultValue }
+          (_.isArray(formDefaultValue) && formDefaultValue.join(',')) ||
+          formDefaultValue;
+        defaultValue = !_.isObject(defaultValue) ? defaultValue : '';
+        fieldSchema = { ...fieldSchema, name, defaultValue };
         return (
           <TextField
             key={'text-field-' + name}
@@ -135,9 +127,9 @@ class InfoForm extends Component {
             onChange={this.handleChange}
             ref={'text-field-' + name}
           />
-        )
+        );
       })
-    )
+    );
   }
   render() {
     return (
@@ -150,12 +142,12 @@ class InfoForm extends Component {
           handleClear={this.handleClear}
         />
       </div>
-    )
+    );
   }
 }
 
 InfoForm.propsTypes = {
   formSchema: PropTypes.array,
-}
+};
 
-export default InfoForm
+export default InfoForm;

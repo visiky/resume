@@ -74,4 +74,4 @@ export default {
     },
   ],
   appraisals: ['个人介绍～～～～～～～～～～～～'],
-}
+};

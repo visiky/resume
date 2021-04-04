@@ -1,54 +1,53 @@
-import React from 'react'
-import Drawer from 'material-ui/Drawer'
-import MenuItem from 'material-ui/MenuItem'
-import RaisedButton from 'material-ui/RaisedButton'
-import DropDownMenu from 'material-ui/DropDownMenu'
+import React from 'react';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class SiderBarDrawer extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { open: false, styleColor: '#273f75' }
-    this.handleToggle = this.handleToggle.bind(this)
-    this.handleChangeStyleColor = this.handleChangeStyleColor.bind(this)
+    super(props);
+    this.state = { open: false, styleColor: '#273f75' };
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleChangeStyleColor = this.handleChangeStyleColor.bind(this);
   }
 
   handleToggle() {
-    this.setState({ open: !this.state.open })
+    this.setState({ open: !this.state.open });
   }
 
   handleClose(index) {
-    this.setState({ open: false })
-    this.props.stepMove(index)
+    this.setState({ open: false });
+    this.props.stepMove(index);
   }
 
   handleChangeStyleColor(color) {
-    this.setState({ styleColor: color })
-    this.props.setStyleColor(color)
+    this.setState({ styleColor: color });
+    this.props.setStyleColor(color);
   }
 
   handleChangeTemplate(templateId) {
-    this.props.setTemplate(templateId)
+    this.props.setTemplate(templateId);
   }
   render() {
     return (
       <div className="sider-bar-drawer">
-        <RaisedButton label="打开设置菜单" onTouchTap={this.handleToggle} />
+        <RaisedButton label="打开设置菜单" onClick={this.handleToggle} />
         <Drawer
           docked={false}
           width={200}
           open={this.state.open}
-          onRequestChange={(open) => this.setState({ open })}
+          onRequestChange={open => this.setState({ open })}
         >
-          <MenuItem onTouchTap={this.handleClose.bind(this, 0)}>
+          <MenuItem onClick={this.handleClose.bind(this, 0)}>
             基本信息
           </MenuItem>
-          <MenuItem onTouchTap={this.handleClose.bind(this, 1)}>
+          <MenuItem onClick={this.handleClose.bind(this, 1)}>
             工作经历
           </MenuItem>
-          <MenuItem onTouchTap={this.handleClose.bind(this, 2)}>
+          <MenuItem onClick={this.handleClose.bind(this, 2)}>
             技能证书
           </MenuItem>
-          <MenuItem onTouchTap={this.handleClose.bind(this, 3)}>
+          <MenuItem onClick={this.handleClose.bind(this, 3)}>
             自我评价
           </MenuItem>
           <MenuItem>选择颜色风格</MenuItem>
@@ -76,7 +75,7 @@ class SiderBarDrawer extends React.Component {
           </div>
         </Drawer>
       </div>
-    )
+    );
   }
 }
-export default SiderBarDrawer
+export default SiderBarDrawer;

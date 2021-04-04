@@ -11,4 +11,4 @@ export default {
   desktopDrawerMenuItemHeight: 48,
   desktopSubheaderHeight: 48,
   desktopToolbarHeight: 56,
-}
+};

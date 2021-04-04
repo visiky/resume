@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
-import FontIcon from 'material-ui/FontIcon'
+import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
 
 class ButtonGroup extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isPreview: false,
-    }
+    };
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
       isPreview: nextProps.isPreview,
-    })
+    });
   }
   render() {
     const styles = {
       button: {
         margin: '5px',
       },
-    }
+    };
     return (
       <div className="buttonGroupSection">
         {!this.state.isPreview && (
@@ -50,8 +50,8 @@ class ButtonGroup extends Component {
           </div>
         )}
       </div>
-    )
+    );
   }
 }
 
-export default ButtonGroup
+export default ButtonGroup;
