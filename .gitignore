@@ -19,6 +19,6 @@ package-lock.json
 .vscode
 
 
-# gatsby
-.cache
+# gatsby files
+.cache/
 public
