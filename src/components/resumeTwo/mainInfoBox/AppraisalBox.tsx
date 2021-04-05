@@ -1,24 +1,23 @@
-import React from 'react'
-import _ from 'lodash'
-import PropTypes from 'prop-types'
-import DragWrapper from 'components/common/DragWrapper'
-import showConfirm from 'components/common/Confirm'
-import { Tooltip } from 'antd'
+import React from 'react';
+import _ from 'lodash';
+import { Tooltip } from 'antd';
+import PropTypes from 'prop-types';
+import showConfirm from '../../common/Confirm';
 
 const AppraisalBox = (props, context) => {
-  const _context = context // issues：避免回调中访问不到context
+  const _context = context; // issues：避免回调中访问不到context
   const handleContextMenu = (e, index) => {
-    e.preventDefault()
+    e.preventDefault();
     showConfirm(null, '确定删除？').then(
-      (message) => {
-        let nextAppraisals = props.appraisals
-        nextAppraisals.splice(index, 1)
-        _context.deleteInfo({ appraisals: nextAppraisals })
+      message => {
+        let nextAppraisals = props.appraisals;
+        nextAppraisals.splice(index, 1);
+        _context.deleteInfo({ appraisals: nextAppraisals });
       },
-      (message) => {}
-    )
-  }
-  const appraisals = props.appraisals
+      message => {}
+    );
+  };
+  const appraisals = props.appraisals;
   return (
     <div className="appraisal-box">
       <div className="section-list-item">
@@ -32,21 +31,21 @@ const AppraisalBox = (props, context) => {
               <p
                 style={{ textIndent: '30px' }}
                 className="section-list-item__content"
-                onContextMenu={(e) => {
-                  handleContextMenu(e, index)
+                onContextMenu={e => {
+                  handleContextMenu(e, index);
                 }}
               >
                 {appraisal}
               </p>
             </Tooltip>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
 AppraisalBox.contextTypes = {
   deleteInfo: PropTypes.func,
-}
-export default AppraisalBox
+};
+export default AppraisalBox;

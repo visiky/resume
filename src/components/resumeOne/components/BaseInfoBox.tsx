@@ -1,25 +1,25 @@
-import React from 'react'
-import _ from 'lodash'
+import React from 'react';
+import _ from 'lodash';
 
-const BasicInfoBox = (props) => {
+const BasicInfoBox = props => {
   // let types = ["school", "apartment", "graduateTime", "phone", "blog", "email"],
   let basicInfo = props.basicInfo,
-    types = Object.keys(basicInfo)
-  types = types.map((type) => {
+    types = Object.keys(basicInfo);
+  types = types.map(type => {
     if (
       basicInfo.hasOwnProperty(type) &&
       Object.prototype.toString.call(type) == '[object String]' &&
       type !== 'fullname' &&
       type !== 'jobTitle'
     ) {
-      return type
+      return type;
     }
-  })
+  });
   // TODO: 这里需要强制刷新吗
   return (
     <section className="primary-info">
       <ul className="primary-info-list">
-        {types.map((type) => {
+        {types.map(type => {
           return (
             basicInfo[type] && (
               <li
@@ -36,11 +36,11 @@ const BasicInfoBox = (props) => {
                 &nbsp;<span>{basicInfo[type]}</span>
               </li>
             )
-          )
+          );
         })}
       </ul>
     </section>
-  )
-}
+  );
+};
 
-export default BasicInfoBox
+export default BasicInfoBox;

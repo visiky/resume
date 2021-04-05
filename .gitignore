@@ -17,3 +17,8 @@ package-lock.json
 
 # vscode editor
 .vscode
+
+
+# gatsby files
+.cache/
+public

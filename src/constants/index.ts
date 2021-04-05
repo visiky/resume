@@ -1,18 +1,17 @@
 import * as Actions from '../actions';
 
-
 export const actionTypeMapProp = {
-    SET_BASIC_INFO: 'basicInfo',
-    SET_EXPERIENCE: 'experiences',
-    SET_SKILL: 'skills',
-    SET_APPRAISAL: 'appraisals'
+  SET_BASIC_INFO: 'basicInfo',
+  SET_EXPERIENCE: 'experiences',
+  SET_SKILL: 'skills',
+  SET_APPRAISAL: 'appraisals',
 };
 
 export const actionTypeMapSetAction = {
-    SET_BASIC_INFO: Actions['setBasicInfo'],
-    SET_EXPERIENCE: Actions['setExperience'],
-    SET_SKILL: Actions['setSkill'],
-    SET_APPRAISAL: Actions['setAppraisal']
+  SET_BASIC_INFO: Actions['setBasicInfo'],
+  SET_EXPERIENCE: Actions['setExperience'],
+  SET_SKILL: Actions['setSkill'],
+  SET_APPRAISAL: Actions['setAppraisal'],
 };
 
 // export const actionTypeMapNewSetAction = {
@@ -30,8 +29,8 @@ export const actionTypeMapSetAction = {
 // }
 
 export const indexMapFormId = [
-    'BASIC_INFO',
-    'EXPERIENCE',
-    'SKILL',
-    'APPRAISAL'
+  'BASIC_INFO',
+  'EXPERIENCE',
+  'SKILL',
+  'APPRAISAL',
 ];

@@ -1,20 +1,21 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react';
+import _ from 'lodash';
 
 function BoxWrapper(WrappedComponent) {
   return class extends Component {
     constructor(props) {
-      super(props)
+      super(props);
     }
     render() {
       const id = this.props.id,
         title = this.props.title,
-        subtitle = this.props.subtitle
-      const passProps = _.omit(this.props, 'id', 'title')
+        subtitle = this.props.subtitle;
+      const passProps = _.omit(this.props, 'id', 'title');
       return (
         <section id={id}>
           <div className="section-header">
             <img
-              src={'/images/' + id + '.png'}
+              src={'images/' + id + '.png'}
               alt=""
               width="26px"
               height="26px"
@@ -25,9 +26,9 @@ function BoxWrapper(WrappedComponent) {
             <WrappedComponent {...passProps} />
           </div>
         </section>
-      )
+      );
     }
-  }
+  };
 }
 
-export default BoxWrapper
+export default BoxWrapper;
