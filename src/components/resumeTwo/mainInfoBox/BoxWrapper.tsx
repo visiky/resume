@@ -15,7 +15,7 @@ function BoxWrapper(WrappedComponent) {
         <section id={id}>
           <div className="section-header">
             <img
-              src={'/images/' + id + '.png'}
+              src={'images/' + id + '.png'}
               alt=""
               width="26px"
               height="26px"

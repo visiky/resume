@@ -1,5 +1,4 @@
 import React from 'react';
-// 添加 redux-devtools
 import { Provider } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStore } from 'redux';
@@ -16,11 +15,10 @@ const Page = () => {
     <React.Fragment>
       <Helmet>
         <title>Resume Generator</title>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="./font-awesome.min.css"
-        />
+        {/* for live demo */}
+        <link rel="stylesheet" href="/resume/font-awesome.min.css" />
+        {/* for local development */}
+        <link rel="stylesheet" href="/font-awesome.min.css" />
       </Helmet>
       <Provider store={store}>
         <App />

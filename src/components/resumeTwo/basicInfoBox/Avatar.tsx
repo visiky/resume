@@ -12,7 +12,7 @@ class Avatar extends React.Component {
           uid: -1,
           name: 'default.png',
           status: 'done',
-          url: '/images/avatar.png',
+          url: 'images/avatar.png',
         },
       ],
     };
