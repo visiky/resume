@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import showConfirm from '../../common/Confirm';
 import DragWrapper from '../../common/DragWrapper';
 import colorMap from '../../../constants/colorMap';
+import './SkillBox.less';
 
 const statGroup = number => {
   return (
