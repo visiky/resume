@@ -1,26 +1,25 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import showConfirm from 'components/common/Confirm'
-import DragWrapper from 'components/common/DragWrapper'
-import colorMap from 'constants/colorMap'
-import { Tooltip } from 'antd'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import showConfirm from '../../common/Confirm';
+import DragWrapper from '../../common/DragWrapper';
+import colorMap from '../../../constants/colorMap';
+import { Tooltip } from 'antd';
 
 class ExperienceItem extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   render() {
     const { styleColor, index, experienceType, imgUrl, experienceDescription } =
-      this.props || {}
+      this.props || {};
     return experienceType ? (
       <Tooltip placement="right" title={'右键删除,拖拽移动'}>
         <div
           className="section-list-item"
-          onContextMenu={(e) => this.props.handleContextMenu(index, e)}
+          onContextMenu={e => this.props.handleContextMenu(index, e)}
           title="右键删除"
         >
-          {((url) => {
+          {(url => {
             if (url)
               return (
                 <img
@@ -30,7 +29,7 @@ class ExperienceItem extends Component {
                   height="30px"
                   style={{ marginRight: '8px' }}
                 />
-              )
+              );
           })(imgUrl)}
           <div>
             <h3
@@ -45,39 +44,39 @@ class ExperienceItem extends Component {
           </div>
         </div>
       </Tooltip>
-    ) : null
+    ) : null;
   }
 }
 
 class ExperienceBox extends Component {
   constructor(props) {
-    super(props)
-    this.moveItem = this.moveItem.bind(this)
-    this.handleContextMenu = this.handleContextMenu.bind(this)
+    super(props);
+    this.moveItem = this.moveItem.bind(this);
+    this.handleContextMenu = this.handleContextMenu.bind(this);
   }
   handleContextMenu(index, e) {
-    e.preventDefault()
+    e.preventDefault();
     showConfirm(null, '确定删除？').then(
-      (message) => {
-        let nextExperiences = this.props.experiences
-        nextExperiences.splice(index, 1)
-        this.context.deleteInfo({ experiences: nextExperiences })
+      message => {
+        let nextExperiences = this.props.experiences;
+        nextExperiences.splice(index, 1);
+        this.context.deleteInfo({ experiences: nextExperiences });
       },
-      (message) => {}
-    )
+      message => {}
+    );
   }
   moveItem(fromIndex, toIndex) {
-    let nextExperiences = this.props.experiences
-    ;[nextExperiences[fromIndex], nextExperiences[toIndex]] = [
+    let nextExperiences = this.props.experiences;
+    [nextExperiences[fromIndex], nextExperiences[toIndex]] = [
       nextExperiences[toIndex],
       nextExperiences[fromIndex],
-    ]
-    this.context.adjustInfo({ experiences: nextExperiences })
+    ];
+    this.context.adjustInfo({ experiences: nextExperiences });
   }
   render() {
     const styleColor = colorMap[this.props.styleColor],
       experiences = this.props.experiences,
-      DragItem = DragWrapper(ExperienceItem)
+      DragItem = DragWrapper(ExperienceItem);
     return (
       <div className="experience-box">
         {experiences.map((experience, index) => {
@@ -90,16 +89,16 @@ class ExperienceBox extends Component {
               handleContextMenu={this.handleContextMenu}
               moveItem={this.moveItem}
             />
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 }
 
 ExperienceBox.contextTypes = {
   deleteInfo: PropTypes.func,
   adjustInfo: PropTypes.func,
-}
+};
 
-export default ExperienceBox
+export default ExperienceBox;

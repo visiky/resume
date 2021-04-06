@@ -1,25 +1,24 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import _ from 'lodash'
-import BasicInfoList from './BasicInfoList'
-import { Upload, Icon } from 'antd'
-import Avatar from './Avatar'
+import React, { Component } from 'react';
+import _ from 'lodash';
+import BasicInfoList from './BasicInfoList';
+import { Upload, Icon } from 'antd';
+import Avatar from './Avatar';
 
 class BasicInfoBox extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       file: null,
       fileList: [],
-    }
-    this.handleChange = this.handleChange.bind(this)
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
   shouldComponentUpdate() {
     // console.log("here")
-    return true
+    return true;
   }
   handleChange({ file, fileList }) {
-    this.setState({ file: file, fileList: fileList })
+    this.setState({ file: file, fileList: fileList });
   }
   render() {
     const customStyle = {
@@ -37,15 +36,15 @@ class BasicInfoBox extends Component {
         fontFamily: 'PingFangSC-Regular',
         fontSize: '18px',
       },
-    }
+    };
 
-    const { avatar, fullname, jobTitle } = this.props.basicInfo || {}
+    const { avatar, fullname, jobTitle } = this.props.basicInfo || {};
     const basicInfo = _.omit(
       this.props.basicInfo,
       'avatar',
       'fullname',
       'jobTitle'
-    )
+    );
     return (
       <div className="basic-info-box" style={customStyle.infoBox}>
         <div
@@ -60,8 +59,8 @@ class BasicInfoBox extends Component {
         </div>
         <BasicInfoList {...basicInfo} />
       </div>
-    )
+    );
   }
 }
 
-export default BasicInfoBox
+export default BasicInfoBox;

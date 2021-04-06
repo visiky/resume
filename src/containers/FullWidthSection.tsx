@@ -1,40 +1,38 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { setVisibilityForm } from '../actions'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import LeftSection from './LeftSection'
-import RightSection from './RightSection'
-import ButtonGroup from './ButtonGroup'
+import LeftSection from './LeftSection';
+import RightSection from './RightSection';
+import ButtonGroup from './ButtonGroup';
 
 class FullWidthSection extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       isPreview: false,
-    }
+    };
   }
   handlePreview() {
     this.setState({
       isPreview: true,
-    })
+    });
   }
   handleCanclePreview() {
     this.setState({
       isPreview: false,
-    })
+    });
   }
   handlePrint() {
-    window.print()
+    window.print();
   }
   getChildContext() {
     const isPreviewStyle = {
       margin: '0 auto',
       boxShadow: '1px 1px 3px 3px #d9d9d9',
-    }
+    };
     return {
       isPreviewStyle: this.state.isPreview ? isPreviewStyle : {},
-    }
+    };
   }
   render() {
     return (
@@ -48,12 +46,12 @@ class FullWidthSection extends Component {
           isPreview={this.state.isPreview}
         />
       </div>
-    )
+    );
   }
 }
 
 FullWidthSection.childContextTypes = {
   isPreviewStyle: PropTypes.object,
-}
+};
 
-export default FullWidthSection
+export default FullWidthSection;

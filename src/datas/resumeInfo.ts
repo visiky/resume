@@ -1,7 +1,7 @@
 export default {
   basicInfo: {
     // 建议不超过20个词
-    fullname: '无名儿',
+    fullname: '无名',
     jobTitle: '前端开发工程师',
     profile1: '无名儿大学 网络工程专业 xxx届毕业生',
     profile2: '2014-2016xxxx奖学金·成绩排名xx%',
@@ -9,7 +9,7 @@ export default {
     phone: '156****7119',
     email: '736****86@qq.com',
     blog: 'http://www.xxx.com/xxx/',
-    github: 'github.com/me-momo',
+    github: 'github.com/visiky',
   },
   experiences: [
     {
@@ -74,4 +74,4 @@ export default {
     },
   ],
   appraisals: ['个人介绍～～～～～～～～～～～～'],
-}
+};

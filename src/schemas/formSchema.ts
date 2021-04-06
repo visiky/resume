@@ -124,4 +124,4 @@ export const FORM_SCHEMA = {
       rowsMax: 10,
     },
   ],
-}
+};

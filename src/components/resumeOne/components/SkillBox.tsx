@@ -1,39 +1,39 @@
-import React from 'react'
-import _ from 'lodash'
-import 'less/variables.less'
+import React from 'react';
+import _ from 'lodash';
+import '@/less/variables.less';
 
-const SkillBox = (props) => {
+const SkillBox = props => {
   // TODO:接受一个level属性，定义样式
-  const skills = props.skills
-  const getSkillItemStyle = (skillLevel) => {
+  const skills = props.skills;
+  const getSkillItemStyle = skillLevel => {
     if (!skillLevel || skillLevel < 50) {
       let width =
-        skillLevel || skillLevel == '' ? 'max-content' : skillLevel + '%'
+        skillLevel || skillLevel == '' ? 'max-content' : skillLevel + '%';
       return {
         color: '@deep-green',
         backgroundColor: '#eaf6d0',
         borderColor: '#80bd01',
         width: width,
-      }
+      };
     } else {
       return {
         color: 'ff742a',
         backgroundColor: '#fff6dd',
         borderColor: '#fdbc40',
         width: skillLevel + '%',
-      }
+      };
     }
-  }
+  };
   return (
     <ul className="skill-list--master">
-      {skills.map((skill) => {
+      {skills.map(skill => {
         const {
           skillLevel,
           skillDescription1,
           skillDescription2,
           skillDescription3,
           skillType,
-        } = { ...skill }
+        } = { ...skill };
         return (
           skillType && (
             <li
@@ -77,10 +77,10 @@ const SkillBox = (props) => {
               </div>
             </li>
           )
-        )
+        );
       })}
     </ul>
-  )
-}
+  );
+};
 
-export default SkillBox
+export default SkillBox;

@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import _ from 'lodash'
-import BoxWrapper from './BoxWrapper'
-import SkillBox from './SkillBox'
-import ExperienceBox from './ExperienceBox'
-import AppraisalBox from './AppraisalBox'
+import React, { Component } from 'react';
+import _ from 'lodash';
+import BoxWrapper from './BoxWrapper';
+import SkillBox from './SkillBox';
+import ExperienceBox from './ExperienceBox';
+import AppraisalBox from './AppraisalBox';
 
 class MainInfoBox extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   shouldComponentUpdate(nextProps) {
-    return true
+    return true;
   }
 
   render() {
-    const { skills, appraisals, experiences, styleColor } = this.props
+    const { skills, appraisals, experiences, styleColor } = this.props;
     // 注意直接传入 SkillBox 即可
     const EnhancedSkillBox = BoxWrapper(SkillBox),
       EnhancedAppraisalBox = BoxWrapper(AppraisalBox),
-      EnhancedExperienceBox = BoxWrapper(ExperienceBox)
+      EnhancedExperienceBox = BoxWrapper(ExperienceBox);
     return (
       <div className="main-info-box">
         <EnhancedExperienceBox
@@ -41,8 +41,8 @@ class MainInfoBox extends Component {
           styleColor={styleColor}
         />
       </div>
-    )
+    );
   }
 }
 
-export default MainInfoBox
+export default MainInfoBox;

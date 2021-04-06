@@ -1,84 +1,50 @@
 {
   "name": "resume",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "antd": "^2.9.3",
     "material-ui": "^0.17.4",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-event-listener": "^0.4.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
     "redux": "^3.6.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.13",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/preset-env": "^7.13.12",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.13.0",
     "@types/material-ui": "^0.21.8",
     "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.3",
     "@types/react-redux": "^7.1.16",
-    "@types/react-tap-event-plugin": "^0.0.30",
-    "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
-    "copy-webpack-plugin": "^4.0.1",
-    "cross-env": "^2.0.1",
-    "css-loader": "^0.28.11",
-    "eslint": "^7.23.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-react": "^7.23.1",
-    "html-webpack-plugin": "^4.5.2",
-    "jest-cli": "^26.6.3",
-    "less": "^3.7.1",
-    "less-loader": "^4.1.0",
-    "open-browser-webpack-plugin": "0.0.5",
-    "postcss-import": "^14.0.0",
-    "postcss-loader": "^3.0.0",
+    "gatsby": "^2.26.1",
+    "gatsby-plugin-less": "^5.2.0",
+    "gh-pages": "^3.1.0",
+    "less": "^4.1.0",
+    "prettier": "2.2.1",
     "prop-types": "^15.5.8",
-    "react-hot-loader": "^4.13.0",
     "react-redux": "^5.0.4",
-    "react-tap-event-plugin": "^2.0.1",
-    "redux-devtools-extension": "^2.13.0",
     "redux-form": "^6.6.3",
     "rimraf": "^2.5.4",
-    "style-loader": "^2.0.0",
     "ts-loader": "^8.0.18",
-    "typescript": "^4.2.3",
-    "url-loader": "^4.1.1",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2"
+    "typescript": "^4.2.3"
   },
   "scripts": {
-    "start": "node devServer.js",
-    "clean": "rimraf dist",
-    "eslint": "eslint --ext *.js src",
-    "test": "jest"
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "clean": "gatsby clean",
+    "deploy": "npm run clean && gatsby build --prefix-paths && gh-pages -d public"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "modulePathIgnorePatterns": [
-      "<rootDir>/node_modules/"
-    ]
-  },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "main": "devServer.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Me-Momo/resume.git"
+    "url": "git@github.com:visiky/resume.git"
   },
   "keywords": [
     "resume"
   ],
-  "author": "kasmine <momo736929286@gmail.com>",
+  "author": "visiky <736929286@qq.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Me-Momo/resume/issues"
+    "url": "https://github.com/visiky/resume/issues"
   },
-  "homepage": "https://github.com/Me-Momo/resume#readme"
+  "homepage": "https://github.com/visiky/resume#readme"
 }

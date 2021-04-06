@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import _ from 'lodash'
-import EnhancedComponent from './EnhancedComponent'
-import SkillBox from './components/SkillBox'
-import ExperienceBox from './components/ExperienceBox'
-import BasicInfoBox from './components/BaseInfoBox'
-import AppraisalBox from './components/AppraisalBox'
-import './index.less'
-import 'less/style.less'
-import 'less/style-print.less'
+import React, { Component } from 'react';
+import _ from 'lodash';
+import '@/less/style.less';
+import '@/less/style-print.less';
+import EnhancedComponent from './EnhancedComponent';
+import SkillBox from './components/SkillBox';
+import ExperienceBox from './components/ExperienceBox';
+import BasicInfoBox from './components/BaseInfoBox';
+import AppraisalBox from './components/AppraisalBox';
+import './index.less';
 
 class ResumeOne extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-    const { basicInfo, skills, appraisals, experiences } = this.props
+    const { basicInfo, skills, appraisals, experiences } = this.props;
     // 注意直接传入 SkillBox 即可
     const EnhancedSkillBox = EnhancedComponent(SkillBox),
       EnhancedAppraisalBox = EnhancedComponent(AppraisalBox),
-      EnhancedExperienceBox = EnhancedComponent(ExperienceBox)
+      EnhancedExperienceBox = EnhancedComponent(ExperienceBox);
     return (
       <div className="main resume-one">
         <header>
@@ -43,8 +43,8 @@ class ResumeOne extends Component {
           appraisals={appraisals}
         />
       </div>
-    )
+    );
   }
 }
 
-export default ResumeOne
+export default ResumeOne;
