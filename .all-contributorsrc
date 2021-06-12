@@ -24,6 +24,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "fengchunsgit",
+      "name": "fengchun",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16862867?v=4",
+      "profile": "https://fengchunsgit.github.io/",
+      "contributions": [
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -31,5 +40,6 @@
   "projectOwner": "visiky",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "none"
 }
