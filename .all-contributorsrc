@@ -15,6 +15,15 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "joriewong",
+      "name": "Jared Wang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11408040?v=4",
+      "profile": "https://wongjorie.top",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
