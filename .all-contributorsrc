@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "visiky",
+      "name": "Visiky",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15646325?v=4",
+      "profile": "https://www.zhihu.com/people/visiky",
+      "contributions": [
+        "infra",
+        "test",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "resume",
+  "projectOwner": "visiky",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
