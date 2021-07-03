@@ -56,5 +56,7 @@ export type ResumeConfig = {
   }>;
 
   /** 自我介绍 */
-  aboutme?: string;
+  aboutme?: {
+    aboutme_desc: string;
+  };
 };

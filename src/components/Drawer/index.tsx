@@ -177,11 +177,7 @@ export const Drawer: React.FC<Props> = props => {
                         <span
                           onClick={() => {
                             const value = _.get(props.value, childrenDrawer);
-                            updateCurrentContent(
-                              module.key === 'aboutme'
-                                ? { aboutme: value }
-                                : value
-                            );
+                            updateCurrentContent(value);
                             setChildrenDrawer(module.key);
                           }}
                         >
@@ -207,9 +203,7 @@ export const Drawer: React.FC<Props> = props => {
               config={CONTENT_OF_MODULE[childrenDrawer]}
               value={currentContent}
               onChange={v => {
-                if (childrenDrawer === 'aboutme') {
-                  props.onValueChange(v);
-                } else if (_.endsWith(childrenDrawer, 'List')) {
+                if (_.endsWith(childrenDrawer, 'List')) {
                   const newValue = _.get(props.value, childrenDrawer, []);
                   if (currentContent) {
                     newValue[currentContent.dataIndex] = _.merge(

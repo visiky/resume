@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Rate, Tag } from 'antd';
+import { Rate, Tag } from 'antd';
 import moment from 'moment';
 import {
   MobileFilled,
@@ -8,8 +8,9 @@ import {
   TrophyFilled,
   CheckCircleFilled,
 } from '@ant-design/icons';
-import { ResumeConfig } from '../types';
 import _ from 'lodash';
+import { Avatar } from '../Avatar';
+import { ResumeConfig } from '../types';
 import './index.less';
 
 type Props = {
@@ -53,14 +54,14 @@ export const Resume: React.FC<Props> = props => {
   const awardList = _.get(value, 'awardList');
 
   /** 自我介绍 */
-  const aboutme = _.split(_.get(value, 'aboutme'), '\n');
+  const aboutme = _.split(_.get(value, ['aboutme', 'aboutme_desc']), '\n');
 
   return (
     <div className="resume-content">
       <div className="basic-info">
         {/* 头像 */}
         {!value?.avatar?.hidden && (
-          <Avatar src={value?.avatar?.src} className="avatar" />
+          <Avatar avatarSrc={value?.avatar?.src} className="avatar" />
         )}
         {/* 个人信息 */}
         <div className="profile">
