@@ -1,0 +1,83 @@
+.module-list {
+  .module-item {
+    > div:first-child {
+      &:hover {
+        cursor: pointer;
+      }
+      .item-icon {
+        margin-right: 8px;
+      }
+      .item-name {
+        font-family: roboto-medium;
+      }
+    }
+  }
+
+  .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    padding: 4px 0;
+    width: auto;
+  }
+
+  .ant-collapse-ghost
+    > .ant-collapse-item
+    > .ant-collapse-content
+    > .ant-collapse-content-box {
+    padding: 4px 0;
+  }
+
+  .no-content-panel {
+    .ant-collapse-content-box {
+      display: none;
+    }
+  }
+
+  .list-value-item {
+    margin-left: 20px;
+
+    > div:not(.btn-append) {
+      width: 100%;
+      padding: 4px 0;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+      color: rgba(0, 0, 0, 0.65);
+      font-size: 12px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      margin: 8px 0;
+      padding: 4px 12px;
+    }
+  }
+
+  .btn-append {
+    color: rgba(0, 0, 0, 0.45);
+    text-align: center;
+    font-size: 12px;
+    padding: 8px 0;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .list-value-item {
+    > div {
+      position: relative;
+
+      .anticon-delete {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: #fff;
+        padding: 7.5px 8px;
+        border-radius: 2px;
+        display: none;
+      }
+
+      &:hover .anticon-delete {
+        display: inline-block;
+      }
+    }
+  }
+}
