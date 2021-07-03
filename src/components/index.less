@@ -1,0 +1,57 @@
+/*
+* 全局变量
+*/
+@font-face {
+  font-family: 'roboto-regular';
+  src: url('https://dasstatic.alicdn.com/alisis3/fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'roboto-medium';
+  src: url('https://dasstatic.alicdn.com/alisis3/fonts/Roboto-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'roboto-light';
+  src: url('https://dasstatic.alicdn.com/alisis3/fonts/Roboto-Light.ttf');
+}
+
+body {
+  font-family: roboto-regular;
+  font-size: 14px; // normal-font-size
+
+  margin: 0 !important;
+
+  .page {
+    display: flex;
+    padding: 12px;
+
+    .btn-group {
+      margin-left: 12px;
+      display: block;
+
+      .ant-btn {
+        display: block;
+        margin-top: 8px;
+        width: 90px;
+      }
+    }
+  }
+}
+
+// 打印时的样式
+@media print {
+  @page {
+    size: A4;
+  }
+
+  body,
+  .page {
+    padding: 0;
+    margin: 0;
+  }
+
+  .btn-group {
+    display: none !important;
+  }
+}

@@ -11,9 +11,21 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-antd',
+      options: {
+        style: true,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-less',
       options: {
         strictMath: true,
+        lessOptions: {
+          javascriptEnabled: true,
+          modifyVars: {
+            'font-family': 'roboto-regular',
+          },
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
