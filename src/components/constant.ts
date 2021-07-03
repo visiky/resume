@@ -14,7 +14,7 @@ export const RESUME_INFO: ResumeConfig = {
   },
   educationList: [
     {
-      edu_time: ['2021-07-08', '2021-08-10'],
+      edu_time: ['2014-09-01', '2018-06-30'],
       school: '华南理工大学',
       major: '网络工程',
     },
@@ -95,7 +95,9 @@ export const RESUME_INFO: ResumeConfig = {
         '目前主要是 G2Plot 的核心负责人，日常也做做 AntV 系列产品相关工作：antv 官网、G、G2、G2Plot 以及周边一系列产品',
     },
   ],
-  aboutme: `🔭 I’m currently working on a BI department in Ant Group
-  🌱 I’m focus on data visualization and data analysis
-  📚 https://www.zhihu.com/people/visiky`,
+  aboutme: {
+    aboutme_desc: `🔭 I’m currently working on a BI department in Ant Group
+    🌱 I’m focus on data visualization and data analysis
+    📚 https://www.zhihu.com/people/visiky`,
+  },
 };
