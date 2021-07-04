@@ -29,20 +29,20 @@ export const RESUME_INFO: ResumeConfig = {
     {
       company_name: '数沃信息科技有限公司',
       department_name: '',
-      work_time: ['2017-03-08', '2017-05-10'],
+      work_time: ['2017-03', '2017-05'],
       work_desc:
         '前端实习生。主要负责数据挖掘分析后的可视化结果展现。使用的技术栈为：vue + echarts',
     },
     {
       company_name: '蚂蚁金服',
       department_name: '数据中台-大数据部',
-      work_time: ['2017-06-01', '2017-12-20'],
+      work_time: ['2017-06', '2017-12'],
       work_desc: '前端实习生，参与多类数据产品的研发工作。',
     },
     {
       company_name: '蚂蚁集团',
       department_name: '数据中台-大数据部',
-      work_time: ['2018-06-01', '2020-07-03'],
+      work_time: ['2018-06', '2020-07'],
       work_desc:
         '大型 BI 数据分析产品的可视化模块负责人。日常也负责数据可视化的开源技术建设，AntV 团队成员。',
     },

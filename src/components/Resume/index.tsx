@@ -191,6 +191,7 @@ export const Resume: React.FC<Props> = props => {
                       {work.company_name}
                       <span className="sub-info">{work.department_name}</span>
                     </b>
+                    <span className="info-time">{work.work_time.join(' - ')}</span>
                   </div>
                   <div>{work.work_desc}</div>
                 </div>
