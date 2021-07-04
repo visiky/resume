@@ -12,6 +12,9 @@ export type ResumeConfig = {
     mobile: string;
     email: string;
     github?: string;
+    zhihu?: string;
+    /** 工作经验 xx 年 */
+    workExpYear?: string;
   };
 
   /** 教育经历 */
@@ -19,10 +22,12 @@ export type ResumeConfig = {
     edu_time: [string | undefined, string | number];
     school: string;
     major?: string;
+    /** 学历 */
+    academic_degree?: string;
   }>;
 
   /** 工作经历 */
-  workList: Array<{
+  workExpList: Array<{
     company_name: string;
     department_name: string;
     work_time?: [string | undefined, string | number];
@@ -37,6 +42,8 @@ export type ResumeConfig = {
     project_role: string;
     /** 描述 */
     project_desc?: string;
+    /** 项目内容，负责内容 */
+    project_content?: string;
   }>;
 
   /** 个人技能 */
@@ -51,8 +58,16 @@ export type ResumeConfig = {
 
   /** 荣誉奖项 */
   awardList?: Array<{
+    // 奖项
     award_info: string;
-    award_time: string;
+    award_time?: string;
+  }>;
+
+  /** 作品 */
+  workList?: Array<{
+    work_name?: string;
+    work_desc?: string;
+    visit_link?: string;
   }>;
 
   /** 自我介绍 */
@@ -69,4 +84,4 @@ export type ThemeConfig = {
   color: string;
   /** tag 标签色 */
   tagColor: string;
-}
+};

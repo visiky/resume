@@ -93,10 +93,10 @@ const Page: React.FC = () => {
         <Resume value={config} theme={theme} />
         <Affix offsetTop={0}>
           <Button.Group className="btn-group">
-            <Print />
             <Button type="primary" disabled>
               主题配置
             </Button>
+            <Print />
             <Drawer
               value={config}
               onValueChange={onConfigChange}

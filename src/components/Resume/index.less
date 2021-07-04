@@ -34,12 +34,12 @@
 
   // 布局位置
   .basic-info {
-    padding: 18px 18px 18px 24px;
+    padding: 24px 18px 24px 24px;
   }
 
   .main-info {
     height: 100%;
-    padding: 32px 24px 24px 20px;
+    padding: 33px 24px 32px 20px;
     background: #f2f2f2;
   }
 
@@ -91,7 +91,7 @@
   }
 
   .basic-info .profile .profile-list {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 
     > div:not(:last-of-type) {
       margin-bottom: 4px;
@@ -122,13 +122,37 @@
   }
 
   // 非通用
-  .basic-info .section-award .award-time {
-    margin-right: 8px;
+  .basic-info section .sub-info {
+    color: rgba(0, 0, 0, 0.45);
+  }
+
+  .basic-info .section-award {
+    .sub-info {
+      font-size: 14px;
+      margin-left: 8px;
+    }
+  }
+
+  .basic-info .education-item {
+    &:not(:first-of-type) {
+      margin-top: 8px;
+    }
+  }
+
+  .basic-info .section-work {
+    > div {
+      line-height: 24px;
+    }
+
+    a.sub-info {
+      font-size: 12px;
+      margin-left: 8px;
+    }
   }
 
   // main-info 内容样式
   .main-info section {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 
     .section-header {
       display: flex;
@@ -163,11 +187,19 @@
         transform: rotate(45deg);
       }
     }
+
+    .section-detail {
+      letter-spacing: 1.2px;
+
+      &:not(:first-of-type) {
+        margin-top: 4px;
+      }
+    }
   }
 
   // 非通用
   .main-info .section-project,
-  .main-info .section-work {
+  .main-info .section-work-exp {
     .section-info .ant-tag {
       line-height: 20px;
       height: 20px;
@@ -175,7 +207,7 @@
     }
 
     .section-item:not(:first-of-type) {
-      margin-top: 12px;
+      margin-top: 18px;
     }
 
     .section-info .sub-info,

@@ -18,8 +18,9 @@ export const MODULES = [
   { name: '个人信息', icon: <ContactsTwoTone />, key: 'profile' },
   { name: '教育经历', icon: <ScheduleTwoTone />, key: 'educationList' },
   { name: '荣誉奖项', icon: <TrophyTwoTone />, key: 'awardList' },
-  { name: '个人技能', icon: <ToolTwoTone />, key: 'skillList' },
-  { name: '工作经历', icon: <GiftTwoTone />, key: 'workList' },
+  { name: '个人作品', icon: <ToolTwoTone />, key: 'workList' },
+  { name: '专业技能', icon: <ToolTwoTone />, key: 'skillList' },
+  { name: '工作经历', icon: <GiftTwoTone />, key: 'workExpList' },
   { name: '项目经历', icon: <RocketTwoTone />, key: 'projectList' },
   { name: '自我介绍', icon: <StarTwoTone />, key: 'aboutme' },
 ];
@@ -57,11 +58,16 @@ export const CONTENT_OF_MODULE = {
     },
     {
       type: 'input',
-      attributeId: 'other',
-      displayName: '其它',
+      attributeId: 'zhihu',
+      displayName: '知乎',
       cfg: {
-        placeholder: 'Other personal infomation, optional',
+        placeholder: 'Please input the link to visit your zhihu account, optional',
       },
+    },
+    {
+      type: 'input',
+      attributeId: 'workExpYear',
+      displayName: '工作经验',
     },
   ],
   educationList: [
@@ -102,7 +108,7 @@ export const CONTENT_OF_MODULE = {
       cfg: { autoSize: { minRows: 8 }, showCount: true },
     },
   ],
-  workList: [
+  workExpList: [
     {
       type: 'input',
       attributeId: 'work_time',
@@ -125,6 +131,23 @@ export const CONTENT_OF_MODULE = {
       type: 'textArea',
       attributeId: 'work_desc',
       displayName: '职位或描述',
+    },
+  ],
+  workList: [
+    {
+      type: 'input',
+      attributeId: 'work_name',
+      displayName: '作品名称',
+    },
+    {
+      type: 'input',
+      attributeId: 'work_desc',
+      displayName: '作品描述',
+    },
+    {
+      type: 'input',
+      attributeId: 'visit_link',
+      displayName: '作品链接',
     },
   ],
   skillList: [
@@ -169,7 +192,7 @@ export const CONTENT_OF_MODULE = {
   aboutme: [
     {
       type: 'textArea',
-      attributeId: 'aboutme',
+      attributeId: 'aboutme_desc',
       cfg: { autoSize: { minRows: 4 }, showCount: true },
     },
   ],

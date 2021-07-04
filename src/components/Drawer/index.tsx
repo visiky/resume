@@ -94,7 +94,7 @@ export const Drawer: React.FC<Props> = props => {
         onClick={() => setVisible(true)}
         style={props.style}
       >
-        打开配置
+        进行配置
       </Button>
       <AntdDrawer
         title={
@@ -187,8 +187,9 @@ export const Drawer: React.FC<Props> = props => {
                         header={
                           <span
                             onClick={() => {
-                              const value = _.get(props.value, childrenDrawer);
-                              updateCurrentContent(value);
+                              updateCurrentContent(
+                                _.get(props.value, module.key)
+                              );
                               setChildrenDrawer(module.key);
                             }}
                           >
@@ -248,7 +249,11 @@ export const Drawer: React.FC<Props> = props => {
             <FormCreator
               config={[
                 { type: 'input', attributeId: 'color', displayName: '主题色' },
-                { type: 'input', attributeId: 'tagColor', displayName: 'tag 标签色' },
+                {
+                  type: 'input',
+                  attributeId: 'tagColor',
+                  displayName: 'tag 标签色',
+                },
               ]}
               value={props.theme}
               onChange={v => {
