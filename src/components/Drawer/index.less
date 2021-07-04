@@ -25,6 +25,15 @@
     padding: 4px 0;
   }
 
+  // radio.group 复写
+  .ant-radio-button-wrapper {
+    border: none !important;
+  }
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+    background: none !important;
+  }
+  // radio.group 复写
+
   .no-content-panel {
     .ant-collapse-content-box {
       display: none;

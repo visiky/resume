@@ -24,6 +24,7 @@ module.exports = {
           javascriptEnabled: true,
           modifyVars: {
             'font-family': 'roboto-regular',
+            'primary-color': '#2f5785'
           },
         },
       },
