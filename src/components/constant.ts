@@ -22,7 +22,7 @@ export const RESUME_INFO: ResumeConfig = {
   awardList: [
     {
       award_info: '蚂蚁近卫军 优秀新人奖',
-      award_time: '2018.8',
+      award_time: '2018-08',
     },
   ],
   workList: [
