@@ -1,16 +1,22 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { Button, Affix } from 'antd';
+import { Button, Affix, Upload, message } from 'antd';
+import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
-import { ResumeConfig, ThemeConfig } from './types';
-import { RESUME_INFO } from './constant';
 import { Print } from './Print';
+import { RESUME_INFO } from './constant';
+import { copyToClipboard } from './helpers/copy-to-board';
+import { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
+import { getDevice } from './helpers/detect-device';
 
 const Page: React.FC = () => {
   const [config, setConfig] = useState<ResumeConfig>(RESUME_INFO);
-  const [theme, setTheme] = useState<ThemeConfig>({ color: '#2f5785', tagColor: '#8bc34a' });
+  const [theme, setTheme] = useState<ThemeConfig>({
+    color: '#2f5785',
+    tagColor: '#8bc34a',
+  });
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
@@ -21,6 +27,12 @@ const Page: React.FC = () => {
 
   const onThemeChange = useCallback((v: Partial<ThemeConfig>) => {
     setTheme(_.assign({}, theme, v));
+  }, []);
+
+  useEffect(() => {
+    if (getDevice() === 'mobile') {
+      message.info('移动端只提供查看功能，在线制作请前往 PC 端');
+    }
   }, []);
 
   const [box, setBox] = useState({ width: 0, height: 0, left: 0 });
@@ -48,6 +60,33 @@ const Page: React.FC = () => {
     };
   }, []);
 
+  const importConfig = (file: RcFile) => {
+    if (window.FileReader) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          if (reader.result) {
+            // @ts-ignore
+            const newConfig: ConfigProps = JSON.parse(reader.result);
+            onThemeChange(newConfig.theme);
+            onConfigChange(_.omit(newConfig, 'theme'));
+          }
+          message.success('上传配置已应用');
+        } catch (err) {
+          message.error('上传文件有误，请重新上传');
+        }
+      };
+      reader.readAsText(file);
+    } else {
+      message.error('您当前浏览器不支持 FileReader，建议使用谷歌浏览器');
+    }
+    return false;
+  };
+
+  const copyConfig = () => {
+    copyToClipboard(JSON.stringify({ ...config, theme }));
+  };
+
   return (
     <React.Fragment>
       <div className="page">
@@ -64,6 +103,18 @@ const Page: React.FC = () => {
               theme={theme}
               onThemeChange={onThemeChange}
             />
+            <Button.Group className="btn-group" style={{ marginLeft: 0 }}>
+              <Upload
+                accept=".json"
+                showUploadList={false}
+                beforeUpload={importConfig}
+              >
+                <Button>导入配置</Button>
+              </Upload>
+              <Button type="primary" onClick={copyConfig}>
+                复制配置
+              </Button>
+            </Button.Group>
           </Button.Group>
         </Affix>
         <div
