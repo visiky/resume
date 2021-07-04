@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Button, Affix } from 'antd';
 import _ from 'lodash';
 import { Drawer } from './Drawer';
@@ -17,6 +17,31 @@ const Page: React.FC = () => {
     [config]
   );
 
+  const [box, setBox] = useState({ width: 0, height: 0, left: 0 });
+
+  useEffect(() => {
+    const targetNode = document.querySelector('.resume-content');
+
+    const observer = new MutationObserver(() => {
+      setBox(targetNode.getBoundingClientRect());
+    });
+    observer.observe(targetNode, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    });
+
+    // 再加一个定时器，监控下变化
+    const interval = setInterval(() => {
+      setBox(targetNode.getBoundingClientRect());
+    }, 1000);
+
+    return () => {
+      observer.disconnect();
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <React.Fragment>
       <div className="page">
@@ -30,6 +55,15 @@ const Page: React.FC = () => {
             <Drawer value={config} onValueChange={onConfigChange} />
           </Button.Group>
         </Affix>
+        <div
+          className="box-size-info"
+          style={{
+            top: `${box.height + 4}px`,
+            left: `${box.width + box.left}px`,
+          }}
+        >
+          ({box.width}, {box.height})
+        </div>
       </div>
     </React.Fragment>
   );
