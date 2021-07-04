@@ -37,6 +37,35 @@ body {
       }
     }
   }
+
+  @media (max-width: 768px) {
+    .page {
+      flex-direction: column-reverse;
+
+      .btn-group {
+        margin-left: 0px;
+
+        .ant-btn {
+          margin: 0px 0px 8px;
+          display: inline-block;
+
+          &:not(:last-of-type) {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  // 移动端不给编辑
+  @media (max-width: 414px) {
+    .page {
+      padding: 0;
+      .btn-group {
+        display: none;
+      }
+    }
+  }
 }
 
 // 打印时的样式

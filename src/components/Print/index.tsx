@@ -10,11 +10,7 @@ export const Print = ({}: Props) => {
   };
 
   return (
-    <Button
-      type="primary"
-      onClick={print}
-      style={{ display: 'block', marginTop: '8px' }}
-    >
+    <Button type="primary" onClick={print}>
       PDF 下载
     </Button>
   );

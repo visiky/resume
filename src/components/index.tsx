@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button } from 'antd';
+import { Button, Affix } from 'antd';
 import _ from 'lodash';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
@@ -21,14 +21,15 @@ const Page: React.FC = () => {
     <React.Fragment>
       <div className="page">
         <Resume value={config} />
-        <Button.Group className="btn-group">
-          <Print />
-          <Button type="primary" disabled>
-            <div style={{ fontSize: '10px' }}>主题配置</div>
-            <div style={{ fontSize: '8px' }}>(建设中)</div>
-          </Button>
-          <Drawer value={config} onValueChange={onConfigChange} />
-        </Button.Group>
+        <Affix offsetTop={0}>
+          <Button.Group className="btn-group">
+            <Print />
+            <Button type="primary" disabled>
+              主题配置
+            </Button>
+            <Drawer value={config} onValueChange={onConfigChange} />
+          </Button.Group>
+        </Affix>
       </div>
     </React.Fragment>
   );
