@@ -117,7 +117,7 @@ export const RESUME_INFO: ResumeConfig = {
     },
   ],
   aboutme: {
-    aboutme_desc: `🌱 专注项：I’m focus on data visualization and data analysis
+    aboutme_desc: `🌱 I’m focus on data visualization and data analysis
     😈 能力项：沟通协调能力、执行力、代码洁癖`,
   },
 };

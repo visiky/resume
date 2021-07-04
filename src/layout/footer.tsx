@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
         <div className="author">
           by
           <a href={contact} style={{ marginLeft: '4px' }} target="_blank">
-            {author};
+            {author}
           </a>
         </div>
         <a href={githubUrl} style={{ marginLeft: '8px' }} target="_blank">

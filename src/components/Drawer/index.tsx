@@ -1,6 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { Drawer as AntdDrawer, Button, Collapse, Modal, Radio } from 'antd';
-import { DeleteFilled } from '@ant-design/icons';
+import {
+  Drawer as AntdDrawer,
+  Button,
+  Collapse,
+  Modal,
+  Radio,
+  Popover,
+} from 'antd';
+import { DeleteFilled, InfoCircleFilled } from '@ant-design/icons';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import _ from 'lodash';
@@ -95,6 +102,9 @@ export const Drawer: React.FC<Props> = props => {
         style={props.style}
       >
         进行配置
+        <Popover content="移动端模式下，只支持预览，不支持配置">
+          <InfoCircleFilled style={{ marginLeft: '4px' }} />
+        </Popover>
       </Button>
       <AntdDrawer
         title={
