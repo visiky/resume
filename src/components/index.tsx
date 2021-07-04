@@ -3,19 +3,25 @@ import { Button, Affix } from 'antd';
 import _ from 'lodash';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
-import { ResumeConfig } from './types';
+import { ResumeConfig, ThemeConfig } from './types';
 import { RESUME_INFO } from './constant';
 import { Print } from './Print';
 import './index.less';
 
 const Page: React.FC = () => {
   const [config, setConfig] = useState<ResumeConfig>(RESUME_INFO);
+  const [theme, setTheme] = useState<ThemeConfig>({ color: '#2f5785', tagColor: '#8bc34a' });
+
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
       setConfig(_.assign({}, config, v));
     },
     [config]
   );
+
+  const onThemeChange = useCallback((v: Partial<ThemeConfig>) => {
+    setTheme(_.assign({}, theme, v));
+  }, []);
 
   const [box, setBox] = useState({ width: 0, height: 0, left: 0 });
 
@@ -45,14 +51,19 @@ const Page: React.FC = () => {
   return (
     <React.Fragment>
       <div className="page">
-        <Resume value={config} />
+        <Resume value={config} theme={theme} />
         <Affix offsetTop={0}>
           <Button.Group className="btn-group">
             <Print />
             <Button type="primary" disabled>
               主题配置
             </Button>
-            <Drawer value={config} onValueChange={onConfigChange} />
+            <Drawer
+              value={config}
+              onValueChange={onConfigChange}
+              theme={theme}
+              onThemeChange={onThemeChange}
+            />
           </Button.Group>
         </Affix>
         <div

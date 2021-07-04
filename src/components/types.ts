@@ -60,3 +60,13 @@ export type ResumeConfig = {
     aboutme_desc: string;
   };
 };
+
+/**
+ * 主题配置，暂时只支持主题色
+ */
+export type ThemeConfig = {
+  /** 主题色 */
+  color: string;
+  /** tag 标签色 */
+  tagColor: string;
+}

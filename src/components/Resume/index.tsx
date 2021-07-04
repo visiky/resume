@@ -10,19 +10,20 @@ import {
 } from '@ant-design/icons';
 import _ from 'lodash';
 import { Avatar } from '../Avatar';
-import { ResumeConfig } from '../types';
+import { ResumeConfig, ThemeConfig } from '../types';
 import './index.less';
 
 type Props = {
   value: ResumeConfig;
+  theme: ThemeConfig;
 };
 
-const wrapper = ({ id, title, theme }) => WrappedComponent => {
+const wrapper = ({ id, title, color }) => WrappedComponent => {
   return (
     <section>
       <div className="section-header">
         <img src={`images/${id}.png`} alt="" width="26px" height="26px" />
-        <h1 style={{ background: theme }}>{title}</h1>
+        <h1 style={{ background: color }}>{title}</h1>
       </div>
       <div className="section-body">{WrappedComponent}</div>
     </section>
@@ -33,7 +34,7 @@ const wrapper = ({ id, title, theme }) => WrappedComponent => {
  * @description 简历内容区
  */
 export const Resume: React.FC<Props> = props => {
-  const { value } = props;
+  const { value, theme } = props;
 
   /** 个人基础信息 */
   const profile = _.get(value, 'profile');
@@ -69,19 +70,19 @@ export const Resume: React.FC<Props> = props => {
           <div className="profile-list">
             {profile?.mobile && (
               <div className="email">
-                <MobileFilled style={{ color: '#3c679a' }} />
+                <MobileFilled style={{ color: theme.color, opacity: 0.85 }} />
                 {profile.mobile}
               </div>
             )}
             {profile?.email && (
               <div className="email">
-                <MailFilled style={{ color: '#3c679a' }} />
+                <MailFilled style={{ color: theme.color, opacity: 0.85 }} />
                 {profile.email}
               </div>
             )}
             {profile?.github && (
               <div className="github">
-                <GithubFilled style={{ color: '#3c679a' }} />
+                <GithubFilled style={{ color: theme.color, opacity: 0.85 }} />
                 <span
                   style={{ cursor: 'pointer' }}
                   onClick={() => {
@@ -97,7 +98,9 @@ export const Resume: React.FC<Props> = props => {
         {/* 教育经历 */}
         {educationList?.length ? (
           <section className="section section-education">
-            <div className="section-title">教育经历</div>
+            <div className="section-title" style={{ color: theme.color }}>
+              教育经历
+            </div>
             {educationList.map(education => {
               const start = moment(education.edu_time[0]).format('YYYY.MM');
               const end = moment(education.edu_time[1]).format('YYYY.MM');
@@ -123,7 +126,9 @@ export const Resume: React.FC<Props> = props => {
         {/* 荣誉奖项 */}
         {awardList?.length ? (
           <section className="section section-award">
-            <div className="section-title">荣誉奖项</div>
+            <div className="section-title" style={{ color: theme.color }}>
+              荣誉奖项
+            </div>
             {awardList.map((award, idx) => {
               return (
                 <div key={idx.toString()}>
@@ -142,7 +147,9 @@ export const Resume: React.FC<Props> = props => {
         {/* 个人技能 */}
         {skillList?.length ? (
           <section className="section section-skill">
-            <div className="section-title">技能</div>
+            <div className="section-title" style={{ color: theme.color }}>
+              技能
+            </div>
             {skillList.map(skill => {
               return skill ? (
                 <React.Fragment>
@@ -173,7 +180,7 @@ export const Resume: React.FC<Props> = props => {
         {wrapper({
           id: 'work-experience',
           title: '工作经历',
-          theme: 'rgb(39, 63, 117)',
+          color: theme.color,
         })(
           <div className="section section-work">
             {_.map(workList, (work, idx) =>
@@ -192,14 +199,14 @@ export const Resume: React.FC<Props> = props => {
           </div>
         )}
 
-        {wrapper({ id: 'skill', title: '项目经历', theme: 'rgb(39, 63, 117)' })(
+        {wrapper({ id: 'skill', title: '项目经历', color: theme.color })(
           <div className="section section-project">
             {_.map(projectList, (project, idx) =>
               project ? (
                 <div className="section-item">
                   <div className="section-info" key={idx}>
                     <b className="info-name">{project.project_name}</b>
-                    {project.project_role && <Tag>{project.project_role}</Tag>}
+                    {project.project_role && <Tag color={theme.tagColor}>{project.project_role}</Tag>}
                   </div>
                   <div style={{ whiteSpace: 'pre-wrap' }}>
                     {project.project_desc}
@@ -214,11 +221,11 @@ export const Resume: React.FC<Props> = props => {
           ? wrapper({
               id: 'love',
               title: '自我介绍',
-              theme: 'rgb(39, 63, 117)',
+              color: theme.color,
             })(
               <div>
-                {aboutme.map(d => (
-                  <div>{d}</div>
+                {aboutme.map((d, idx) => (
+                  <div key={`${idx}`}>{d}</div>
                 ))}
               </div>
             )
