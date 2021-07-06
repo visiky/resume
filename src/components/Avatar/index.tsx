@@ -1,41 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Upload, Avatar as AntdAvatar } from 'antd';
 import './index.less';
 
 export const Avatar = ({ avatarSrc, className }) => {
-  const [fileList, setFileList] = useState<any[]>([]);
-  const [src, setSrc] = useState();
-
-  useEffect(() => {
-    setSrc(avatarSrc);
-  }, [avatarSrc]);
-
-  useEffect(() => {
-    setFileList(
-      src
-        ? [
-            {
-              uid: -1,
-              name: '',
-              status: 'done',
-              url: src,
-            },
-          ]
-        : []
-    );
-  }, [src]);
+  const [fileList, setFileList] = useState<any[]>([{ thumbUrl: avatarSrc }]);
 
   const handleChange = ({ file: newFile, fileList: newFileList }) => {
     if (newFile.status === 'error') {
       console.error('upload avatar error:');
     }
     setFileList(newFileList);
-    setSrc(newFileList[0]?.thumbUrl);
   };
 
   return (
     <div className="avatar">
-      {fileList.length > 0 && <AntdAvatar className={className} src={src} />}
+      {fileList.length > 0 && <AntdAvatar className={className} src={fileList[0]?.thumbUrl} />}
       <Upload
         listType="picture-card"
         fileList={fileList}
