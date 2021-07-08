@@ -8,8 +8,8 @@ export const RESUME_INFO: ResumeConfig = {
   },
   profile: {
     name: '廖晓娟 (新茗)',
-    email: '736929286@qq.com',
-    mobile: '15625057119',
+    email: '736xxxxx86@qq.com',
+    mobile: '156xxxxxx19',
     github: 'https://github.com/visiky',
     zhihu: 'https://www.zhihu.com/people/visiky',
     workExpYear: '4 年',
