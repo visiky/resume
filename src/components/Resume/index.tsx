@@ -1,6 +1,5 @@
 import React from 'react';
 import { Rate, Tag } from 'antd';
-import moment from 'moment';
 import {
   MobileFilled,
   MailFilled,
@@ -103,7 +102,9 @@ export const Resume: React.FC<Props> = props => {
             )}
             {profile?.zhihu && (
               <div className="github">
-                <ZhihuCircleFilled style={{ color: theme.color, opacity: 0.85 }} />
+                <ZhihuCircleFilled
+                  style={{ color: theme.color, opacity: 0.85 }}
+                />
                 <span
                   style={{ cursor: 'pointer' }}
                   onClick={() => {
@@ -129,10 +130,7 @@ export const Resume: React.FC<Props> = props => {
               教育经历
             </div>
             {educationList.map((education, idx) => {
-              const start = moment(education.edu_time[0]).format('YYYY.MM');
-              const end = education.edu_time[1]
-                ? moment(education.edu_time[1]).format('YYYY.MM')
-                : null;
+              const [start, end] = education.edu_time;
               return (
                 <React.Fragment>
                   <div key={idx.toString()} className="education-item">
@@ -140,7 +138,7 @@ export const Resume: React.FC<Props> = props => {
                       <b>{education.school}</b>
                       <span className="sub-info" style={{ float: 'right' }}>
                         {start}
-                        {end ? ` - ${end}` : ' 至今'}
+                        {end ? ` ~ ${end}` : ' 至今'}
                       </span>
                     </div>
                     <div>
@@ -246,10 +244,8 @@ export const Resume: React.FC<Props> = props => {
         })(
           <div className="section section-work-exp">
             {_.map(workExpList, (work, idx) => {
-              const start = moment(work.work_time[0]).format('YYYY.MM');
-              const end = work.work_time[1]
-                ? moment(work.work_time[1]).format('YYYY.MM')
-                : null;
+              const start = work.work_time[0];
+              const end = work.work_time[1] ? work.work_time[1] : null;
               return work ? (
                 <div className="section-item">
                   <div className="section-info" key={idx}>
@@ -259,7 +255,7 @@ export const Resume: React.FC<Props> = props => {
                     </b>
                     <span className="info-time">
                       {start}
-                      {end ? ` - ${end}` : ' 至今'}
+                      {end ? ` ~ ${end}` : ' 至今'}
                     </span>
                   </div>
                   <div>{work.work_desc}</div>

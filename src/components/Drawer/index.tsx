@@ -110,7 +110,7 @@ export const Drawer: React.FC<Props> = props => {
         title={
           <Radio.Group value={type} onChange={e => setType(e.target.value)}>
             <Radio.Button value="module">模块</Radio.Button>
-            <Radio.Button value="theme">主题</Radio.Button>
+            <Radio.Button value="theme">样式</Radio.Button>
           </Radio.Group>
         }
         width={480}

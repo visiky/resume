@@ -16,7 +16,7 @@ export const RESUME_INFO: ResumeConfig = {
   },
   educationList: [
     {
-      edu_time: ['2014-09-01', '2018-06-30'],
+      edu_time: ['2014.09.01', '2018.06.30'],
       school: '华南理工大学',
       major: '网络工程',
       academic_degree: '本科',
@@ -40,20 +40,20 @@ export const RESUME_INFO: ResumeConfig = {
     {
       company_name: '数沃信息科技有限公司',
       department_name: '',
-      work_time: ['2017-03', '2017-05'],
+      work_time: ['2017.03', '2017.05'],
       work_desc:
         '前端实习生，主要负责数据挖掘分析后的可视化结果展现。使用的技术栈为：vue + echarts',
     },
     {
       company_name: '蚂蚁金服',
       department_name: '大数据部',
-      work_time: ['2017-06', '2017-12'],
+      work_time: ['2017.06', '2017.12'],
       work_desc: '前端实习生，参与多类数据产品的研发工作。',
     },
     {
       company_name: '蚂蚁集团',
       department_name: '体验技术部',
-      work_time: ['2018-06', null],
+      work_time: ['2018.06', null],
       work_desc:
         '负责过高管数据作战室、敏捷 BI 产品的可视分析模块，日常也负责数据可视化的开源技术建设（AntV 团队成员）',
     },
