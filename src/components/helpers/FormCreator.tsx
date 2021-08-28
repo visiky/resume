@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Form, Input, InputNumber, DatePicker, Button } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 import _ from 'lodash';
-import moment from 'moment';
 
 type Props = {
   /** 表单配置 */
@@ -28,11 +27,6 @@ const FormItemComponentMap = (type: string) => (props: { value?: any; } = {}) =>
       return <Input {...props} />;
     case 'number':
       return <InputNumber {...props} />;
-    case 'datePicker':
-      return <DatePicker {...props} value={moment(props.value)}/>;
-    case 'rangePicker':
-      // @ts-ignore
-      return <DatePicker.RangePicker {...props} value={_.map(props.value, v => moment(v))} />;
     case 'textArea':
       return <Input.TextArea {...props} />;
     default:
@@ -77,7 +71,7 @@ export const FormCreator: React.FC<Props> = props => {
         })}
         <Form.Item wrapperCol={{ offset: 6 }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            提交
           </Button>
         </Form.Item>
       </Form>
