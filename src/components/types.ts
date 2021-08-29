@@ -17,7 +17,7 @@ export type ResumeConfig = {
     workExpYear?: string;
   };
 
-  /** 教育经历 */
+  /** 教育背景 */
   educationList: Array<{
     edu_time: [string | undefined, string | number];
     school: string;
@@ -44,6 +44,8 @@ export type ResumeConfig = {
     project_desc?: string;
     /** 项目内容，负责内容 */
     project_content?: string;
+    /** 项目时间 */
+    project_time?: string;
   }>;
 
   /** 个人技能 */
@@ -56,7 +58,7 @@ export type ResumeConfig = {
     skill_desc?: string;
   }>;
 
-  /** 荣誉奖项 */
+  /** 更多信息 */
   awardList?: Array<{
     // 奖项
     award_info: string;

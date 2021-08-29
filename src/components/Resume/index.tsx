@@ -43,7 +43,7 @@ export const Resume: React.FC<Props> = props => {
   /** 个人基础信息 */
   const profile = _.get(value, 'profile');
 
-  /** 教育经历 */
+  /** 教育背景 */
   const educationList = _.get(value, 'educationList');
 
   /** 工作经历 */
@@ -55,7 +55,7 @@ export const Resume: React.FC<Props> = props => {
   /** 个人技能 */
   const skillList = _.get(value, 'skillList');
 
-  /** 荣誉奖项 */
+  /** 更多信息 */
   const awardList = _.get(value, 'awardList');
 
   /** 作品 */
@@ -123,11 +123,22 @@ export const Resume: React.FC<Props> = props => {
             )}
           </div>
         </div>
-        {/* 教育经历 */}
+        {/* 自我介绍 */}
+        {!!_.trim(_.join(aboutme, '')) && (
+          <section className="section section-aboutme">
+            <div className="section-title" style={{ color: theme.color }}>
+              自我介绍
+            </div>
+            {aboutme.map((d, idx) => (
+              <div key={`${idx}`}>{d}</div>
+            ))}
+          </section>
+        )}
+        {/* 教育背景 */}
         {educationList?.length ? (
           <section className="section section-education">
             <div className="section-title" style={{ color: theme.color }}>
-              教育经历
+              教育背景
             </div>
             {educationList.map((education, idx) => {
               const [start, end] = education.edu_time;
@@ -158,29 +169,6 @@ export const Resume: React.FC<Props> = props => {
             })}
           </section>
         ) : null}
-        {/* 荣誉奖项 */}
-        {awardList?.length ? (
-          <section className="section section-award">
-            <div className="section-title" style={{ color: theme.color }}>
-              荣誉奖项
-            </div>
-            {awardList.map((award, idx) => {
-              return (
-                <div key={idx.toString()}>
-                  <TrophyFilled
-                    style={{ color: '#ffc107', marginRight: '8px' }}
-                  />
-                  <b className="info-name">{award.award_info}</b>
-                  {award.award_time && (
-                    <span className="sub-info award-time">
-                      ({award.award_time})
-                    </span>
-                  )}
-                </div>
-              );
-            })}
-          </section>
-        ) : null}
         {workList.length ? (
           <section className="section section-work">
             <div className="section-title" style={{ color: theme.color }}>
@@ -204,16 +192,22 @@ export const Resume: React.FC<Props> = props => {
             })}
           </section>
         ) : null}
-        {/* 个人技能 */}
+        {/* 专业技能 */}
         {skillList?.length ? (
           <section className="section section-skill">
             <div className="section-title" style={{ color: theme.color }}>
-              技能
+              专业技能
             </div>
             {skillList.map(skill => {
               return skill ? (
                 <React.Fragment>
-                  <div className="section-info">
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginTop: '8px',
+                    }}
+                  >
                     <b className="info-name">{skill.skill_name}</b>
                     <Rate
                       allowHalf
@@ -222,16 +216,41 @@ export const Resume: React.FC<Props> = props => {
                       className="skill-rate"
                     />
                   </div>
-                  {_.split(skill.skill_desc, '\n').map(d => (
-                    <div className="skill-detail-item">
-                      <CheckCircleFilled
-                        style={{ color: '#ffc107', marginRight: '8px' }}
-                      />
-                      {d}
-                    </div>
-                  ))}
+                  {_.split(skill.skill_desc, '\n').map(d =>
+                    d ? (
+                      <div className="skill-detail-item">
+                        <CheckCircleFilled
+                          style={{ color: '#ffc107', marginRight: '8px' }}
+                        />
+                        {d}
+                      </div>
+                    ) : null
+                  )}
                 </React.Fragment>
               ) : null;
+            })}
+          </section>
+        ) : null}
+        {/* 更多信息 */}
+        {awardList?.length ? (
+          <section className="section section-award">
+            <div className="section-title" style={{ color: theme.color }}>
+              更多信息
+            </div>
+            {awardList.map((award, idx) => {
+              return (
+                <div key={idx.toString()}>
+                  <TrophyFilled
+                    style={{ color: '#ffc107', marginRight: '8px' }}
+                  />
+                  <b className="info-name">{award.award_info}</b>
+                  {award.award_time && (
+                    <span className="sub-info award-time">
+                      ({award.award_time})
+                    </span>
+                  )}
+                </div>
+              );
             })}
           </section>
         ) : null}
@@ -258,7 +277,7 @@ export const Resume: React.FC<Props> = props => {
                       {end ? ` ~ ${end}` : ' 至今'}
                     </span>
                   </div>
-                  <div>{work.work_desc}</div>
+                  <div className="work-description">{work.work_desc}</div>
                 </div>
               ) : null;
             })}
@@ -271,7 +290,7 @@ export const Resume: React.FC<Props> = props => {
               project ? (
                 <div className="section-item">
                   <div className="section-info" key={idx}>
-                    <b className="info-name">{project.project_name}</b>
+                    <b className="info-name">{project.project_name}<span className="info-time">{project.project_time}</span></b>
                     {project.project_role && (
                       <Tag color={theme.tagColor}>{project.project_role}</Tag>
                     )}
@@ -282,25 +301,13 @@ export const Resume: React.FC<Props> = props => {
                   </div>
                   <div className="section-detail">
                     <b>主要工作：</b>
-                    <span>{project.project_content}</span>
+                    <span className="project-content">{project.project_content}</span>
                   </div>
                 </div>
               ) : null
             )}
           </div>
         )}
-        {!!_.trim(_.join(aboutme, '')) &&
-          wrapper({
-            id: 'love',
-            title: '自我介绍',
-            color: theme.color,
-          })(
-            <div>
-              {aboutme.map((d, idx) => (
-                <div key={`${idx}`}>{d}</div>
-              ))}
-            </div>
-          )}
       </div>
     </div>
   );

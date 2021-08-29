@@ -16,13 +16,13 @@ import _ from 'lodash';
  */
 export const MODULES = [
   { name: '个人信息', icon: <ContactsTwoTone />, key: 'profile' },
-  { name: '教育经历', icon: <ScheduleTwoTone />, key: 'educationList' },
-  { name: '荣誉奖项', icon: <TrophyTwoTone />, key: 'awardList' },
+  { name: '教育背景', icon: <ScheduleTwoTone />, key: 'educationList' },
+  { name: '自我介绍', icon: <StarTwoTone />, key: 'aboutme' },
+  { name: '更多信息', icon: <TrophyTwoTone />, key: 'awardList' },
   { name: '个人作品', icon: <ToolTwoTone />, key: 'workList' },
   { name: '专业技能', icon: <ToolTwoTone />, key: 'skillList' },
   { name: '工作经历', icon: <GiftTwoTone />, key: 'workExpList' },
   { name: '项目经历', icon: <RocketTwoTone />, key: 'projectList' },
-  { name: '自我介绍', icon: <StarTwoTone />, key: 'aboutme' },
 ];
 
 /**
