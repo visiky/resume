@@ -14,6 +14,7 @@ Read resume data from a JS (liked JSON) file and generate a static web page. ✨
 ## ✨ Recommendation
 
 - [resumemaker](https://www.resumemaker.online/es.php)
+- [Geek Resume - Pure Markdown, an online resume editor for developer.](https://www.jijian.press/)
 
 ## Contributors ✨
 
