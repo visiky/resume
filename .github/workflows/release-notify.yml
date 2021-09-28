@@ -1,14 +1,14 @@
 name: DingTalk Release Notify
 
 on:
+  workflow_dispatch:
   release:
-    types: [published]
+    types: [published, edited]
 
 jobs:
   release-notify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: visiky/release-notify@main
         with:
           DING_TALK_TOKEN: ${{ secrets.DING_TALK_TOKEN}}
