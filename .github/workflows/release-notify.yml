@@ -9,7 +9,7 @@ jobs:
   release-notify:
     runs-on: ubuntu-latest
     steps:
-      - uses: visiky/release-notify@main
+      - uses: visiky/dingtalk-release-notify@main
         with:
           DING_TALK_TOKEN: ${{ secrets.DING_TALK_TOKEN}}
           notify_title: '🎉 Resume release {release_tag} 🎉'
