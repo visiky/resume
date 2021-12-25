@@ -1,4 +1,4 @@
-import { ResumeConfig } from './types';
+import { ResumeConfig } from '../components/types';
 
 /** 初始化常量 */
 export const RESUME_INFO: ResumeConfig = {

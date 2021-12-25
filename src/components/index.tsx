@@ -1,22 +1,34 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { Button, Affix, Upload, message } from 'antd';
+import { Button, Affix, Upload, message, Spin } from 'antd';
+import fetch from 'cross-fetch';
 import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { Print } from './Print';
-import { RESUME_INFO } from './constant';
 import { copyToClipboard } from './helpers/copy-to-board';
 import { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
 import { getDevice } from './helpers/detect-device';
 
 const Page: React.FC = () => {
-  const [config, setConfig] = useState<ResumeConfig>(RESUME_INFO);
+  const [config, setConfig] = useState<ResumeConfig>();
+  const [loading, updateLoading] = useState<boolean>(true);
   const [theme, setTheme] = useState<ThemeConfig>({
     color: '#2f5785',
     tagColor: '#8bc34a',
   });
+
+  useEffect(() => {
+    fetch(
+      'https://raw.githubusercontent.com/visiky/visiky/master/data/resume.json'
+    )
+      .then(data => data.json())
+      .then(data => {
+        setConfig(data);
+        updateLoading(false);
+      });
+  }, []);
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
@@ -39,6 +51,7 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     const targetNode = document.querySelector('.resume-content');
+    if (!targetNode) return;
 
     const observer = new MutationObserver(() => {
       setBox(targetNode.getBoundingClientRect());
@@ -89,44 +102,46 @@ const Page: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div className="page">
-        <Resume value={config} theme={theme} />
-        <Affix offsetTop={0}>
-          <Button.Group className="btn-group">
-            <Button type="primary" disabled>
-              主题配置
-            </Button>
-            <Print />
-            <Drawer
-              value={config}
-              onValueChange={onConfigChange}
-              theme={theme}
-              onThemeChange={onThemeChange}
-            />
-            <Button.Group className="btn-group" style={{ marginLeft: 0 }}>
-              <Upload
-                accept=".json"
-                showUploadList={false}
-                beforeUpload={importConfig}
-              >
-                <Button>导入配置</Button>
-              </Upload>
-              <Button type="primary" onClick={copyConfig}>
-                复制配置
+      <Spin spinning={loading}>
+        <div className="page">
+          {config && <Resume value={config} theme={theme} />}
+          <Affix offsetTop={0}>
+            <Button.Group className="btn-group">
+              <Button type="primary" disabled>
+                主题配置
               </Button>
+              <Print />
+              <Drawer
+                value={config}
+                onValueChange={onConfigChange}
+                theme={theme}
+                onThemeChange={onThemeChange}
+              />
+              <Button.Group className="btn-group" style={{ marginLeft: 0 }}>
+                <Upload
+                  accept=".json"
+                  showUploadList={false}
+                  beforeUpload={importConfig}
+                >
+                  <Button>导入配置</Button>
+                </Upload>
+                <Button type="primary" onClick={copyConfig}>
+                  复制配置
+                </Button>
+              </Button.Group>
             </Button.Group>
-          </Button.Group>
-        </Affix>
-        <div
-          className="box-size-info"
-          style={{
-            top: `${box.height + 4}px`,
-            left: `${box.width + box.left}px`,
-          }}
-        >
-          ({box.width}, {box.height})
+          </Affix>
+          <div
+            className="box-size-info"
+            style={{
+              top: `${box.height + 4}px`,
+              left: `${box.width + box.left}px`,
+            }}
+          >
+            ({box.width}, {box.height})
+          </div>
         </div>
-      </div>
+      </Spin>
     </React.Fragment>
   );
 };
