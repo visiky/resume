@@ -12,8 +12,8 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import _ from 'lodash';
 import arrayMove from 'array-move';
-import { FormCreator } from '../helpers/FormCreator';
-import { MODULES, CONTENT_OF_MODULE } from '../helpers/contant';
+import { FormCreator } from '../../helpers/FormCreator';
+import { MODULES, CONTENT_OF_MODULE } from '../../helpers/contant';
 import { ResumeConfig, ThemeConfig } from '../types';
 import './index.less';
 

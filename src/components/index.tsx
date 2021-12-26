@@ -6,10 +6,10 @@ import _ from 'lodash';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { Print } from './Print';
-import { copyToClipboard } from './helpers/copy-to-board';
+import { copyToClipboard } from '../helpers/copy-to-board';
 import { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
-import { getDevice } from './helpers/detect-device';
+import { getDevice } from '../helpers/detect-device';
 
 const Page: React.FC = () => {
   const [config, setConfig] = useState<ResumeConfig>();
