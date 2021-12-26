@@ -1,22 +1,64 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { Button, Affix, Upload, message } from 'antd';
+import { Button, Affix, Upload, message, Spin, Modal } from 'antd';
+import fetch from 'cross-fetch';
+import qs from 'query-string';
 import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash';
+import { RESUME_INFO } from '../datas/resume';
+import { copyToClipboard } from '../helpers/copy-to-board';
+import { getDevice } from '../helpers/detect-device';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { Print } from './Print';
-import { RESUME_INFO } from './constant';
-import { copyToClipboard } from './helpers/copy-to-board';
 import { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
-import { getDevice } from './helpers/detect-device';
 
 const Page: React.FC = () => {
-  const [config, setConfig] = useState<ResumeConfig>(RESUME_INFO);
+  const [config, setConfig] = useState<ResumeConfig>();
+  const [loading, updateLoading] = useState<boolean>(true);
+  const [mode, updateMode] = useState<string>('read');
   const [theme, setTheme] = useState<ThemeConfig>({
     color: '#2f5785',
     tagColor: '#8bc34a',
   });
+
+  useEffect(() => {
+    const search = typeof window !== 'undefined' && window.location.search;
+    const query = qs.parse(search);
+    const user = query.user || '';
+    const branch = query.branch || 'master';
+    const mode = (query.mode as string) || 'red';
+    fetch(
+      `https://raw.githubusercontent.com/${user}/${user}/${branch}/resume.json`
+    )
+      .then(data => {
+        if (data.status !== 200) {
+          const link = `https://github.com/${user}/${user}/tree/${branch}`;
+          Modal.info({
+            title: '获取简历信息失败',
+            content: (
+              <div>
+                请检查用户名 {user} 是否正确或者简历信息是否在
+                <a href={link} target="_blank">{`${link}/resume.json`}</a>下
+              </div>
+            ),
+            okText: '进入在线编辑',
+            onOk: () => {
+              setConfig(RESUME_INFO);
+              updateLoading(false);
+              updateMode('edit');
+            },
+          });
+          return;
+        }
+        return data.json();
+      })
+      .then(data => {
+        setConfig(data);
+        updateLoading(false);
+        updateMode(mode);
+      });
+  }, []);
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
@@ -39,6 +81,7 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     const targetNode = document.querySelector('.resume-content');
+    if (!targetNode) return;
 
     const observer = new MutationObserver(() => {
       setBox(targetNode.getBoundingClientRect());
@@ -89,44 +132,50 @@ const Page: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div className="page">
-        <Resume value={config} theme={theme} />
-        <Affix offsetTop={0}>
-          <Button.Group className="btn-group">
-            <Button type="primary" disabled>
-              主题配置
-            </Button>
-            <Print />
-            <Drawer
-              value={config}
-              onValueChange={onConfigChange}
-              theme={theme}
-              onThemeChange={onThemeChange}
-            />
-            <Button.Group className="btn-group" style={{ marginLeft: 0 }}>
-              <Upload
-                accept=".json"
-                showUploadList={false}
-                beforeUpload={importConfig}
+      <Spin spinning={loading}>
+        <div className="page">
+          {config && <Resume value={config} theme={theme} />}
+          {mode === 'edit' && (
+            <React.Fragment>
+              <Affix offsetTop={0}>
+                <Button.Group className="btn-group">
+                  <Button type="primary" disabled>
+                    主题配置
+                  </Button>
+                  <Print />
+                  <Drawer
+                    value={config}
+                    onValueChange={onConfigChange}
+                    theme={theme}
+                    onThemeChange={onThemeChange}
+                  />
+                  <Button.Group className="btn-group" style={{ marginLeft: 0 }}>
+                    <Upload
+                      accept=".json"
+                      showUploadList={false}
+                      beforeUpload={importConfig}
+                    >
+                      <Button>导入配置</Button>
+                    </Upload>
+                    <Button type="primary" onClick={copyConfig}>
+                      复制配置
+                    </Button>
+                  </Button.Group>
+                </Button.Group>
+              </Affix>
+              <div
+                className="box-size-info"
+                style={{
+                  top: `${box.height + 4}px`,
+                  left: `${box.width + box.left}px`,
+                }}
               >
-                <Button>导入配置</Button>
-              </Upload>
-              <Button type="primary" onClick={copyConfig}>
-                复制配置
-              </Button>
-            </Button.Group>
-          </Button.Group>
-        </Affix>
-        <div
-          className="box-size-info"
-          style={{
-            top: `${box.height + 4}px`,
-            left: `${box.width + box.left}px`,
-          }}
-        >
-          ({box.width}, {box.height})
+                ({box.width}, {box.height})
+              </div>
+            </React.Fragment>
+          )}
         </div>
-      </div>
+      </Spin>
     </React.Fragment>
   );
 };

@@ -1,39 +1,32 @@
 ## 🧾 My Resume
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Read resume data from a JS (liked JSON) file and generate a static web page. ✨ [Live Demo](https://visiky.github.io/resume)
+📃 静态简历生成器。支持在线预览、编辑和 PDF 下载。 ✨ [Live Demo](https://visiky.github.io/resume)
 
-## ⚒ Development
+## 如何使用（How to use）
 
-1. Run `npm install` to install the dependencies.
-2. Run `npm start`, then visit `http://localhost:8000`.
-3. Start development, fill your profile and generate your resume~
+**方式1:**
+
+在线编辑 -> 导出配置 -> 存储“简历信息”在个人 github special 仓库下（例如: [visiky/visiky](https://github.com/visiky/visiky/blob/master/resume.json)）
+
+
+**方式2:**
+
+直接创建一个 `resume.json` 文件在自己的 special 仓库下 (内容参考: [visiky/visiky](https://github.com/visiky/visiky/blob/master/resume.json)). 
+
+**最后**
+
+访问 https://visiky.github.io/resume?user={user}&branch={branch}
+
+参数说明:
+
+|参数|描述|默认值|
+|---|---|---|
+| user | github 用户名 | 必选 |
+| branch | 分支名 | 默认: master |
+
+
 
 ## ✨ Recommendation
 
 - [resumemaker](https://www.resumemaker.online/es.php)
 - [Geek Resume - Pure Markdown, an online resume editor for developer.](https://www.jijian.press/)
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://www.zhihu.com/people/visiky"><img src="https://avatars.githubusercontent.com/u/15646325?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Visiky</b></sub></a><br /><a href="#infra-visiky" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/visiky/resume/commits?author=visiky" title="Tests">⚠️</a> <a href="https://github.com/visiky/resume/commits?author=visiky" title="Code">💻</a></td>
-    <td align="center"><a href="https://wongjorie.top"><img src="https://avatars.githubusercontent.com/u/11408040?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jared Wang</b></sub></a><br /><a href="https://github.com/visiky/resume/commits?author=joriewong" title="Code">💻</a></td>
-    <td align="center"><a href="https://fengchunsgit.github.io/"><img src="https://avatars.githubusercontent.com/u/16862867?v=4?s=100" width="100px;" alt=""/><br /><sub><b>fengchun</b></sub></a><br /><a href="#content-fengchunsgit" title="Content">🖋</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
