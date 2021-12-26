@@ -26,6 +26,8 @@ type Props = {
   onValueChange: (v: Partial<ResumeConfig>) => void;
   theme: ThemeConfig;
   onThemeChange: (v: Partial<ThemeConfig>) => void;
+  template: string;
+  onTemplateChange: (v: string) => void;
 
   style?: object;
 };
@@ -266,8 +268,8 @@ export const Drawer: React.FC<Props> = props => {
               onChange={v => props.onThemeChange(v)}
             />
             <Templates
-              {...props.theme}
-              onChange={v => props.onThemeChange(v)}
+              template={props.template}
+              onChange={v => props.onTemplateChange(v)}
             />
           </React.Fragment>
         )}

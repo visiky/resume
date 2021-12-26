@@ -27,7 +27,6 @@ export const ConfigTheme: React.FC<Props> = props => {
       }
     `;
     $style.innerHTML = styles;
-    console.log('$style', $style);
   }, [props.color, props.tagColor]);
 
   return (

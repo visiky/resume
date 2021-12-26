@@ -17,6 +17,7 @@ const Page: React.FC = () => {
   const [config, setConfig] = useState<ResumeConfig>();
   const [loading, updateLoading] = useState<boolean>(true);
   const [mode, updateMode] = useState<string>('read');
+  const [template, updateTemplate] = useState<string>('template1');
   const [theme, setTheme] = useState<ThemeConfig>({
     color: '#2f5785',
     tagColor: '#8bc34a',
@@ -25,9 +26,17 @@ const Page: React.FC = () => {
   useEffect(() => {
     const search = typeof window !== 'undefined' && window.location.search;
     const query = qs.parse(search);
+    if (query.template) {
+      updateTemplate(query.template as string);
+    }
+  }, []);
+
+  useEffect(() => {
+    const search = typeof window !== 'undefined' && window.location.search;
+    const query = qs.parse(search);
     const user = query.user || '';
     const branch = query.branch || 'master';
-    const mode = (query.mode as string) || 'red';
+    const mode = (query.mode as string) || 'read';
     user && ReactGA.set({ user });
 
     fetch(
@@ -136,7 +145,9 @@ const Page: React.FC = () => {
     <React.Fragment>
       <Spin spinning={loading}>
         <div className="page">
-          {config && <Resume value={config} theme={theme} />}
+          {config && (
+            <Resume value={config} theme={theme} template={template} />
+          )}
           {mode === 'edit' && (
             <React.Fragment>
               <Affix offsetTop={0}>
@@ -146,11 +157,10 @@ const Page: React.FC = () => {
                     onValueChange={onConfigChange}
                     theme={theme}
                     onThemeChange={onThemeChange}
+                    template={template}
+                    onTemplateChange={updateTemplate}
                   />
-                  <Button.Group
-                    className="btn-group"
-                    style={{ marginLeft: 0 }}
-                  >
+                  <Button.Group className="btn-group" style={{ marginLeft: 0 }}>
                     <Upload
                       accept=".json"
                       showUploadList={false}
