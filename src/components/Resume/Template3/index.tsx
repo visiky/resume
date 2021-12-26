@@ -11,7 +11,6 @@ import {
   CrownFilled,
 } from '@ant-design/icons';
 import _ from 'lodash';
-import { Avatar } from '../../Avatar';
 import { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
 
@@ -50,7 +49,7 @@ const CardWrapper: React.FC<{
 /**
  * @description 简历内容区
  */
-export const Template2: React.FC<Props> = props => {
+export const Template3: React.FC<Props> = props => {
   const { value, theme } = props;
 
   /** 个人基础信息 */

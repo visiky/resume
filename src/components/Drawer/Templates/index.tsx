@@ -8,19 +8,22 @@ type Props = {
   onChange: (v: string) => void;
 };
 
-const TEMPLATE_1 =
-  'https://gw.alipayobjects.com/zos/antfincdn/GLDkiGBSPl/moban1.svg';
-
 const TEMPLATES = [
   {
     url: 'https://gw.alipayobjects.com/zos/antfincdn/GLDkiGBSPl/moban1.svg',
     id: 'template1',
-    description: '默认模板',
+    description: '默认模板(适用于单页)',
   },
   {
     url: 'https://gw.alipayobjects.com/zos/antfincdn/GLDkiGBSPl/moban1.svg',
     id: 'template2',
-    description: '简易模板',
+    description: '建设中',
+    disabled: true,
+  },
+  {
+    url: 'https://gw.alipayobjects.com/zos/antfincdn/kT1AgHc5gU/moban2.svg',
+    id: 'template3',
+    description: '简易模板(适用于多页)',
   },
 ];
 
@@ -32,9 +35,10 @@ export const Templates: React.FC<Props> = props => {
           <div
             className={cx('template-item', {
               selected: item.id === props.template,
+              disabled: item.disabled,
             })}
             key={`${item.id}`}
-            onClick={() => props.onChange(item.id)}
+            onClick={() => !item.disabled && props.onChange(item.id)}
           >
             <ReactSVG
               src={item.url}
