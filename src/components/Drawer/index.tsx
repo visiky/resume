@@ -120,11 +120,11 @@ export const Drawer: React.FC<Props> = props => {
         {type === 'module' ? (
           <DndProvider backend={HTML5Backend}>
             <div className="module-list">
-              {MODULES.map(module => {
+              {MODULES.map((module, idx) => {
                 if (_.endsWith(module.key, 'List')) {
                   const values = _.get(props.value, module.key, []);
                   return (
-                    <div className="module-item">
+                    <div className="module-item" key={`${idx}`}>
                       <Collapse defaultActiveKey={[]} ghost>
                         <Panel
                           header={
