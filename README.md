@@ -8,6 +8,7 @@
 
 在线编辑 -> 导出配置 -> 存储“简历信息”在个人 github special 仓库下（例如: [visiky/visiky](https://github.com/visiky/visiky/blob/master/resume.json)）
 
+
 **方式2:**
 
 直接创建一个 `resume.json` 文件在自己的 special 仓库下 (内容参考: [visiky/visiky](https://github.com/visiky/visiky/blob/master/resume.json)). 
@@ -23,6 +24,9 @@
 | user | github 用户名 | 必选 |
 | branch | 分支名 | 默认: master |
 
+
+
 ## ✨ Recommendation
 
 - [resumemaker](https://www.resumemaker.online/es.php)
+- [Geek Resume - Pure Markdown, an online resume editor for developer.](https://www.jijian.press/)
