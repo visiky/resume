@@ -1,6 +1,6 @@
 ## 🧾 My Resume
 
-在线简历生成器。支持在线预览、编辑和 PDF 下载。✨ [在线编辑](https://visiky.github.io/resume)
+在线简历生成器。无须 fork 仓库，即可在线预览、编辑和下载 PDF 简历。✨ [在线编辑](https://visiky.github.io/resume)
 
 内置 3 套模板，支持自定义主题颜色.
 
@@ -28,8 +28,9 @@
 | 参数   | 描述          | 默认值       |
 | ------ | ------------- | ------------ |
 | user   | github 用户名 | 必选         |
-| branch | 分支名        | 默认: master |
 | template | 模板        | 默认: template1 |
+| branch | 分支名        | 默认: master |
+| mode | 模式        | 备注: 默认为‘只读’模式，设置为: `mode=edit` 即可进入编辑模式 |
 
 ## ✨ Recommendation
 
