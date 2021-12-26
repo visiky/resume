@@ -6,7 +6,7 @@
 
 |默认模板| 简易模板| 简易模板2（适用于多页）|
 | -------------------------------- | --------------------------------------------------|----------------------- |
-| <img src="https://gw.alipayobjects.com/zos/antfincdn/GLDkiGBSPl/moban1.svg" height="280" />|<img src="https://gw.alipayobjects.com/zos/antfincdn/RGxVcJ2O3q/moban2.svg" height="280" />| <img src="https://gw.alipayobjects.com/zos/antfincdn/Kn2jUKcBme/moban2.svg" height="280" />|
+| <img src="https://gw.alipayobjects.com/zos/antfincdn/GLDkiGBSPl/moban1.svg" height="280" />|<img src="https://gw.alipayobjects.com/zos/antfincdn/tCZGzek01v/moban2-1.png" height="280" />| <img src="https://gw.alipayobjects.com/zos/antfincdn/Kn2jUKcBme/moban2.svg" height="280" />|
 |[Live Demo](https://visiky.github.io/resume?user=visiky)  |[Live Demo](https://visiky.github.io/resume?user=visiky&template=template2)|[Live Demo](https://visiky.github.io/resume?user=visiky&template=template3) |
 
 ## 如何使用（How to use）
