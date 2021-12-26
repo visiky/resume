@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, Input, InputNumber, Button } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 import _ from 'lodash';
+import { ColorPicker } from './ColorPicker';
 
 type Props = {
   /** 表单配置 */
@@ -21,7 +22,9 @@ type Props = {
   onChange: (v: any) => void;
 };
 
-const FormItemComponentMap = (type: string) => (props: { value?: any; } = {}) => {
+const FormItemComponentMap = (type: string) => (
+  props: { value: any; onChange?: (v) => void } = { value: null }
+) => {
   switch (type) {
     case 'input':
       return <Input {...props} />;
@@ -29,6 +32,8 @@ const FormItemComponentMap = (type: string) => (props: { value?: any; } = {}) =>
       return <InputNumber {...props} />;
     case 'textArea':
       return <Input.TextArea {...props} />;
+    case 'color-picker':
+      return <ColorPicker {...props} />;
     default:
       return <Input />;
   }
@@ -65,7 +70,10 @@ export const FormCreator: React.FC<Props> = props => {
               name={c.attributeId}
               rules={c.rules}
             >
-              {FormItemComponentMap(c.type)({ ...(c.cfg || {}), value: props.value?.[c.attributeId]})}
+              {FormItemComponentMap(c.type)({
+                ...(c.cfg || {}),
+                value: props.value?.[c.attributeId],
+              })}
             </Form.Item>
           );
         })}

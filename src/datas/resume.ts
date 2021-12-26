@@ -3,13 +3,13 @@ import { ResumeConfig } from '../components/types';
 /** 初始化常量 */
 export const RESUME_INFO: ResumeConfig = {
   avatar: {
-    src: 'https://avatars.githubusercontent.com/u/15646325?v=4',
+    src: undefined,
     hidden: false,
   },
   profile: {
-    "name": "廖晓娟 (新茗)",
-    "email": "736929286@qq.com",
-    "mobile": "15625057119",
+    "name": "姓名",
+    "email": "736****86@qq.com",
+    "mobile": "156********",
     "github": "https://github.com/visiky",
     "zhihu": "https://www.zhihu.com/people/visiky",
     "workExpYear": ""

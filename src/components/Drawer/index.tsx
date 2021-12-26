@@ -12,7 +12,7 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import _ from 'lodash';
 import arrayMove from 'array-move';
-import { FormCreator } from '../../helpers/FormCreator';
+import { FormCreator } from '../FormCreator';
 import { MODULES, CONTENT_OF_MODULE } from '../../helpers/contant';
 import { ResumeConfig, ThemeConfig } from '../types';
 import './index.less';
@@ -258,9 +258,9 @@ export const Drawer: React.FC<Props> = props => {
           <div className="theme-config">
             <FormCreator
               config={[
-                { type: 'input', attributeId: 'color', displayName: '主题色' },
+                { type: 'color-picker', attributeId: 'color', displayName: '主题色' },
                 {
-                  type: 'input',
+                  type: 'color-picker',
                   attributeId: 'tagColor',
                   displayName: 'tag 标签色',
                 },
