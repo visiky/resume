@@ -15,13 +15,12 @@ const TEMPLATES = [
     description: '默认模板(适用于单页)',
   },
   {
-    url: 'https://gw.alipayobjects.com/zos/antfincdn/GLDkiGBSPl/moban1.svg',
+    url: 'https://gw.alipayobjects.com/zos/antfincdn/RGxVcJ2O3q/moban2.svg',
     id: 'template2',
-    description: '建设中',
-    disabled: true,
+    description: '简易模板',
   },
   {
-    url: 'https://gw.alipayobjects.com/zos/antfincdn/kT1AgHc5gU/moban2.svg',
+    url: 'https://gw.alipayobjects.com/zos/antfincdn/Kn2jUKcBme/moban2.svg',
     id: 'template3',
     description: '简易模板(适用于多页)',
   },

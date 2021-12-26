@@ -1,6 +1,6 @@
 // 响应式布局
 // 内容
-.template3-resume {
+.template2-resume {
   width: 794px;
   min-height: 942px;
   margin-bottom: 60px;
@@ -15,61 +15,62 @@
     size: A4;
   }
 
-  .template3-resume {
+  .template2-resume {
     width: 100%;
     box-shadow: none;
   }
 }
 
 // 内容
-.template3-resume {
+.template2-resume {
   // 加点阴影
   box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.15);
 
   // 布局位置
   .basic-info {
-    padding: 24px 18px 24px 24px;
+    padding: 18px 24px 12px 24px;
   }
 
   .main-info {
-    padding: 24px 24px 32px 32px;
+    padding: 0 24px 24px;
     background: #fff;
-  }
-
-  // 复写
-  .ant-ribbon {
-    height: 24px;
-    line-height: 24px;
   }
 
   .section-title {
     font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 8px;
     letter-spacing: 0;
-  }
+    position: relative;
 
-  .ant-card-body {
-    padding: 12px 24px;
+    &::after {
+      content: ' ';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      left: 88px;
+      height: 1px;
+      transform: translateY(-1px);
+      background-color: currentColor;
+      opacity: 0.54;
+    }
   }
 
   .basic-info .section {
-    padding-top: 28px;
     border-radius: 0;
-  }
-  .ant-ribbon-wrapper:not(:last-of-type) .ant-card-bordered {
-    border-bottom: 0;
   }
 
   // 内容样式 通用
-  section {
+  .section {
     &:not(:first-of-type) {
-      margin-top: 24px;
+      margin-top: 12px;
     }
 
     .section-info {
-      font-size: 18px;
-      line-height: 24px;
+      font-size: 14px;
+      line-height: 16px;
       color: rgba(0, 0, 0, 0.85);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
 
       display: flex;
       justify-content: space-between;
@@ -86,7 +87,7 @@
 
   // basic-info 内容样式
   .basic-info .avatar {
-    margin: 12px auto;
+    margin: 0 auto;
     display: block;
     width: 84px;
     height: 84px;
@@ -99,7 +100,19 @@
   }
 
   .basic-info .profile {
-    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+
+    margin-bottom: 12px;
+
+    > div:first-of-type {
+      flex: 1;
+    }
+    > div:nth-of-type(2) {
+      width: 150px;
+    }
 
     .profile-list {
       display: flex;
@@ -177,40 +190,6 @@
   .main-info section {
     margin-bottom: 16px;
 
-    .section-header {
-      display: flex;
-      margin-bottom: 10px;
-
-      img {
-        margin-right: 8px;
-      }
-
-      h1 {
-        position: relative;
-        font-size: 16px;
-        font-weight: bold;
-        color: #fff;
-        width: 200px;
-        width: max-content;
-        line-height: 24px;
-        padding: 0 100px 0 10px;
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-        margin-left: -12px;
-      }
-      h1:before {
-        content: '';
-        display: block;
-        width: 18px;
-        height: 18px;
-        background: #fff;
-        position: absolute;
-        right: -9px;
-        top: 4px;
-        transform: rotate(45deg);
-      }
-    }
-
     .section-detail {
       letter-spacing: 1.2px;
 
@@ -230,7 +209,7 @@
     }
 
     .section-item:not(:first-of-type) {
-      margin-top: 18px;
+      margin-top: 10px;
     }
 
     .section-info .sub-info,

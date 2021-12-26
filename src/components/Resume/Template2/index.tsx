@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rate, Tag, Badge, Card } from 'antd';
+import { Rate, Tag } from 'antd';
 import {
   PhoneFilled,
   MailFilled,
@@ -10,7 +10,9 @@ import {
   ScheduleFilled,
   CrownFilled,
 } from '@ant-design/icons';
+import cx from 'classnames';
 import _ from 'lodash';
+import { Avatar } from '../../Avatar';
 import { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
 
@@ -19,37 +21,21 @@ type Props = {
   theme: ThemeConfig;
 };
 
-const wrapper = ({ id, title, color }) => WrappedComponent => {
+const Wrapper = ({ className, title, color, children }) => {
   return (
-    <section>
-      <div className="section-header">
-        <h1 style={{ background: color }}>{title}</h1>
+    <div className={cx('section', className)}>
+      <div className="section-title" style={{ color }}>
+        {title}
       </div>
-      <div className="section-body">{WrappedComponent}</div>
-    </section>
-  );
-};
-
-const CardWrapper: React.FC<{
-  title: string;
-  className: string;
-  color: string;
-}> = ({ title, color, className, children }) => {
-  return (
-    <Badge.Ribbon
-      text={<div className="section-title">{title}</div>}
-      color={color}
-      placement="start"
-    >
-      <Card className={className}>{children}</Card>
-    </Badge.Ribbon>
+      <div className="section-body">{children}</div>
+    </div>
   );
 };
 
 /**
  * @description 简历内容区
  */
-export const Template3: React.FC<Props> = props => {
+export const Template2: React.FC<Props> = props => {
   const { value, theme } = props;
 
   /** 个人基础信息 */
@@ -77,64 +63,72 @@ export const Template3: React.FC<Props> = props => {
   const aboutme = _.split(_.get(value, ['aboutme', 'aboutme_desc']), '\n');
 
   return (
-    <div className="template3-resume resume-content">
+    <div className="template2-resume resume-content">
       <div className="basic-info">
-        {/* <CardWrapper title="个人信息" className="profile" color={theme.color}> */}
+        {/* <Wrapper title="个人信息" className="profile" color={theme.color}> */}
         <div className="profile">
-          {profile?.name && <div className="name">{profile.name}</div>}
-          <div className="profile-list">
-            {profile?.mobile && (
-              <div className="mobile">
-                <PhoneFilled style={{ color: theme.color, opacity: 0.85 }} />
-                {profile.mobile}
-              </div>
-            )}
-            {profile?.email && (
-              <div className="email">
-                <MailFilled style={{ color: theme.color, opacity: 0.85 }} />
-                {profile.email}
-              </div>
-            )}
-            {profile?.github && (
-              <div className="github">
-                <GithubFilled style={{ color: theme.color, opacity: 0.85 }} />
-                <span
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    window.open(profile.github);
-                  }}
-                >
-                  {profile.github}
-                </span>
-              </div>
-            )}
-            {profile?.zhihu && (
-              <div className="github">
-                <ZhihuCircleFilled
-                  style={{ color: theme.color, opacity: 0.85 }}
-                />
-                <span
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    window.open(profile.zhihu);
-                  }}
-                >
-                  {profile.zhihu}
-                </span>
-              </div>
-            )}
-            {profile?.workExpYear && (
-              <div className="work-exp-year">
-                <ScheduleFilled style={{ color: theme.color, opacity: 0.85 }} />
-                <span>工作经验: {profile.workExpYear}</span>
-              </div>
-            )}
+          <div className="profile-info">
+            {profile?.name && <div className="name">{profile.name}</div>}
+            <div className="profile-list">
+              {profile?.mobile && (
+                <div className="mobile">
+                  <PhoneFilled style={{ color: theme.color, opacity: 0.85 }} />
+                  {profile.mobile}
+                </div>
+              )}
+              {profile?.email && (
+                <div className="email">
+                  <MailFilled style={{ color: theme.color, opacity: 0.85 }} />
+                  {profile.email}
+                </div>
+              )}
+              {profile?.github && (
+                <div className="github">
+                  <GithubFilled style={{ color: theme.color, opacity: 0.85 }} />
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      window.open(profile.github);
+                    }}
+                  >
+                    {profile.github}
+                  </span>
+                </div>
+              )}
+              {profile?.zhihu && (
+                <div className="github">
+                  <ZhihuCircleFilled
+                    style={{ color: theme.color, opacity: 0.85 }}
+                  />
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      window.open(profile.zhihu);
+                    }}
+                  >
+                    {profile.zhihu}
+                  </span>
+                </div>
+              )}
+              {profile?.workExpYear && (
+                <div className="work-exp-year">
+                  <ScheduleFilled
+                    style={{ color: theme.color, opacity: 0.85 }}
+                  />
+                  <span>工作经验: {profile.workExpYear}</span>
+                </div>
+              )}
+            </div>
           </div>
+          {/* 头像 */}
+          {!value?.avatar?.hidden && (
+            <Avatar avatarSrc={value?.avatar?.src} className="avatar" />
+          )}
         </div>
-        {/* </CardWrapper> */}
+        {/* </Wrapper> */}
         {/* 教育背景 */}
         {educationList?.length ? (
-          <CardWrapper
+          <Wrapper
             title="教育背景"
             className="section section-education"
             color={theme.color}
@@ -166,10 +160,10 @@ export const Template3: React.FC<Props> = props => {
                 </div>
               );
             })}
-          </CardWrapper>
+          </Wrapper>
         ) : null}
         {workList.length ? (
-          <CardWrapper
+          <Wrapper
             title="个人作品"
             className="section section-work"
             color={theme.color}
@@ -190,9 +184,9 @@ export const Template3: React.FC<Props> = props => {
                 </div>
               );
             })}
-          </CardWrapper>
+          </Wrapper>
         ) : null}
-        <CardWrapper
+        <Wrapper
           title="自我介绍"
           className="section section-aboutme"
           color={theme.color}
@@ -200,10 +194,10 @@ export const Template3: React.FC<Props> = props => {
           {aboutme.map((d, idx) => (
             <div key={`${idx}`}>{d}</div>
           ))}
-        </CardWrapper>
+        </Wrapper>
         {/* 专业技能 */}
         {skillList?.length ? (
-          <CardWrapper
+          <Wrapper
             title="专业技能"
             className="section section-skill"
             color={theme.color}
@@ -229,10 +223,10 @@ export const Template3: React.FC<Props> = props => {
                 </div>
               ) : null;
             })}
-          </CardWrapper>
+          </Wrapper>
         ) : null}
-        {awardList?.length ? (
-          <CardWrapper
+        {/* {awardList?.length ? (
+          <Wrapper
             title="更多信息"
             className="section section-award"
             color={theme.color}
@@ -243,7 +237,7 @@ export const Template3: React.FC<Props> = props => {
                   <TrophyFilled
                     style={{ color: '#ffc107', marginRight: '8px' }}
                   />
-                  <b className="info-name">{award.award_info}</b>
+                  <span className="info-name">{award.award_info}</span>
                   {award.award_time && (
                     <span className="sub-info award-time">
                       ({award.award_time})
@@ -252,15 +246,11 @@ export const Template3: React.FC<Props> = props => {
                 </div>
               );
             })}
-          </CardWrapper>
-        ) : null}
+          </Wrapper>
+        ) : null} */}
       </div>
       <div className="main-info">
-        {wrapper({
-          id: 'work-experience',
-          title: '工作经历',
-          color: theme.color,
-        })(
+        <Wrapper className="experience" title="工作经历" color={theme.color}>
           <div className="section section-work-exp">
             {_.map(workExpList, (work, idx) => {
               const start = work.work_time[0];
@@ -282,9 +272,8 @@ export const Template3: React.FC<Props> = props => {
               ) : null;
             })}
           </div>
-        )}
-
-        {wrapper({ id: 'skill', title: '项目经历', color: theme.color })(
+        </Wrapper>
+        <Wrapper className="skill" title="项目经历" color={theme.color}>
           <div className="section section-project">
             {_.map(projectList, (project, idx) =>
               project ? (
@@ -299,11 +288,11 @@ export const Template3: React.FC<Props> = props => {
                     )}
                   </div>
                   <div className="section-detail">
-                    <b>项目描述：</b>
+                    <span>项目描述：</span>
                     <span>{project.project_desc}</span>
                   </div>
                   <div className="section-detail">
-                    <b>主要工作：</b>
+                    <span>主要工作：</span>
                     <span className="project-content">
                       {project.project_content}
                     </span>
@@ -312,7 +301,7 @@ export const Template3: React.FC<Props> = props => {
               ) : null
             )}
           </div>
-        )}
+        </Wrapper>
       </div>
     </div>
   );
