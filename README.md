@@ -2,13 +2,12 @@
 
 在线简历生成器。支持在线预览、编辑和 PDF 下载。✨ [在线编辑](https://visiky.github.io/resume)
 
-内置 3 套模板，支持自定义主题颜色，生成之后，将简历信息存储在个人 github special 仓库下，然后通过 https://visiky.github.io/resume?user={user}&branch={branch} 访问即可。
+内置 3 套模板，支持自定义主题颜色.
 
-| 模板                                                                  | 在线预览                                                                    |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| ![](https://gw.alipayobjects.com/zos/antfincdn/GLDkiGBSPl/moban1.svg) | [Live Demo](https://visiky.github.io/resume?user=visiky)                    |
-| ![](https://gw.alipayobjects.com/zos/antfincdn/RGxVcJ2O3q/moban2.svg) | [Live Demo](https://visiky.github.io/resume?user=visiky&template=template2) |
-| ![](https://gw.alipayobjects.com/zos/antfincdn/Kn2jUKcBme/moban2.svg) | [Live Demo](https://visiky.github.io/resume?user=visiky&template=template3) |
+|默认模板| 简易模板| 简易模板2（适用于多页）|
+| -------------------------------- | --------------------------------------------------|----------------------- |
+| <img src="https://gw.alipayobjects.com/zos/antfincdn/GLDkiGBSPl/moban1.svg" height="280" />|<img src="https://gw.alipayobjects.com/zos/antfincdn/RGxVcJ2O3q/moban2.svg" height="280" />| <img src="https://gw.alipayobjects.com/zos/antfincdn/Kn2jUKcBme/moban2.svg" height="280" />|
+|[Live Demo](https://visiky.github.io/resume?user=visiky)  |[Live Demo](https://visiky.github.io/resume?user=visiky&template=template2)|[Live Demo](https://visiky.github.io/resume?user=visiky&template=template3) |
 
 ## 如何使用（How to use）
 
@@ -30,6 +29,7 @@
 | ------ | ------------- | ------------ |
 | user   | github 用户名 | 必选         |
 | branch | 分支名        | 默认: master |
+| template | 模板        | 默认: template1 |
 
 ## ✨ Recommendation
 
