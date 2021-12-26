@@ -80,7 +80,7 @@ const Page: React.FC = () => {
 
   const onThemeChange = useCallback((v: Partial<ThemeConfig>) => {
     setTheme(_.assign({}, theme, v));
-  }, []);
+  }, [theme]);
 
   useEffect(() => {
     if (getDevice() === 'mobile') {
