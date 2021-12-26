@@ -19,7 +19,6 @@
   "devDependencies": {
     "@types/antd": "^1.0.0",
     "@types/react": "^17.0.3",
-    "all-contributors-cli": "^6.20.0",
     "babel-plugin-import": "^1.13.3",
     "gatsby": "^2.26.1",
     "gatsby-plugin-antd": "^2.2.0",
@@ -27,15 +26,13 @@
     "gh-pages": "^3.1.0",
     "less": "^4.1.0",
     "prettier": "2.2.1",
-    "react-dnd": "^14.0.2",
-    "react-dnd-html5-backend": "^14.0.0",
     "rimraf": "^2.5.4",
     "ts-loader": "^8.0.18",
     "typescript": "^4.2.3"
   },
   "scripts": {
     "start": "gatsby clean && gatsby develop",
-    "build": "gatsby clean && gatsby build",
+    "build": "gatsby build",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "clean": "gatsby clean",
     "deploy": "npm run clean && gatsby build --prefix-paths && gh-pages -d public"
