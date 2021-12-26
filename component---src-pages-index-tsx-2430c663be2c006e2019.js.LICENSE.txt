@@ -4,6 +4,12 @@
   http://jedwatson.github.io/classnames
 */
 
+/*!
+ * content-type
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
 /** @license React v16.13.1
  * react-is.production.min.js
  *
