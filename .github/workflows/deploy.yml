@@ -1,19 +1,19 @@
-name: github pages
+# name: github pages
 
-on:
-  push:
-    branches:
-      - master  # Set a branch name to trigger deployment
+# on:
+#   push:
+#     branches:
+#       - master  # Set a branch name to trigger deployment
 
-jobs:
-  deploy:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 12
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v2
+#         with:
+#           node-version: 12
 
-      - run: yarn install
-      - run: npm run build
-      - run: npm run deploy
+#       - run: yarn install
+#       - run: npm run build
+#       - run: npm run deploy
