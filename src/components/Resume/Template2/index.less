@@ -1,0 +1,228 @@
+// 响应式布局
+// 内容
+.template2-resume {
+  width: 794px;
+  min-height: 942px;
+  margin-bottom: 60px;
+
+  @media (max-width: 794px) {
+    width: 100%;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+  }
+
+  .template2-resume {
+    width: 100%;
+    box-shadow: none;
+  }
+}
+
+// 内容
+.template2-resume {
+  // 加点阴影
+  box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.15);
+
+  // 布局位置
+  .basic-info {
+    padding: 18px 24px 12px 24px;
+  }
+
+  .main-info {
+    padding: 0 24px 24px;
+    background: #fff;
+  }
+
+  .section-title {
+    font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 8px;
+    letter-spacing: 0;
+    position: relative;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      left: 88px;
+      height: 1px;
+      transform: translateY(-1px);
+      background-color: currentColor;
+      opacity: 0.54;
+    }
+  }
+
+  .basic-info .section {
+    border-radius: 0;
+  }
+
+  // 内容样式 通用
+  .section {
+    &:not(:first-of-type) {
+      margin-top: 12px;
+    }
+
+    .section-info {
+      font-size: 14px;
+      line-height: 16px;
+      color: rgba(0, 0, 0, 0.85);
+      margin-bottom: 4px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .basic-info section .section-info {
+    .info-name {
+      max-width: 198px;
+      padding-right: 4px;
+    }
+  }
+
+  // basic-info 内容样式
+  .basic-info .avatar {
+    margin: 0 auto;
+    display: block;
+    width: 84px;
+    height: 84px;
+  }
+
+  .basic-info .name {
+    margin: 0 0 8px 4px;
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .basic-info .profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+
+    margin-bottom: 12px;
+
+    > div:first-of-type {
+      flex: 1;
+    }
+    > div:nth-of-type(2) {
+      width: 150px;
+    }
+
+    .profile-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 4px;
+
+      > div {
+        flex: 220px 1;
+      }
+
+      > div:not(:last-of-type) {
+        margin-bottom: 4px;
+      }
+
+      .anticon {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  // 非通用，skill
+  .basic-info .section-skill {
+    .skill-item {
+      display: flex;
+      justify-content: space-between;
+
+      &:not(:first-of-type) {
+        margin-top: 2px;
+      }
+    }
+
+    .skill-rate {
+      font-size: 14px;
+
+      .ant-rate-star {
+        margin-right: 4px;
+      }
+    }
+
+    .skill-detail-item {
+      margin-top: 4px;
+    }
+  }
+
+  // 非通用
+  .basic-info section .sub-info {
+    color: rgba(0, 0, 0, 0.45);
+  }
+
+  .basic-info .section-award {
+    .sub-info {
+      font-size: 14px;
+      margin-left: 8px;
+    }
+  }
+
+  .basic-info .education-item {
+    &:not(:first-of-type) {
+      margin-top: 8px;
+    }
+  }
+
+  .basic-info .section-work {
+    > div {
+      line-height: 24px;
+    }
+
+    a.sub-info {
+      font-size: 12px;
+      margin-left: 8px;
+    }
+  }
+
+  // main-info 内容样式
+  .main-info section {
+    margin-bottom: 16px;
+
+    .section-detail {
+      letter-spacing: 1.2px;
+
+      &:not(:first-of-type) {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  // 非通用
+  .main-info .section-project,
+  .main-info .section-work-exp {
+    .section-info .ant-tag {
+      line-height: 20px;
+      height: 20px;
+      border: none;
+    }
+
+    .section-item:not(:first-of-type) {
+      margin-top: 10px;
+    }
+
+    .section-info .sub-info,
+    .section-info .info-time {
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 12px;
+      margin-left: 8px;
+      font-weight: 300;
+    }
+
+    .work-description,
+    .project-content {
+      white-space: pre-wrap;
+    }
+  }
+}
