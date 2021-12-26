@@ -3,7 +3,7 @@ name: github pages
 on:
   push:
     branches:
-      - master  # Set a branch name to trigger deployment
+      - master # Set a branch name to trigger deployment
 
 jobs:
   deploy:
@@ -14,8 +14,14 @@ jobs:
         with:
           node-version: 12
 
-      - run: npm install
+      - run: yarn install
       - run: npm run build
+<<<<<<< Updated upstream
+      - run: |
+          git config --local user.name visiky
+          git config --local user.email 736929286@qq.com
+          npm run deploy
+=======
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -23,3 +29,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           
+>>>>>>> Stashed changes
