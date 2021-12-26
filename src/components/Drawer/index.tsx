@@ -15,8 +15,9 @@ import arrayMove from 'array-move';
 import { FormCreator } from '../FormCreator';
 import { MODULES, CONTENT_OF_MODULE } from '../../helpers/contant';
 import { ResumeConfig, ThemeConfig } from '../types';
+import { ConfigTheme } from './ConfigTheme';
+import { Templates } from './Templates';
 import './index.less';
-import { ConfigTheme } from '../ConfigTheme';
 
 const { Panel } = Collapse;
 
@@ -79,7 +80,7 @@ export const Drawer: React.FC<Props> = props => {
   const [childrenDrawer, setChildrenDrawer] = useState(null);
   const [currentContent, updateCurrentContent] = useState(null);
 
-  const [type, setType] = useState('module');
+  const [type, setType] = useState('template');
 
   const swapItems = (moduleKey: string, oldIdx: number, newIdx: number) => {
     const newValues = _.clone(_.get(props.value, moduleKey, []));
@@ -115,6 +116,7 @@ export const Drawer: React.FC<Props> = props => {
           </Radio.Group>
         }
         width={480}
+        closable={false}
         onClose={() => setVisible(false)}
         visible={visible}
       >
@@ -263,9 +265,10 @@ export const Drawer: React.FC<Props> = props => {
               {...props.theme}
               onChange={v => props.onThemeChange(v)}
             />
-            <div className="template-list">
-              
-            </div>
+            <Templates
+              {...props.theme}
+              onChange={v => props.onThemeChange(v)}
+            />
           </React.Fragment>
         )}
       </AntdDrawer>
