@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Button, Affix, Upload, message, Spin, Modal } from 'antd';
+import ReactGA from 'react-ga';
 import fetch from 'cross-fetch';
 import qs from 'query-string';
 import { RcFile } from 'antd/lib/upload';
@@ -27,7 +28,9 @@ const Page: React.FC = () => {
     const query = qs.parse(search);
     const user = query.user || '';
     const branch = query.branch || 'master';
-    const mode = (query.mode as string) || 'red';
+    const mode = query.mode as string || 'red';
+    user && ReactGA.set({ user });
+
     fetch(
       `https://raw.githubusercontent.com/${user}/${user}/${branch}/resume.json`
     )
