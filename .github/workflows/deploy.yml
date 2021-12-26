@@ -14,12 +14,6 @@ jobs:
         with:
           node-version: 12
 
-      - run: npm install
+      - run: yarn install
       - run: npm run build
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          
+      - run: npm run deploy
