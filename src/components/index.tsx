@@ -10,7 +10,6 @@ import { copyToClipboard } from '../helpers/copy-to-board';
 import { getDevice } from '../helpers/detect-device';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
-import { Print } from './Print';
 import { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
 
@@ -28,7 +27,7 @@ const Page: React.FC = () => {
     const query = qs.parse(search);
     const user = query.user || '';
     const branch = query.branch || 'master';
-    const mode = query.mode as string || 'red';
+    const mode = (query.mode as string) || 'red';
     user && ReactGA.set({ user });
 
     fetch(
@@ -142,17 +141,16 @@ const Page: React.FC = () => {
             <React.Fragment>
               <Affix offsetTop={0}>
                 <Button.Group className="btn-group">
-                  <Button type="primary" disabled>
-                    主题配置
-                  </Button>
-                  <Print />
                   <Drawer
                     value={config}
                     onValueChange={onConfigChange}
                     theme={theme}
                     onThemeChange={onThemeChange}
                   />
-                  <Button.Group className="btn-group" style={{ marginLeft: 0 }}>
+                  <Button.Group
+                    className="btn-group"
+                    style={{ marginLeft: 0 }}
+                  >
                     <Upload
                       accept=".json"
                       showUploadList={false}
@@ -162,6 +160,9 @@ const Page: React.FC = () => {
                     </Upload>
                     <Button type="primary" onClick={copyConfig}>
                       复制配置
+                    </Button>
+                    <Button type="primary" onClick={() => window.print()}>
+                      PDF 下载
                     </Button>
                   </Button.Group>
                 </Button.Group>

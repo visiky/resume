@@ -16,6 +16,7 @@ import { FormCreator } from '../FormCreator';
 import { MODULES, CONTENT_OF_MODULE } from '../../helpers/contant';
 import { ResumeConfig, ThemeConfig } from '../types';
 import './index.less';
+import { ConfigTheme } from '../ConfigTheme';
 
 const { Panel } = Collapse;
 
@@ -109,8 +110,8 @@ export const Drawer: React.FC<Props> = props => {
       <AntdDrawer
         title={
           <Radio.Group value={type} onChange={e => setType(e.target.value)}>
-            <Radio.Button value="module">模块</Radio.Button>
-            <Radio.Button value="theme">样式</Radio.Button>
+            <Radio.Button value="template">选择模板</Radio.Button>
+            <Radio.Button value="module">配置简历</Radio.Button>
           </Radio.Group>
         }
         width={480}
@@ -118,159 +119,154 @@ export const Drawer: React.FC<Props> = props => {
         visible={visible}
       >
         {type === 'module' ? (
-          <DndProvider backend={HTML5Backend}>
-            <div className="module-list">
-              {MODULES.map((module, idx) => {
-                if (_.endsWith(module.key, 'List')) {
-                  const values = _.get(props.value, module.key, []);
+          <React.Fragment>
+            <DndProvider backend={HTML5Backend}>
+              <div className="module-list">
+                {MODULES.map((module, idx) => {
+                  if (_.endsWith(module.key, 'List')) {
+                    const values = _.get(props.value, module.key, []);
+                    return (
+                      <div className="module-item" key={`${idx}`}>
+                        <Collapse defaultActiveKey={[]} ghost>
+                          <Panel
+                            header={
+                              <>
+                                <span className="item-icon">{module.icon}</span>
+                                <span className="item-name">{module.name}</span>
+                              </>
+                            }
+                            key="1"
+                          >
+                            <div className="list-value-item">
+                              {_.map(values, (value, idx: number) => (
+                                <DragableRow
+                                  key={idx}
+                                  index={idx}
+                                  moveRow={(oldIdx, newIdx) =>
+                                    swapItems(module.key, oldIdx, newIdx)
+                                  }
+                                >
+                                  <div
+                                    onClick={() => {
+                                      setChildrenDrawer(module.key);
+                                      updateCurrentContent({
+                                        ...value,
+                                        dataIndex: idx,
+                                      });
+                                    }}
+                                  >
+                                    {`${idx + 1}. ${Object.values(
+                                      value || {}
+                                    ).join(' - ')}`}
+                                  </div>
+                                  <DeleteFilled
+                                    onClick={() => {
+                                      Modal.confirm({
+                                        content: '确认删除',
+                                        onOk: () => deleteItem(module.key, idx),
+                                      });
+                                    }}
+                                  />
+                                </DragableRow>
+                              ))}
+                              <div
+                                className="btn-append"
+                                onClick={() => {
+                                  setChildrenDrawer(module.key);
+                                  updateCurrentContent(null);
+                                }}
+                              >
+                                继续添加
+                              </div>
+                            </div>
+                          </Panel>
+                        </Collapse>
+                      </div>
+                    );
+                  }
                   return (
-                    <div className="module-item" key={`${idx}`}>
-                      <Collapse defaultActiveKey={[]} ghost>
+                    <div className="module-item">
+                      <Collapse
+                        defaultActiveKey={[]}
+                        ghost
+                        expandIcon={() => (
+                          <span
+                            style={{ display: 'inline-block', width: '12px' }}
+                          />
+                        )}
+                      >
                         <Panel
                           header={
-                            <>
-                              <span className="item-icon">{module.icon}</span>
-                              <span className="item-name">{module.name}</span>
-                            </>
-                          }
-                          key="1"
-                        >
-                          <div className="list-value-item">
-                            {_.map(values, (value, idx: number) => (
-                              <DragableRow
-                                key={idx}
-                                index={idx}
-                                moveRow={(oldIdx, newIdx) =>
-                                  swapItems(module.key, oldIdx, newIdx)
-                                }
-                              >
-                                <div
-                                  onClick={() => {
-                                    setChildrenDrawer(module.key);
-                                    updateCurrentContent({
-                                      ...value,
-                                      dataIndex: idx,
-                                    });
-                                  }}
-                                >
-                                  {`${idx + 1}. ${Object.values(
-                                    value || {}
-                                  ).join(' - ')}`}
-                                </div>
-                                <DeleteFilled
-                                  onClick={() => {
-                                    Modal.confirm({
-                                      content: '确认删除',
-                                      onOk: () => deleteItem(module.key, idx),
-                                    });
-                                  }}
-                                />
-                              </DragableRow>
-                            ))}
-                            <div
-                              className="btn-append"
+                            <span
                               onClick={() => {
+                                updateCurrentContent(
+                                  _.get(props.value, module.key)
+                                );
                                 setChildrenDrawer(module.key);
-                                updateCurrentContent(null);
                               }}
                             >
-                              继续添加
-                            </div>
-                          </div>
-                        </Panel>
+                              <span className="item-icon">{module.icon}</span>
+                              <span className="item-name">{module.name}</span>
+                            </span>
+                          }
+                          key="1"
+                          className="no-content-panel"
+                        />
                       </Collapse>
                     </div>
                   );
-                }
-                return (
-                  <div className="module-item">
-                    <Collapse
-                      defaultActiveKey={[]}
-                      ghost
-                      expandIcon={() => (
-                        <span
-                          style={{ display: 'inline-block', width: '12px' }}
-                        />
-                      )}
-                    >
-                      <Panel
-                        header={
-                          <span
-                            onClick={() => {
-                              updateCurrentContent(
-                                _.get(props.value, module.key)
-                              );
-                              setChildrenDrawer(module.key);
-                            }}
-                          >
-                            <span className="item-icon">{module.icon}</span>
-                            <span className="item-name">{module.name}</span>
-                          </span>
-                        }
-                        key="1"
-                        className="no-content-panel"
-                      />
-                    </Collapse>
-                  </div>
-                );
-              })}
-            </div>
-            <AntdDrawer
-              title={MODULES.find(m => m.key === childrenDrawer)?.name}
-              width={450}
-              onClose={() => setChildrenDrawer(null)}
-              visible={!!childrenDrawer}
-            >
-              <FormCreator
-                config={CONTENT_OF_MODULE[childrenDrawer]}
-                value={currentContent}
-                onChange={v => {
-                  if (_.endsWith(childrenDrawer, 'List')) {
-                    const newValue = _.get(props.value, childrenDrawer, []);
-                    if (currentContent) {
-                      newValue[currentContent.dataIndex] = _.merge(
-                        {},
-                        currentContent,
-                        v
-                      );
+                })}
+              </div>
+              <AntdDrawer
+                title={MODULES.find(m => m.key === childrenDrawer)?.name}
+                width={450}
+                onClose={() => setChildrenDrawer(null)}
+                visible={!!childrenDrawer}
+              >
+                <FormCreator
+                  config={CONTENT_OF_MODULE[childrenDrawer]}
+                  value={currentContent}
+                  onChange={v => {
+                    if (_.endsWith(childrenDrawer, 'List')) {
+                      const newValue = _.get(props.value, childrenDrawer, []);
+                      if (currentContent) {
+                        newValue[currentContent.dataIndex] = _.merge(
+                          {},
+                          currentContent,
+                          v
+                        );
+                      } else {
+                        newValue.push(v);
+                      }
+                      props.onValueChange({
+                        [childrenDrawer]: newValue,
+                      });
                     } else {
-                      newValue.push(v);
+                      props.onValueChange({
+                        [childrenDrawer]: _.merge({}, currentContent, v),
+                      });
                     }
-                    props.onValueChange({
-                      [childrenDrawer]: newValue,
-                    });
-                  } else {
-                    props.onValueChange({
-                      [childrenDrawer]: _.merge({}, currentContent, v),
-                    });
-                  }
 
-                  // 关闭抽屉
-                  setChildrenDrawer(null);
-                  // 清空当前选中内容
-                  updateCurrentContent(null);
-                }}
-              />
-            </AntdDrawer>
-          </DndProvider>
+                    // 关闭抽屉
+                    setChildrenDrawer(null);
+                    // 清空当前选中内容
+                    updateCurrentContent(null);
+                  }}
+                />
+              </AntdDrawer>
+            </DndProvider>
+          </React.Fragment>
         ) : (
           // 简单做
-          <div className="theme-config">
-            <FormCreator
-              config={[
-                { type: 'color-picker', attributeId: 'color', displayName: '主题色' },
-                {
-                  type: 'color-picker',
-                  attributeId: 'tagColor',
-                  displayName: 'tag 标签色',
-                },
-              ]}
-              value={props.theme}
-              onChange={v => {
-                props.onThemeChange(v);
-              }}
+          <React.Fragment>
+            <ConfigTheme
+              {...props.theme}
+              onChange={v => props.onThemeChange(v)}
             />
-          </div>
+            <div className="template-list">
+              
+            </div>
+          </React.Fragment>
         )}
       </AntdDrawer>
     </>
