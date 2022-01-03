@@ -34,7 +34,9 @@ body {
       .ant-btn {
         display: block;
         margin-top: 8px;
+        padding: 4px 8px;
         width: 98px;
+        border-radius: 0 !important;
       }
     }
   }
@@ -47,11 +49,13 @@ body {
         margin-left: 0px;
 
         .ant-btn {
-          margin: 0px 0px 8px;
+          margin-top: 0;
+          margin-bottom: 8px;
+          margin-right: 8px;
           display: inline-block;
 
-          &:not(:last-of-type) {
-            margin-right: 8px;
+          &:not(.btn-upload):last-of-type {
+            margin-right: 0px;
           }
         }
       }
@@ -63,7 +67,7 @@ body {
     .page {
       padding: 0;
       .btn-group,
-      .box-size-info  {
+      .box-size-info {
         display: none;
       }
     }

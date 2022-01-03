@@ -14,6 +14,7 @@ import _ from 'lodash';
 import { Avatar } from '../../Avatar';
 import { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
+import { getLocale } from '@/locale';
 
 type Props = {
   value: ResumeConfig;
@@ -38,6 +39,7 @@ const wrapper = ({ id, title, color }) => WrappedComponent => {
  * @description 简历内容区
  */
 export const Template1: React.FC<Props> = props => {
+  const i18n = getLocale();
   const { value, theme } = props;
 
   /** 个人基础信息 */
@@ -118,7 +120,7 @@ export const Template1: React.FC<Props> = props => {
             {profile?.workExpYear && (
               <div className="work-exp-year">
                 <ScheduleFilled style={{ color: theme.color, opacity: 0.85 }} />
-                <span>工作经验: {profile.workExpYear}</span>
+                <span>{i18n.get('工作经验')}: {profile.workExpYear}</span>
               </div>
             )}
           </div>
@@ -127,7 +129,7 @@ export const Template1: React.FC<Props> = props => {
         {!!_.trim(_.join(aboutme, '')) && (
           <section className="section section-aboutme">
             <div className="section-title" style={{ color: theme.color }}>
-              自我介绍
+              {i18n.get('自我介绍')}
             </div>
             {aboutme.map((d, idx) => (
               <div key={`${idx}`}>{d}</div>
@@ -138,7 +140,7 @@ export const Template1: React.FC<Props> = props => {
         {educationList?.length ? (
           <section className="section section-education">
             <div className="section-title" style={{ color: theme.color }}>
-              教育背景
+              {i18n.get('教育背景')}
             </div>
             {educationList.map((education, idx) => {
               const [start, end] = education.edu_time;
@@ -148,7 +150,7 @@ export const Template1: React.FC<Props> = props => {
                     <b>{education.school}</b>
                     <span className="sub-info" style={{ float: 'right' }}>
                       {start}
-                      {end ? ` ~ ${end}` : ' 至今'}
+                      {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
                     </span>
                   </div>
                   <div>
@@ -167,7 +169,7 @@ export const Template1: React.FC<Props> = props => {
         {workList.length ? (
           <section className="section section-work">
             <div className="section-title" style={{ color: theme.color }}>
-              个人作品
+              {i18n.get('个人作品')}
             </div>
             {workList.map((work, idx) => {
               return (
@@ -178,7 +180,7 @@ export const Template1: React.FC<Props> = props => {
                     />
                     <b className="info-name">{work.work_name}</b>
                     <a className="sub-info" href={work.visit_link}>
-                      访问链接
+                      {i18n.get('访问链接')}
                     </a>
                   </div>
                   {work.work_desc && <div>{work.work_desc}</div>}
@@ -191,11 +193,11 @@ export const Template1: React.FC<Props> = props => {
         {skillList?.length ? (
           <section className="section section-skill">
             <div className="section-title" style={{ color: theme.color }}>
-              专业技能
+              {i18n.get('专业技能')}
             </div>
             {skillList.map((skill, idx) => {
               return skill ? (
-                <React.Fragment>
+                <React.Fragment key={`${idx}`}>
                   <div
                     style={{
                       display: 'flex',
@@ -212,9 +214,9 @@ export const Template1: React.FC<Props> = props => {
                       className="skill-rate"
                     />
                   </div>
-                  {_.split(skill.skill_desc, '\n').map(d =>
+                  {_.split(skill.skill_desc, '\n').map((d, idx) =>
                     d ? (
-                      <div className="skill-detail-item">
+                      <div className="skill-detail-item" key={`${idx}`}>
                         <CheckCircleFilled
                           style={{ color: '#ffc107', marginRight: '8px' }}
                         />
@@ -231,7 +233,7 @@ export const Template1: React.FC<Props> = props => {
         {awardList?.length ? (
           <section className="section section-award">
             <div className="section-title" style={{ color: theme.color }}>
-              更多信息
+              {i18n.get('更多信息')}
             </div>
             {awardList.map((award, idx) => {
               return (
@@ -254,7 +256,7 @@ export const Template1: React.FC<Props> = props => {
       <div className="main-info">
         {wrapper({
           id: 'work-experience',
-          title: '工作经历',
+          title: i18n.get('工作经历'),
           color: theme.color,
         })(
           <div className="section section-work-exp">
@@ -270,7 +272,7 @@ export const Template1: React.FC<Props> = props => {
                     </b>
                     <span className="info-time">
                       {start}
-                      {end ? ` ~ ${end}` : ' 至今'}
+                      {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
                     </span>
                   </div>
                   <div className="work-description">{work.work_desc}</div>
@@ -280,7 +282,7 @@ export const Template1: React.FC<Props> = props => {
           </div>
         )}
 
-        {wrapper({ id: 'skill', title: '项目经历', color: theme.color })(
+        {wrapper({ id: 'skill', title: i18n.get('项目经历'), color: theme.color })(
           <div className="section section-project">
             {_.map(projectList, (project, idx) =>
               project ? (
@@ -295,11 +297,11 @@ export const Template1: React.FC<Props> = props => {
                     )}
                   </div>
                   <div className="section-detail">
-                    <b>项目描述：</b>
+                    <b>{i18n.get('项目描述')}：</b>
                     <span>{project.project_desc}</span>
                   </div>
                   <div className="section-detail">
-                    <b>主要工作：</b>
+                    <b>{i18n.get('主要工作')}：</b>
                     <span className="project-content">
                       {project.project_content}
                     </span>

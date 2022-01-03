@@ -1,3 +1,4 @@
+import { getLocale } from '@/locale';
 import React, { useEffect } from 'react';
 import { ColorPicker } from '../../FormCreator/ColorPicker';
 import { ThemeConfig } from '../../types';
@@ -9,10 +10,12 @@ type Props = ThemeConfig & {
 const FormItemStyle = {
   display: 'flex',
   alignItems: 'center',
-  minWidth: '80px',
+  minWidth: '100px',
 };
 
 export const ConfigTheme: React.FC<Props> = props => {
+  const i18n = getLocale();
+
   useEffect(() => {
     let $style = document.getElementById('dynamic');
     if (!$style) {
@@ -32,14 +35,14 @@ export const ConfigTheme: React.FC<Props> = props => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <div style={FormItemStyle}>
-        <span style={{ marginRight: '4px' }}>主题色</span>
+        <span style={{ marginRight: '4px' }}>{i18n.get('主题色')}</span>
         <ColorPicker
           value={props.color}
           onChange={v => props.onChange({ color: v })}
         />
       </div>
       <div style={FormItemStyle}>
-        <span style={{ marginRight: '4px' }}>tag 标签色</span>
+        <span style={{ marginRight: '4px' }}>{i18n.get('tag 标签色')}</span>
         <ColorPicker
           value={props.tagColor}
           onChange={v => props.onChange({ tagColor: v })}
