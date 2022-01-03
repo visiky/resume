@@ -57,7 +57,7 @@ export const LangSwitcher = ({ className }: { className?: string }) => {
           {RadioContent}
         </Popover>
       ) : (
-        { RadioContent }
+        RadioContent
       )}
     </div>
   );
