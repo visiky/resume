@@ -7,6 +7,14 @@
     display: none;
   }
 }
-.gatsby-focus-wrapper {
+
+// 默认的样式
+#___gatsby,
+#gatsby-focus-wrapper {
   min-height: 100vh;
+}
+
+// loading 样式
+#gatsby-focus-wrapper > .ant-spin-nested-loading {
+  height: calc(100vh - 46px/** footer */);
 }

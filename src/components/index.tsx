@@ -76,9 +76,12 @@ const Page: React.FC = () => {
     [config]
   );
 
-  const onThemeChange = useCallback((v: Partial<ThemeConfig>) => {
-    setTheme(_.assign({}, theme, v));
-  }, [theme]);
+  const onThemeChange = useCallback(
+    (v: Partial<ThemeConfig>) => {
+      setTheme(_.assign({}, theme, v));
+    },
+    [theme]
+  );
 
   useEffect(() => {
     if (getDevice() === 'mobile') {
@@ -158,13 +161,13 @@ const Page: React.FC = () => {
                     template={template}
                     onTemplateChange={updateTemplate}
                   />
-                  <Button.Group className="btn-group" style={{ marginLeft: 0 }}>
+                  <React.Fragment>
                     <Upload
                       accept=".json"
                       showUploadList={false}
                       beforeUpload={importConfig}
                     >
-                      <Button>导入配置</Button>
+                      <Button className="btn-upload">导入配置</Button>
                     </Upload>
                     <Button type="primary" onClick={copyConfig}>
                       复制配置
@@ -172,7 +175,7 @@ const Page: React.FC = () => {
                     <Button type="primary" onClick={() => window.print()}>
                       PDF 下载
                     </Button>
-                  </Button.Group>
+                  </React.Fragment>
                 </Button.Group>
               </Affix>
               <div
