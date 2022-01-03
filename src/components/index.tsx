@@ -1,21 +1,29 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { Button, Affix, Upload, message, Spin, Modal } from 'antd';
 import fetch from 'cross-fetch';
 import qs from 'query-string';
 import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash';
-import { RESUME_INFO } from '../datas/resume';
-import { copyToClipboard } from '../helpers/copy-to-board';
-import { getDevice } from '../helpers/detect-device';
+import { getLanguage, getLocale } from '@/locale';
+import { useModeSwitcher } from '@/hooks/useModeSwitcher';
+import { RESUME_INFO } from '@/datas/resume';
+import { customAssign } from '@/helpers/customAssign';
+import { copyToClipboard } from '@/helpers/copy-to-board';
+import { getDevice } from '@/helpers/detect-device';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
 
-const Page: React.FC = () => {
+export const Page: React.FC = () => {
+  const lang = getLanguage();
+  const i18n = getLocale();
+
+  const [, mode, changeMode] = useModeSwitcher({});
+
+  const originalConfig = useRef<ResumeConfig>();
   const [config, setConfig] = useState<ResumeConfig>();
   const [loading, updateLoading] = useState<boolean>(true);
-  const [mode, updateMode] = useState<string>('read');
   const [template, updateTemplate] = useState<string>('template1');
   const [theme, setTheme] = useState<ThemeConfig>({
     color: '#2f5785',
@@ -35,8 +43,6 @@ const Page: React.FC = () => {
     const query = qs.parse(search);
     const user = query.user || '';
     const branch = query.branch || 'master';
-    const mode = (query.mode as string) || 'read';
-
     fetch(
       `https://raw.githubusercontent.com/${user}/${user}/${branch}/resume.json`
     )
@@ -53,9 +59,19 @@ const Page: React.FC = () => {
             ),
             okText: '进入在线编辑',
             onOk: () => {
-              setConfig(RESUME_INFO);
+              originalConfig.current = RESUME_INFO;
+              setConfig(
+                _.omit(
+                  customAssign(
+                    {},
+                    RESUME_INFO,
+                    _.get(RESUME_INFO, ['locales', lang])
+                  ),
+                  ['locales']
+                )
+              );
               updateLoading(false);
-              updateMode('edit');
+              changeMode('edit');
             },
           });
           return;
@@ -63,17 +79,21 @@ const Page: React.FC = () => {
         return data.json();
       })
       .then(data => {
-        setConfig(data);
+        originalConfig.current = data;
+        setConfig(
+          _.omit(customAssign({}, data, _.get(data, ['locales', lang])), [
+            'locales',
+          ])
+        );
         updateLoading(false);
-        updateMode(mode);
       });
-  }, []);
+  }, [lang]);
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
       setConfig(_.assign({}, config, v));
     },
-    [config]
+    [config, lang]
   );
 
   const onThemeChange = useCallback(
@@ -85,7 +105,7 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     if (getDevice() === 'mobile') {
-      message.info('移动端只提供查看功能，在线制作请前往 PC 端');
+      message.info(i18n.get('移动端只提供查看功能，在线制作请前往 PC 端'));
     }
   }, []);
 
@@ -126,20 +146,28 @@ const Page: React.FC = () => {
             onThemeChange(newConfig.theme);
             onConfigChange(_.omit(newConfig, 'theme'));
           }
-          message.success('上传配置已应用');
+          message.success(i18n.get('上传配置已应用'));
         } catch (err) {
-          message.error('上传文件有误，请重新上传');
+          message.error(i18n.get('上传文件有误，请重新上传'));
         }
       };
       reader.readAsText(file);
     } else {
-      message.error('您当前浏览器不支持 FileReader，建议使用谷歌浏览器');
+      message.error(
+        i18n.get('您当前浏览器不支持 FileReader，建议使用谷歌浏览器')
+      );
     }
     return false;
   };
 
   const copyConfig = () => {
-    copyToClipboard(JSON.stringify({ ...config, theme }));
+    let fullConfig = config;
+    if (lang !== 'zh_CN') {
+      fullConfig = customAssign({}, originalConfig?.current, {
+        locales: { [lang]: config },
+      });
+    }
+    copyToClipboard(JSON.stringify({ ...fullConfig, theme }));
   };
 
   return (
@@ -167,13 +195,15 @@ const Page: React.FC = () => {
                       showUploadList={false}
                       beforeUpload={importConfig}
                     >
-                      <Button className="btn-upload">导入配置</Button>
+                      <Button className="btn-upload">
+                        {i18n.get('导入配置')}
+                      </Button>
                     </Upload>
                     <Button type="primary" onClick={copyConfig}>
-                      复制配置
+                      {i18n.get('复制配置')}
                     </Button>
                     <Button type="primary" onClick={() => window.print()}>
-                      PDF 下载
+                      {i18n.get('PDF 下载')}
                     </Button>
                   </React.Fragment>
                 </Button.Group>

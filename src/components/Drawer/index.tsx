@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import {
   Drawer as AntdDrawer,
   Button,
@@ -18,6 +18,7 @@ import { ResumeConfig, ThemeConfig } from '../types';
 import { ConfigTheme } from './ConfigTheme';
 import { Templates } from './Templates';
 import './index.less';
+import { getLocale } from '@/locale';
 
 const { Panel } = Collapse;
 
@@ -78,6 +79,8 @@ const DragableRow = ({ index, moveRow, ...restProps }) => {
  * @description 简历配置区
  */
 export const Drawer: React.FC<Props> = props => {
+  const i18n = getLocale();
+
   const [visible, setVisible] = useState(false);
   const [childrenDrawer, setChildrenDrawer] = useState(null);
   const [currentContent, updateCurrentContent] = useState(null);
@@ -98,6 +101,14 @@ export const Drawer: React.FC<Props> = props => {
     });
   };
 
+  const modules = useMemo(() => {
+    return MODULES({ i18n });
+  }, [i18n]);
+
+  const contentOfModule = useMemo(() => {
+    return CONTENT_OF_MODULE({ i18n });
+  }, [i18n]);
+
   return (
     <>
       <Button
@@ -105,16 +116,16 @@ export const Drawer: React.FC<Props> = props => {
         onClick={() => setVisible(true)}
         style={props.style}
       >
-        进行配置
-        <Popover content="移动端模式下，只支持预览，不支持配置">
+        {i18n.get('进行配置')}
+        <Popover content={i18n.get('移动端模式下，只支持预览，不支持配置')}>
           <InfoCircleFilled style={{ marginLeft: '4px' }} />
         </Popover>
       </Button>
       <AntdDrawer
         title={
           <Radio.Group value={type} onChange={e => setType(e.target.value)}>
-            <Radio.Button value="template">选择模板</Radio.Button>
-            <Radio.Button value="module">配置简历</Radio.Button>
+            <Radio.Button value="template">{i18n.get('选择模板')}</Radio.Button>
+            <Radio.Button value="module">{i18n.get('配置简历')}</Radio.Button>
           </Radio.Group>
         }
         width={480}
@@ -126,7 +137,7 @@ export const Drawer: React.FC<Props> = props => {
           <React.Fragment>
             <DndProvider backend={HTML5Backend}>
               <div className="module-list">
-                {MODULES.map((module, idx) => {
+                {modules.map((module, idx) => {
                   if (_.endsWith(module.key, 'List')) {
                     const values = _.get(props.value, module.key, []);
                     return (
@@ -166,7 +177,7 @@ export const Drawer: React.FC<Props> = props => {
                                   <DeleteFilled
                                     onClick={() => {
                                       Modal.confirm({
-                                        content: '确认删除',
+                                        content: i18n.get('确认删除'),
                                         onOk: () => deleteItem(module.key, idx),
                                       });
                                     }}
@@ -180,7 +191,7 @@ export const Drawer: React.FC<Props> = props => {
                                   updateCurrentContent(null);
                                 }}
                               >
-                                继续添加
+                                {i18n.get('继续添加')}
                               </div>
                             </div>
                           </Panel>
@@ -222,13 +233,13 @@ export const Drawer: React.FC<Props> = props => {
                 })}
               </div>
               <AntdDrawer
-                title={MODULES.find(m => m.key === childrenDrawer)?.name}
+                title={modules.find(m => m.key === childrenDrawer)?.name}
                 width={450}
                 onClose={() => setChildrenDrawer(null)}
                 visible={!!childrenDrawer}
               >
                 <FormCreator
-                  config={CONTENT_OF_MODULE[childrenDrawer]}
+                  config={contentOfModule[childrenDrawer]}
                   value={currentContent}
                   onChange={v => {
                     if (_.endsWith(childrenDrawer, 'List')) {

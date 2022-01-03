@@ -13,6 +13,7 @@ import {
 import _ from 'lodash';
 import { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
+import { getLocale } from '@/locale';
 
 type Props = {
   value: ResumeConfig;
@@ -50,6 +51,7 @@ const CardWrapper: React.FC<{
  * @description 简历内容区
  */
 export const Template3: React.FC<Props> = props => {
+  const i18n = getLocale();
   const { value, theme } = props;
 
   /** 个人基础信息 */
@@ -126,7 +128,7 @@ export const Template3: React.FC<Props> = props => {
             {profile?.workExpYear && (
               <div className="work-exp-year">
                 <ScheduleFilled style={{ color: theme.color, opacity: 0.85 }} />
-                <span>工作经验: {profile.workExpYear}</span>
+                <span>{i18n.get('工作经验')}: {profile.workExpYear}</span>
               </div>
             )}
           </div>
@@ -135,7 +137,7 @@ export const Template3: React.FC<Props> = props => {
         {/* 教育背景 */}
         {educationList?.length ? (
           <CardWrapper
-            title="教育背景"
+            title={i18n.get("教育背景")}
             className="section section-education"
             color={theme.color}
           >
@@ -160,7 +162,7 @@ export const Template3: React.FC<Props> = props => {
                     </span>
                     <span className="sub-info" style={{ float: 'right' }}>
                       {start}
-                      {end ? ` ~ ${end}` : ' 至今'}
+                      {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
                     </span>
                   </div>
                 </div>
@@ -170,7 +172,7 @@ export const Template3: React.FC<Props> = props => {
         ) : null}
         {workList.length ? (
           <CardWrapper
-            title="个人作品"
+            title={i18n.get("个人作品")}
             className="section section-work"
             color={theme.color}
           >
@@ -183,7 +185,7 @@ export const Template3: React.FC<Props> = props => {
                     />
                     <b className="info-name">{work.work_name}</b>
                     <a className="sub-info" href={work.visit_link}>
-                      访问链接
+                      {i18n.get('访问链接')}
                     </a>
                   </div>
                   {work.work_desc && <div>{work.work_desc}</div>}
@@ -193,7 +195,7 @@ export const Template3: React.FC<Props> = props => {
           </CardWrapper>
         ) : null}
         <CardWrapper
-          title="自我介绍"
+          title={i18n.get("自我介绍")}
           className="section section-aboutme"
           color={theme.color}
         >
@@ -204,7 +206,7 @@ export const Template3: React.FC<Props> = props => {
         {/* 专业技能 */}
         {skillList?.length ? (
           <CardWrapper
-            title="专业技能"
+            title={i18n.get('专业技能')}
             className="section section-skill"
             color={theme.color}
           >
@@ -233,7 +235,7 @@ export const Template3: React.FC<Props> = props => {
         ) : null}
         {awardList?.length ? (
           <CardWrapper
-            title="更多信息"
+            title={i18n.get("更多信息")}
             className="section section-award"
             color={theme.color}
           >
@@ -258,7 +260,7 @@ export const Template3: React.FC<Props> = props => {
       <div className="main-info">
         {wrapper({
           id: 'work-experience',
-          title: '工作经历',
+          title: i18n.get('工作经历'),
           color: theme.color,
         })(
           <div className="section section-work-exp">
@@ -274,7 +276,7 @@ export const Template3: React.FC<Props> = props => {
                     </b>
                     <span className="info-time">
                       {start}
-                      {end ? ` ~ ${end}` : ' 至今'}
+                      {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
                     </span>
                   </div>
                   <div className="work-description">{work.work_desc}</div>
@@ -284,7 +286,7 @@ export const Template3: React.FC<Props> = props => {
           </div>
         )}
 
-        {wrapper({ id: 'skill', title: '项目经历', color: theme.color })(
+        {wrapper({ id: 'skill', title: i18n.get('项目经历'), color: theme.color })(
           <div className="section section-project">
             {_.map(projectList, (project, idx) =>
               project ? (
@@ -299,11 +301,11 @@ export const Template3: React.FC<Props> = props => {
                     )}
                   </div>
                   <div className="section-detail">
-                    <b>项目描述：</b>
+                    <b>{i18n.get('项目描述')}：</b>
                     <span>{project.project_desc}</span>
                   </div>
                   <div className="section-detail">
-                    <b>主要工作：</b>
+                    <b>{i18n.get('主要工作')}：</b>
                     <span className="project-content">
                       {project.project_content}
                     </span>

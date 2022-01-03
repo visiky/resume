@@ -16,5 +16,11 @@
 
 // loading 样式
 #gatsby-focus-wrapper > .ant-spin-nested-loading {
-  height: calc(100vh - 46px/** footer */);
+  height: calc(100vh - 46px /** header */ - 46px /** footer */);
+}
+
+// 全局视光复写
+.ant-popover-inner-content {
+  padding: 4px 8px;
+  font-size: 12px;
 }

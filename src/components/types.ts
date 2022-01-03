@@ -2,15 +2,15 @@
 export type ResumeConfig = {
   /** 头像 */
   avatar?: {
-    src: string;
+    src?: string;
     hidden?: boolean;
   };
 
   /** 个人信息 */
   profile?: {
     name: string;
-    mobile: string;
-    email: string;
+    mobile?: string;
+    email?: string;
     github?: string;
     zhihu?: string;
     /** 工作经验 xx 年 */

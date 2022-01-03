@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactSVG } from 'react-svg';
 import cx from 'classnames';
 import './index.less';
+import { getLocale } from '@/locale';
 
 type Props = {
   template: string;
@@ -28,6 +29,8 @@ const TEMPLATES = [
 ];
 
 export const Templates: React.FC<Props> = props => {
+  const i18n = getLocale();
+  
   return (
     <div className="templates">
       {TEMPLATES.map(item => {
@@ -46,7 +49,8 @@ export const Templates: React.FC<Props> = props => {
                 svg.setAttribute('class', 'template');
               }}
             />
-            <span className="template-description">{item.description}</span>
+            <span className="template-id">{item.id}</span>
+            <span className="template-description">{i18n.get(item.description)}</span>
           </div>
         );
       })}
