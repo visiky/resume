@@ -1,6 +1,6 @@
 {
   "name": "resume",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
