@@ -1,10 +1,12 @@
 import React from 'react';
 import {
+  ProfileTwoTone,
   ContactsTwoTone,
-  StarTwoTone,
+  SmileTwoTone,
   TrophyTwoTone,
-  GiftTwoTone,
+  TagsTwoTone,
   RocketTwoTone,
+  ProjectTwoTone,
   ToolTwoTone,
   ScheduleTwoTone,
 } from '@ant-design/icons';
@@ -15,38 +17,56 @@ import _ from 'lodash';
  * ② 后续支持添加自定义模块
  */
 export const MODULES = [
-  { name: '个人信息', icon: <ContactsTwoTone />, key: 'profile' },
+  { name: '头像设置', icon: <ContactsTwoTone />, key: 'avatar' },
+  { name: '个人信息', icon: <ProfileTwoTone />, key: 'profile' },
   { name: '教育背景', icon: <ScheduleTwoTone />, key: 'educationList' },
-  { name: '自我介绍', icon: <StarTwoTone />, key: 'aboutme' },
+  { name: '自我介绍', icon: <SmileTwoTone />, key: 'aboutme' },
   { name: '更多信息', icon: <TrophyTwoTone />, key: 'awardList' },
   { name: '个人作品', icon: <ToolTwoTone />, key: 'workList' },
-  { name: '专业技能', icon: <ToolTwoTone />, key: 'skillList' },
-  { name: '工作经历', icon: <GiftTwoTone />, key: 'workExpList' },
-  { name: '项目经历', icon: <RocketTwoTone />, key: 'projectList' },
+  { name: '专业技能', icon: <RocketTwoTone />, key: 'skillList' },
+  { name: '工作经历', icon: <TagsTwoTone />, key: 'workExpList' },
+  { name: '项目经历', icon: <ProjectTwoTone />, key: 'projectList' },
 ];
 
 /**
  * 模块对应配置内容
  */
 export const CONTENT_OF_MODULE = {
+  avatar: [
+    {
+      type: 'checkbox',
+      attributeId: 'hidden',
+      displayName: '隐藏头像',
+      formItemProps: {
+        valuePropName: 'checked',
+      },
+      cfg: {
+        checked: false,
+      },
+    },
+  ],
   profile: [
     {
       type: 'input',
       attributeId: 'name',
       displayName: '姓名',
-      rules: [{ required: true }],
+      formItemProps: { rules: [{ required: true }] },
     },
     {
       type: 'input',
       attributeId: 'mobile',
       displayName: '手机号码',
-      rules: [{ required: true, message: 'Please input your phone number!' }],
+      formItemProps: {
+        rules: [{ required: true, message: 'Please input your phone number!' }],
+      },
     },
     {
       type: 'input',
       attributeId: 'email',
       displayName: '邮箱',
-      rules: [{ required: true, message: 'Please input your email!' }],
+      formItemProps: {
+        rules: [{ required: true, message: 'Please input your email!' }],
+      },
     },
     {
       type: 'input',
@@ -61,7 +81,8 @@ export const CONTENT_OF_MODULE = {
       attributeId: 'zhihu',
       displayName: '知乎',
       cfg: {
-        placeholder: 'Please input the link to visit your zhihu account, optional',
+        placeholder:
+          'Please input the link to visit your zhihu account, optional',
       },
     },
     {
@@ -75,14 +96,14 @@ export const CONTENT_OF_MODULE = {
       type: 'input',
       attributeId: 'edu_time',
       displayName: '起始时间',
-      rules: [{ required: true }],
+      formItemProps: { rules: [{ required: true }] },
       // cfg: { picker: 'month' },
     },
     {
       type: 'input',
       attributeId: 'school',
       displayName: '学校',
-      rules: [{ required: true }],
+      formItemProps: { rules: [{ required: true }] },
     },
     {
       type: 'input',
@@ -113,14 +134,14 @@ export const CONTENT_OF_MODULE = {
       type: 'input',
       attributeId: 'work_time',
       displayName: '起止时间',
-      rules: [{ required: true }],
+      formItemProps: { rules: [{ required: true }] },
       // cfg: { picker: 'month' },
     },
     {
       type: 'input',
       attributeId: 'company_name',
       displayName: '公司名称',
-      rules: [{ required: true }],
+      formItemProps: { rules: [{ required: true }] },
     },
     {
       type: 'input',
@@ -179,14 +200,14 @@ export const CONTENT_OF_MODULE = {
       type: 'input',
       attributeId: 'award_time',
       displayName: '获奖时间',
-      rules: [{ required: true }],
+      formItemProps: { rules: [{ required: true }] },
       // cfg: { picker: 'month' },
     },
     {
       type: 'input',
       attributeId: 'award_info',
       displayName: '奖项内容',
-      rules: [{ required: true }],
+      formItemProps: { rules: [{ required: true }] },
     },
   ],
   aboutme: [

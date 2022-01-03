@@ -65,7 +65,6 @@ export const Template2: React.FC<Props> = props => {
   return (
     <div className="template2-resume resume-content">
       <div className="basic-info">
-        {/* <Wrapper title="个人信息" className="profile" color={theme.color}> */}
         <div className="profile">
           <div className="profile-info">
             {profile?.name && <div className="name">{profile.name}</div>}

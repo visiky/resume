@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Form, Input, InputNumber, Button, Checkbox } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 import _ from 'lodash';
 import { ColorPicker } from './ColorPicker';
@@ -10,7 +10,7 @@ type Props = {
     type: string /** 组件类型 */;
     attributeId: string;
     displayName: string;
-    rules?: FormItemProps['rules'];
+    formItemProps?: FormItemProps;
     cfg?: {
       [k: string]: any /**其它和组件本身有关的配置 */;
     };
@@ -26,6 +26,8 @@ const FormItemComponentMap = (type: string) => (
   props: { value: any; onChange?: (v) => void } = { value: null }
 ) => {
   switch (type) {
+    case 'checkbox':
+      return <Checkbox {...props} />;
     case 'input':
       return <Input {...props} />;
     case 'number':
@@ -68,11 +70,11 @@ export const FormCreator: React.FC<Props> = props => {
               label={c.displayName}
               wrapperCol={c.displayName ? { span: 18 } : { span: 24 }}
               name={c.attributeId}
-              rules={c.rules}
+              {...(c.formItemProps || {})}
             >
               {FormItemComponentMap(c.type)({
                 ...(c.cfg || {}),
-                value: props.value?.[c.attributeId],
+                value: _.get(props.value, [c.attributeId]),
               })}
             </Form.Item>
           );

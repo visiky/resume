@@ -127,4 +127,8 @@ export const RESUME_INFO: ResumeConfig = {
     参与 AntV 团队开源项目 G2、G2Plot 的研发，目前是 G2Plot 的主要负责人。
     `,
   },
+  // 国际化
+  locales: {
+    en: {}
+  }
 };

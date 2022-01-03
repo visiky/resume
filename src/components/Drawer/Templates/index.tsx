@@ -23,6 +23,7 @@ const TEMPLATES = [
     url: 'https://gw.alipayobjects.com/zos/antfincdn/Kn2jUKcBme/moban2.svg',
     id: 'template3',
     description: '简易模板(适用于多页)',
+    disabled: false,
   },
 ];
 
