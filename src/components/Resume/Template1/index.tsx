@@ -166,7 +166,7 @@ export const Template1: React.FC<Props> = props => {
             })}
           </section>
         ) : null}
-        {workList.length ? (
+        {workList?.length ? (
           <section className="section section-work">
             <div className="section-title" style={{ color: theme.color }}>
               {i18n.get('个人作品')}
