@@ -49,31 +49,59 @@ export const Page: React.FC = () => {
       .then(data => {
         if (data.status !== 200) {
           const link = `https://github.com/${user}/${user}/tree/${branch}`;
-          Modal.info({
-            title: '获取简历信息失败',
-            content: (
-              <div>
-                请检查用户名 {user} 是否正确或者简历信息是否在
-                <a href={link} target="_blank">{`${link}/resume.json`}</a>下
-              </div>
-            ),
-            okText: '进入在线编辑',
-            onOk: () => {
-              originalConfig.current = RESUME_INFO;
-              setConfig(
-                _.omit(
-                  customAssign(
-                    {},
-                    RESUME_INFO,
-                    _.get(RESUME_INFO, ['locales', lang])
-                  ),
-                  ['locales']
-                )
-              );
-              updateLoading(false);
-              changeMode('edit');
-            },
-          });
+          if (mode === 'edit') {
+            Modal.info({
+              title: i18n.get('获取简历信息失败'),
+              content: (
+                <div>
+                  请检查用户名 {user} 是否正确或者简历信息是否在
+                  <a href={link} target="_blank">{`${link}/resume.json`}</a>下
+                </div>
+              ),
+              okText: i18n.get('确定'),
+              onOk: () => {
+                originalConfig.current = RESUME_INFO;
+                setConfig(
+                  _.omit(
+                    customAssign(
+                      {},
+                      RESUME_INFO,
+                      _.get(RESUME_INFO, ['locales', lang])
+                    ),
+                    ['locales']
+                  )
+                );
+                updateLoading(false);
+              },
+            });
+          } else {
+            Modal.info({
+              title: i18n.get('获取简历信息失败'),
+              content: (
+                <div>
+                  请检查用户名 {user} 是否正确或者简历信息是否在
+                  <a href={link} target="_blank">{`${link}/resume.json`}</a>下
+                </div>
+              ),
+              okText: i18n.get('进入在线编辑'),
+              onOk: () => {
+                originalConfig.current = RESUME_INFO;
+                setConfig(
+                  _.omit(
+                    customAssign(
+                      {},
+                      RESUME_INFO,
+                      _.get(RESUME_INFO, ['locales', lang])
+                    ),
+                    ['locales']
+                  )
+                );
+                updateLoading(false);
+                changeMode('edit');
+              },
+            });
+          }
+         
           return;
         }
         return data.json();

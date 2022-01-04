@@ -170,7 +170,7 @@ export const Template3: React.FC<Props> = props => {
             })}
           </CardWrapper>
         ) : null}
-        {workList.length ? (
+        {workList?.length ? (
           <CardWrapper
             title={i18n.get("个人作品")}
             className="section section-work"

@@ -164,7 +164,7 @@ export const Template2: React.FC<Props> = props => {
             })}
           </Wrapper>
         ) : null}
-        {workList.length ? (
+        {workList?.length ? (
           <Wrapper
             title={i18n.get('个人作品')}
             className="section section-work"
