@@ -30,15 +30,17 @@ export const LangSwitcher = ({ className }: { className?: string }) => {
   const RadioContent = (
     <span>
       <span
-        className={cx('lang', { unselected: lang !== 'zh_CN' })}
+        className={cx('lang')}
         onClick={() => changeLanguage('zh_CN')}
+        data-lang="zh_CN"
       >
         中
       </span>
       <span className="divider">/</span>
       <span
-        className={cx('lang', { unselected: lang !== 'en_US' })}
+        className={cx('lang')}
         onClick={() => changeLanguage('en_US')}
+        data-lang="en_US"
       >
         En
       </span>
