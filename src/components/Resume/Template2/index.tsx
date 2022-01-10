@@ -252,66 +252,72 @@ export const Template2: React.FC<Props> = props => {
         ) : null} */}
       </div>
       <div className="main-info">
-        <Wrapper
-          className="experience"
-          title={i18n.get('工作经历')}
-          color={theme.color}
-        >
-          <div className="section section-work-exp">
-            {_.map(workExpList, (work, idx) => {
-              const start = work.work_time[0];
-              const end = work.work_time[1] ? work.work_time[1] : null;
-              return work ? (
-                <div className="section-item" key={idx.toString()}>
-                  <div className="section-info">
-                    <b className="info-name">
-                      {work.company_name}
-                      <span className="sub-info">{work.department_name}</span>
-                    </b>
-                    <span className="info-time">
-                      {start}
-                      {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
-                    </span>
+        {workExpList?.length && (
+          <Wrapper
+            className="experience"
+            title={i18n.get('工作经历')}
+            color={theme.color}
+          >
+            <div className="section section-work-exp">
+              {_.map(workExpList, (work, idx) => {
+                const start = work.work_time[0];
+                const end = work.work_time[1] ? work.work_time[1] : null;
+                return work ? (
+                  <div className="section-item" key={idx.toString()}>
+                    <div className="section-info">
+                      <b className="info-name">
+                        {work.company_name}
+                        <span className="sub-info">{work.department_name}</span>
+                      </b>
+                      <span className="info-time">
+                        {start}
+                        {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
+                      </span>
+                    </div>
+                    <div className="work-description">{work.work_desc}</div>
                   </div>
-                  <div className="work-description">{work.work_desc}</div>
-                </div>
-              ) : null;
-            })}
-          </div>
-        </Wrapper>
-        <Wrapper
-          className="skill"
-          title={i18n.get('项目经历')}
-          color={theme.color}
-        >
-          <div className="section section-project">
-            {_.map(projectList, (project, idx) =>
-              project ? (
-                <div className="section-item" key={idx.toString()}>
-                  <div className="section-info">
-                    <b className="info-name">
-                      {project.project_name}
-                      <span className="info-time">{project.project_time}</span>
-                    </b>
-                    {project.project_role && (
-                      <Tag color={theme.tagColor}>{project.project_role}</Tag>
-                    )}
+                ) : null;
+              })}
+            </div>
+          </Wrapper>
+        )}
+        {projectList?.length && (
+          <Wrapper
+            className="skill"
+            title={i18n.get('项目经历')}
+            color={theme.color}
+          >
+            <div className="section section-project">
+              {_.map(projectList, (project, idx) =>
+                project ? (
+                  <div className="section-item" key={idx.toString()}>
+                    <div className="section-info">
+                      <b className="info-name">
+                        {project.project_name}
+                        <span className="info-time">
+                          {project.project_time}
+                        </span>
+                      </b>
+                      {project.project_role && (
+                        <Tag color={theme.tagColor}>{project.project_role}</Tag>
+                      )}
+                    </div>
+                    <div className="section-detail">
+                      <span>{i18n.get('项目描述')}：</span>
+                      <span>{project.project_desc}</span>
+                    </div>
+                    <div className="section-detail">
+                      <span>{i18n.get('主要工作')}：</span>
+                      <span className="project-content">
+                        {project.project_content}
+                      </span>
+                    </div>
                   </div>
-                  <div className="section-detail">
-                    <span>{i18n.get('项目描述')}：</span>
-                    <span>{project.project_desc}</span>
-                  </div>
-                  <div className="section-detail">
-                    <span>{i18n.get('主要工作')}：</span>
-                    <span className="project-content">
-                      {project.project_content}
-                    </span>
-                  </div>
-                </div>
-              ) : null
-            )}
-          </div>
-        </Wrapper>
+                ) : null
+              )}
+            </div>
+          </Wrapper>
+        )}
       </div>
     </div>
   );

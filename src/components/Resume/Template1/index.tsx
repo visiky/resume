@@ -254,7 +254,7 @@ export const Template1: React.FC<Props> = props => {
         ) : null}
       </div>
       <div className="main-info">
-        {wrapper({
+        {workExpList?.length && wrapper({
           id: 'work-experience',
           title: i18n.get('工作经历'),
           color: theme.color,
@@ -282,7 +282,7 @@ export const Template1: React.FC<Props> = props => {
           </div>
         )}
 
-        {wrapper({ id: 'skill', title: i18n.get('项目经历'), color: theme.color })(
+        {projectList?.length && wrapper({ id: 'skill', title: i18n.get('项目经历'), color: theme.color })(
           <div className="section section-project">
             {_.map(projectList, (project, idx) =>
               project ? (
