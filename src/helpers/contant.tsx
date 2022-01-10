@@ -11,13 +11,19 @@ import {
   ScheduleTwoTone,
 } from '@ant-design/icons';
 import _ from 'lodash';
-import { getLocale } from '@/locale';
+import { ResumeConfig } from '@/components/types';
 
 /**
  * ① 内置的简历模块
  * ② 后续支持添加自定义模块
  */
-export const MODULES = ({ i18n }) => {
+export const MODULES = ({
+  i18n,
+  titleNameMap,
+}: {
+  i18n: any;
+  titleNameMap?: ResumeConfig['titleNameMap'];
+}) => {
   return [
     { name: i18n.get('头像设置'), icon: <ContactsTwoTone />, key: 'avatar' },
     { name: i18n.get('个人信息'), icon: <ProfileTwoTone />, key: 'profile' },
@@ -36,7 +42,10 @@ export const MODULES = ({ i18n }) => {
       icon: <ProjectTwoTone />,
       key: 'projectList',
     },
-  ];
+  ].map(d => {
+    const name = _.get(titleNameMap, d.key);
+    return { ...d, name: _.isNil(name) ? d.name : name };
+  });
 };
 
 /**

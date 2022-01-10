@@ -11,10 +11,11 @@ import {
 } from '@ant-design/icons';
 import cx from 'classnames';
 import _ from 'lodash';
+import { getLocale } from '@/locale';
+import { DEFAULT_TITLE_NAME_MAP } from '@/datas/constant';
 import { Avatar } from '../../Avatar';
 import { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
-import { getLocale } from '@/locale';
 
 type Props = {
   value: ResumeConfig;
@@ -41,6 +42,8 @@ export const Template2: React.FC<Props> = props => {
 
   /** 个人基础信息 */
   const profile = _.get(value, 'profile');
+
+  const titleNameMap = _.get(value, 'titleNameMap', DEFAULT_TITLE_NAME_MAP);
 
   /** 教育背景 */
   const educationList = _.get(value, 'educationList');
@@ -131,7 +134,8 @@ export const Template2: React.FC<Props> = props => {
         {/* 教育背景 */}
         {educationList?.length ? (
           <Wrapper
-            title={i18n.get('教育背景')}
+            // title={i18n.get('教育背景')}
+            title={titleNameMap.educationList}
             className="section section-education"
             color={theme.color}
           >
@@ -166,7 +170,8 @@ export const Template2: React.FC<Props> = props => {
         ) : null}
         {workList?.length ? (
           <Wrapper
-            title={i18n.get('个人作品')}
+            // title={i18n.get('个人作品')}
+            title={titleNameMap.workList}
             className="section section-work"
             color={theme.color}
           >
@@ -200,7 +205,8 @@ export const Template2: React.FC<Props> = props => {
         {/* 专业技能 */}
         {skillList?.length ? (
           <Wrapper
-            title={i18n.get('专业技能')}
+            // title={i18n.get('专业技能')}
+            title={titleNameMap.skillList}
             className="section section-skill"
             color={theme.color}
           >
@@ -229,7 +235,8 @@ export const Template2: React.FC<Props> = props => {
         ) : null}
         {/* {awardList?.length ? (
           <Wrapper
-            title="更多信息"
+            // title="更多信息"
+            title={titleNameMap.awardList}
             className="section section-award"
             color={theme.color}
           >
@@ -255,7 +262,8 @@ export const Template2: React.FC<Props> = props => {
         {workExpList?.length && (
           <Wrapper
             className="experience"
-            title={i18n.get('工作经历')}
+            // title={i18n.get('工作经历')}
+            title={titleNameMap.workExpList}
             color={theme.color}
           >
             <div className="section section-work-exp">
@@ -284,7 +292,8 @@ export const Template2: React.FC<Props> = props => {
         {projectList?.length && (
           <Wrapper
             className="skill"
-            title={i18n.get('项目经历')}
+            // title={i18n.get('项目经历')}
+            title={titleNameMap.projectList}
             color={theme.color}
           >
             <div className="section section-project">
