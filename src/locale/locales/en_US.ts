@@ -24,8 +24,8 @@ export const EN_US_LOCALE: Locale = {
   个人作品: 'Personal works',
   专业技能: 'Professional skills',
   更多信息: 'More informations',
-  工作经历: 'Work Experience',
-  项目经历: 'Project Experience',
+  工作经历: 'Work experience',
+  项目经历: 'Project experience',
   项目描述: 'Description',
   主要工作: 'Main work',
   至今: 'to present',
@@ -33,6 +33,7 @@ export const EN_US_LOCALE: Locale = {
 
   头像设置: 'Avatar',
   个人信息: 'Personal infomation',
+  个人技能: 'Personal skills',
 
   隐藏头像: 'Hide avatar',
   姓名: 'Fullname',

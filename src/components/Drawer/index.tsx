@@ -14,7 +14,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import _ from 'lodash';
 import arrayMove from 'array-move';
 import { FormCreator } from '../FormCreator';
-import { DEFAULT_TITLE_NAME_MAP } from '@/datas/constant';
+import { getDefaultTitleNameMap } from '@/datas/constant';
 import { getLocale } from '@/locale';
 import { MODULES, CONTENT_OF_MODULE } from '../../helpers/contant';
 import { ResumeConfig, ThemeConfig } from '../types';
@@ -112,6 +112,8 @@ export const Drawer: React.FC<Props> = props => {
     return CONTENT_OF_MODULE({ i18n });
   }, [i18n]);
 
+  const DEFAULT_TITLE_MAP = getDefaultTitleNameMap({ i18n });
+
   return (
     <>
       <Button
@@ -151,10 +153,10 @@ export const Drawer: React.FC<Props> = props => {
                               <>
                                 <span className="item-icon">{module.icon}</span>
                                 <span className="item-name">
-                                  {DEFAULT_TITLE_NAME_MAP[module.key] ? (
+                                  {DEFAULT_TITLE_MAP[module.key] ? (
                                     <Input
                                       placeholder={
-                                        DEFAULT_TITLE_NAME_MAP[module.key]
+                                        DEFAULT_TITLE_MAP[module.key]
                                       }
                                       bordered={false}
                                       defaultValue={module.name}

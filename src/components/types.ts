@@ -31,6 +31,8 @@ export type ResumeConfig = {
     awardList?: string;
     /** 默认: 作品 */
     workList?: string;
+    /** 自我介绍 */
+    aboutme?: string;
   },
 
   /** 教育背景 */

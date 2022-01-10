@@ -6,7 +6,7 @@ import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash';
 import { getLanguage, getLocale } from '@/locale';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
-import { DEFAULT_TITLE_NAME_MAP } from '@/datas/constant';
+import { getDefaultTitleNameMap } from '@/datas/constant';
 import { RESUME_INFO } from '@/datas/resume';
 import { customAssign } from '@/helpers/customAssign';
 import { copyToClipboard } from '@/helpers/copy-to-board';
@@ -32,7 +32,7 @@ export const Page: React.FC = () => {
   });
 
   const changeConfig = (v: Partial<ResumeConfig>) => {
-    setConfig(_.assign({}, { titleNameMap: DEFAULT_TITLE_NAME_MAP }, v));
+    setConfig(_.assign({}, { titleNameMap: getDefaultTitleNameMap({ i18n }) }, v));
   };
 
   useEffect(() => {

@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import _ from 'lodash';
 import { getLocale } from '@/locale';
-import { DEFAULT_TITLE_NAME_MAP } from '@/datas/constant';
+import { getDefaultTitleNameMap } from '@/datas/constant';
 import { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
 
@@ -58,7 +58,7 @@ export const Template3: React.FC<Props> = props => {
   /** 个人基础信息 */
   const profile = _.get(value, 'profile');
 
-  const titleNameMap = _.get(value, 'titleNameMap', DEFAULT_TITLE_NAME_MAP);
+  const titleNameMap = _.get(value, 'titleNameMap', getDefaultTitleNameMap({ i18n }));
 
   /** 教育背景 */
   const educationList = _.get(value, 'educationList');
