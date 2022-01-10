@@ -43,12 +43,21 @@
     letter-spacing: 0;
     position: relative;
 
-    &::after {
+    display: flex;
+    .title {
+      width: auto;
+    }
+    .title-addon {
+      flex: 1;
+      position: relative;
+    }
+
+    .title-addon::after {
       content: ' ';
       position: absolute;
       right: 0;
       top: 50%;
-      left: 88px;
+      left: 16px;
       height: 1px;
       transform: translateY(-1px);
       background-color: currentColor;

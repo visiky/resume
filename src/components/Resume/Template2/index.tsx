@@ -26,7 +26,7 @@ const Wrapper = ({ className, title, color, children }) => {
   return (
     <div className={cx('section', className)}>
       <div className="section-title" style={{ color }}>
-        {title}
+        <span className="title">{title}</span><span className="title-addon" />
       </div>
       <div className="section-body">{children}</div>
     </div>
