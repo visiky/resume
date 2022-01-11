@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import qs from 'query-string';
 import { getLocale } from '@/locale';
+import { getSearchObj } from '@/helpers/location';
 import './index.less';
 
 export function getMode() {
-  const search = typeof window !== 'undefined' && window.location.search;
-  const query = qs.parse(search);
+  const query = getSearchObj();
   return (query ? query.mode : 'read') as string;
 }
 

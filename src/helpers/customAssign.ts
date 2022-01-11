@@ -5,10 +5,6 @@ const toString = {}.toString;
 // 类型检测
 const isType = (value: any, type: string): boolean => toString.call(value) === '[object ' + type + ']';
 
-const isArray = (value: any): value is Array<any> => {
-  return isType(value, 'Array');
-};
-
 const isObjectLike = (value: any): value is object => {
   /**
    * isObjectLike({}) => true
