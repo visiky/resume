@@ -6,6 +6,7 @@ import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash';
 import { getLanguage, getLocale } from '@/locale';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
+import { getDefaultTitleNameMap } from '@/datas/constant';
 import { RESUME_INFO } from '@/datas/resume';
 import { customAssign } from '@/helpers/customAssign';
 import { copyToClipboard } from '@/helpers/copy-to-board';
@@ -29,6 +30,10 @@ export const Page: React.FC = () => {
     color: '#2f5785',
     tagColor: '#8bc34a',
   });
+
+  const changeConfig = (v: Partial<ResumeConfig>) => {
+    setConfig(_.assign({}, { titleNameMap: getDefaultTitleNameMap({ i18n }) }, v));
+  };
 
   useEffect(() => {
     const search = typeof window !== 'undefined' && window.location.search;
@@ -61,7 +66,7 @@ export const Page: React.FC = () => {
               okText: i18n.get('确定'),
               onOk: () => {
                 originalConfig.current = RESUME_INFO;
-                setConfig(
+                changeConfig(
                   _.omit(
                     customAssign(
                       {},
@@ -86,7 +91,7 @@ export const Page: React.FC = () => {
               okText: i18n.get('进入在线编辑'),
               onOk: () => {
                 originalConfig.current = RESUME_INFO;
-                setConfig(
+                changeConfig(
                   _.omit(
                     customAssign(
                       {},
@@ -101,14 +106,14 @@ export const Page: React.FC = () => {
               },
             });
           }
-         
+
           return;
         }
         return data.json();
       })
       .then(data => {
         originalConfig.current = data;
-        setConfig(
+        changeConfig(
           _.omit(customAssign({}, data, _.get(data, ['locales', lang])), [
             'locales',
           ])
@@ -119,7 +124,7 @@ export const Page: React.FC = () => {
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
-      setConfig(_.assign({}, config, v));
+      changeConfig(_.assign({}, config, v));
     },
     [config, lang]
   );
@@ -216,24 +221,24 @@ export const Page: React.FC = () => {
                     onThemeChange={onThemeChange}
                     template={template}
                     onTemplateChange={updateTemplate}
+                    key={'1'}
                   />
-                  <React.Fragment>
-                    <Upload
-                      accept=".json"
-                      showUploadList={false}
-                      beforeUpload={importConfig}
-                    >
-                      <Button className="btn-upload">
-                        {i18n.get('导入配置')}
-                      </Button>
-                    </Upload>
-                    <Button type="primary" onClick={copyConfig}>
-                      {i18n.get('复制配置')}
+                  <Upload
+                    accept=".json"
+                    showUploadList={false}
+                    beforeUpload={importConfig}
+                    key={'2'}
+                  >
+                    <Button className="btn-upload">
+                      {i18n.get('导入配置')}
                     </Button>
-                    <Button type="primary" onClick={() => window.print()}>
-                      {i18n.get('PDF 下载')}
-                    </Button>
-                  </React.Fragment>
+                  </Upload>
+                  <Button type="primary" onClick={copyConfig} key="3">
+                    {i18n.get('复制配置')}
+                  </Button>
+                  <Button type="primary" onClick={() => window.print()} key="4">
+                    {i18n.get('PDF 下载')}
+                  </Button>
                 </Button.Group>
               </Affix>
               <div

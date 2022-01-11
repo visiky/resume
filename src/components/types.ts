@@ -17,6 +17,24 @@ export type ResumeConfig = {
     workExpYear?: string;
   };
 
+  /** 标题名称映射 */
+  titleNameMap?: {
+    /** 默认: 教育背景 */
+    educationList?: string;
+    /** 默认: 工作经历 */
+    workExpList?: string;
+    /** 默认: 项目经历 */
+    projectList?: string;
+    /** 默认: 个人技能 */
+    skillList?: string;
+    /** 默认: 更多信息 */
+    awardList?: string;
+    /** 默认: 作品 */
+    workList?: string;
+    /** 自我介绍 */
+    aboutme?: string;
+  },
+
   /** 教育背景 */
   educationList?: Array<{
     edu_time: [string | undefined, string | number];
@@ -76,7 +94,7 @@ export type ResumeConfig = {
   aboutme?: {
     aboutme_desc: string;
   };
-  
+
   /** 增加国际化 */
   locales?: {
     [key: string]: ResumeConfig;

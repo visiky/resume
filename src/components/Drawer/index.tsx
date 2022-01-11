@@ -6,6 +6,7 @@ import {
   Modal,
   Radio,
   Popover,
+  Input,
 } from 'antd';
 import { DeleteFilled, InfoCircleFilled } from '@ant-design/icons';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
@@ -13,12 +14,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import _ from 'lodash';
 import arrayMove from 'array-move';
 import { FormCreator } from '../FormCreator';
+import { getDefaultTitleNameMap } from '@/datas/constant';
+import { getLocale } from '@/locale';
 import { MODULES, CONTENT_OF_MODULE } from '../../helpers/contant';
 import { ResumeConfig, ThemeConfig } from '../types';
 import { ConfigTheme } from './ConfigTheme';
 import { Templates } from './Templates';
 import './index.less';
-import { getLocale } from '@/locale';
 
 const { Panel } = Collapse;
 
@@ -102,12 +104,15 @@ export const Drawer: React.FC<Props> = props => {
   };
 
   const modules = useMemo(() => {
-    return MODULES({ i18n });
-  }, [i18n]);
+    const titleNameMap = props.value?.titleNameMap;
+    return MODULES({ i18n, titleNameMap });
+  }, [i18n, props.value?.titleNameMap]);
 
   const contentOfModule = useMemo(() => {
     return CONTENT_OF_MODULE({ i18n });
   }, [i18n]);
+
+  const DEFAULT_TITLE_MAP = getDefaultTitleNameMap({ i18n });
 
   return (
     <>
@@ -147,7 +152,28 @@ export const Drawer: React.FC<Props> = props => {
                             header={
                               <>
                                 <span className="item-icon">{module.icon}</span>
-                                <span className="item-name">{module.name}</span>
+                                <span className="item-name">
+                                  {DEFAULT_TITLE_MAP[module.key] ? (
+                                    <Input
+                                      placeholder={
+                                        DEFAULT_TITLE_MAP[module.key]
+                                      }
+                                      bordered={false}
+                                      defaultValue={module.name}
+                                      onChange={e => {
+                                        props.onValueChange({
+                                          titleNameMap: {
+                                            ...(props.value.titleNameMap || {}),
+                                            [module.key]: e.target.value,
+                                          },
+                                        });
+                                      }}
+                                      style={{ padding: 0 }}
+                                    />
+                                  ) : (
+                                    module.name
+                                  )}
+                                </span>
                               </>
                             }
                             key="1"
@@ -155,7 +181,7 @@ export const Drawer: React.FC<Props> = props => {
                             <div className="list-value-item">
                               {_.map(values, (value, idx: number) => (
                                 <DragableRow
-                                  key={idx}
+                                  key={`${idx}`}
                                   index={idx}
                                   moveRow={(oldIdx, newIdx) =>
                                     swapItems(module.key, oldIdx, newIdx)
@@ -169,6 +195,7 @@ export const Drawer: React.FC<Props> = props => {
                                         dataIndex: idx,
                                       });
                                     }}
+                                    key={`${idx}`}
                                   >
                                     {`${idx + 1}. ${Object.values(
                                       value || {}

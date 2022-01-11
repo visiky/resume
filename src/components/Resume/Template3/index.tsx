@@ -11,9 +11,10 @@ import {
   CrownFilled,
 } from '@ant-design/icons';
 import _ from 'lodash';
+import { getLocale } from '@/locale';
+import { getDefaultTitleNameMap } from '@/datas/constant';
 import { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
-import { getLocale } from '@/locale';
 
 type Props = {
   value: ResumeConfig;
@@ -56,6 +57,8 @@ export const Template3: React.FC<Props> = props => {
 
   /** 个人基础信息 */
   const profile = _.get(value, 'profile');
+
+  const titleNameMap = _.get(value, 'titleNameMap', getDefaultTitleNameMap({ i18n }));
 
   /** 教育背景 */
   const educationList = _.get(value, 'educationList');
@@ -128,7 +131,9 @@ export const Template3: React.FC<Props> = props => {
             {profile?.workExpYear && (
               <div className="work-exp-year">
                 <ScheduleFilled style={{ color: theme.color, opacity: 0.85 }} />
-                <span>{i18n.get('工作经验')}: {profile.workExpYear}</span>
+                <span>
+                  {i18n.get('工作经验')}: {profile.workExpYear}
+                </span>
               </div>
             )}
           </div>
@@ -137,7 +142,8 @@ export const Template3: React.FC<Props> = props => {
         {/* 教育背景 */}
         {educationList?.length ? (
           <CardWrapper
-            title={i18n.get("教育背景")}
+            // title={i18n.get('教育背景')}
+            title={titleNameMap.educationList}
             className="section section-education"
             color={theme.color}
           >
@@ -172,7 +178,8 @@ export const Template3: React.FC<Props> = props => {
         ) : null}
         {workList?.length ? (
           <CardWrapper
-            title={i18n.get("个人作品")}
+            // title={i18n.get('个人作品')}
+            title={titleNameMap.workList}
             className="section section-work"
             color={theme.color}
           >
@@ -195,7 +202,7 @@ export const Template3: React.FC<Props> = props => {
           </CardWrapper>
         ) : null}
         <CardWrapper
-          title={i18n.get("自我介绍")}
+          title={i18n.get('自我介绍')}
           className="section section-aboutme"
           color={theme.color}
         >
@@ -206,7 +213,8 @@ export const Template3: React.FC<Props> = props => {
         {/* 专业技能 */}
         {skillList?.length ? (
           <CardWrapper
-            title={i18n.get('专业技能')}
+            // title={i18n.get('专业技能')}
+            title={titleNameMap.skillList}
             className="section section-skill"
             color={theme.color}
           >
@@ -235,7 +243,8 @@ export const Template3: React.FC<Props> = props => {
         ) : null}
         {awardList?.length ? (
           <CardWrapper
-            title={i18n.get("更多信息")}
+            // title={i18n.get('更多信息')}
+            title={titleNameMap.awardList}
             className="section section-award"
             color={theme.color}
           >
@@ -258,63 +267,73 @@ export const Template3: React.FC<Props> = props => {
         ) : null}
       </div>
       <div className="main-info">
-        {wrapper({
-          id: 'work-experience',
-          title: i18n.get('工作经历'),
-          color: theme.color,
-        })(
-          <div className="section section-work-exp">
-            {_.map(workExpList, (work, idx) => {
-              const start = work.work_time[0];
-              const end = work.work_time[1] ? work.work_time[1] : null;
-              return work ? (
-                <div className="section-item" key={idx.toString()}>
-                  <div className="section-info">
-                    <b className="info-name">
-                      {work.company_name}
-                      <span className="sub-info">{work.department_name}</span>
-                    </b>
-                    <span className="info-time">
-                      {start}
-                      {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
-                    </span>
+        {workExpList?.length &&
+          wrapper({
+            id: 'work-experience',
+            // title: i18n.get('工作经历'),
+            title: titleNameMap?.workExpList,
+            color: theme.color,
+          })(
+            <div className="section section-work-exp">
+              {_.map(workExpList, (work, idx) => {
+                const start = work.work_time[0];
+                const end = work.work_time[1] ? work.work_time[1] : null;
+                return work ? (
+                  <div className="section-item" key={idx.toString()}>
+                    <div className="section-info">
+                      <b className="info-name">
+                        {work.company_name}
+                        <span className="sub-info">{work.department_name}</span>
+                      </b>
+                      <span className="info-time">
+                        {start}
+                        {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
+                      </span>
+                    </div>
+                    <div className="work-description">{work.work_desc}</div>
                   </div>
-                  <div className="work-description">{work.work_desc}</div>
-                </div>
-              ) : null;
-            })}
-          </div>
-        )}
+                ) : null;
+              })}
+            </div>
+          )}
 
-        {wrapper({ id: 'skill', title: i18n.get('项目经历'), color: theme.color })(
-          <div className="section section-project">
-            {_.map(projectList, (project, idx) =>
-              project ? (
-                <div className="section-item" key={idx.toString()}>
-                  <div className="section-info">
-                    <b className="info-name">
-                      {project.project_name}
-                      <span className="info-time">{project.project_time}</span>
-                    </b>
-                    {project.project_role && (
-                      <Tag color={theme.tagColor}>{project.project_role}</Tag>
-                    )}
+        {projectList?.length &&
+          wrapper({
+            id: 'skill',
+            // title: i18n.get('项目经历'),
+            title: titleNameMap?.projectList,
+            color: theme.color,
+          })(
+            <div className="section section-project">
+              {_.map(projectList, (project, idx) =>
+                project ? (
+                  <div className="section-item" key={idx.toString()}>
+                    <div className="section-info">
+                      <b className="info-name">
+                        {project.project_name}
+                        <span className="info-time">
+                          {project.project_time}
+                        </span>
+                      </b>
+                      {project.project_role && (
+                        <Tag color={theme.tagColor}>{project.project_role}</Tag>
+                      )}
+                    </div>
+                    <div className="section-detail">
+                      <b>{i18n.get('项目描述')}：</b>
+                      <span>{project.project_desc}</span>
+                    </div>
+                    <div className="section-detail">
+                      <b>{i18n.get('主要工作')}：</b>
+                      <span className="project-content">
+                        {project.project_content}
+                      </span>
+                    </div>
                   </div>
-                  <div className="section-detail">
-                    <b>{i18n.get('项目描述')}：</b>
-                    <span>{project.project_desc}</span>
-                  </div>
-                  <div className="section-detail">
-                    <b>{i18n.get('主要工作')}：</b>
-                    <span className="project-content">
-                      {project.project_content}
-                    </span>
-                  </div>
-                </div>
-              ) : null
-            )}
-          </div>
-        )}
+                ) : null
+              )}
+            </div>
+          )}
       </div>
     </div>
   );
