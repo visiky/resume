@@ -26,7 +26,8 @@ const Wrapper = ({ className, title, color, children }) => {
   return (
     <div className={cx('section', className)}>
       <div className="section-title" style={{ color }}>
-        <span className="title">{title}</span><span className="title-addon" />
+        <span className="title">{title}</span>
+        <span className="title-addon" />
       </div>
       <div className="section-body">{children}</div>
     </div>
@@ -43,7 +44,11 @@ export const Template2: React.FC<Props> = props => {
   /** 个人基础信息 */
   const profile = _.get(value, 'profile');
 
-  const titleNameMap = _.get(value, 'titleNameMap', getDefaultTitleNameMap({ i18n }));
+  const titleNameMap = _.get(
+    value,
+    'titleNameMap',
+    getDefaultTitleNameMap({ i18n })
+  );
 
   /** 教育背景 */
   const educationList = _.get(value, 'educationList');
@@ -259,7 +264,7 @@ export const Template2: React.FC<Props> = props => {
         ) : null} */}
       </div>
       <div className="main-info">
-        {workExpList?.length && (
+        {workExpList?.length ? (
           <Wrapper
             className="experience"
             // title={i18n.get('工作经历')}
@@ -288,8 +293,8 @@ export const Template2: React.FC<Props> = props => {
               })}
             </div>
           </Wrapper>
-        )}
-        {projectList?.length && (
+        ) : null}
+        {projectList?.length ? (
           <Wrapper
             className="skill"
             // title={i18n.get('项目经历')}
@@ -326,7 +331,7 @@ export const Template2: React.FC<Props> = props => {
               )}
             </div>
           </Wrapper>
-        )}
+        ) : null}
       </div>
     </div>
   );
