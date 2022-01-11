@@ -1,12 +1,12 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { Button, Affix, Upload, message, Spin, Modal } from 'antd';
 import fetch from 'cross-fetch';
-import qs from 'query-string';
 import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash';
 import { getLanguage, getLocale } from '@/locale';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
 import { getDefaultTitleNameMap } from '@/datas/constant';
+import { getSearchObj } from '@/helpers/location';
 import { RESUME_INFO } from '@/datas/resume';
 import { customAssign } from '@/helpers/customAssign';
 import { copyToClipboard } from '@/helpers/copy-to-board';
@@ -36,16 +36,14 @@ export const Page: React.FC = () => {
   };
 
   useEffect(() => {
-    const search = typeof window !== 'undefined' && window.location.search;
-    const query = qs.parse(search);
+    const query = getSearchObj();
     if (query.template) {
       updateTemplate(query.template as string);
     }
   }, []);
 
   useEffect(() => {
-    const search = typeof window !== 'undefined' && window.location.search;
-    const query = qs.parse(search);
+    const query = getSearchObj();
     const user = query.user || '';
     const branch = query.branch || 'master';
     fetch(

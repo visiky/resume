@@ -1,22 +1,10 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import { GithubFilled } from '@ant-design/icons';
 import './footer.less';
+import { getSearchObj } from '@/helpers/location';
 
 const Footer: React.FC = () => {
-  const data = useStaticQuery(graphql`
-  query SiteTitleQuery {
-    site {
-      siteMetadata {
-        githubUrl
-        author
-        contact
-      }
-    }
-  }
-`);
-
-  const { author, contact, githubUrl } = data.site.siteMetadata;
+  const user = getSearchObj().user || 'visiky';
 
   return (
     <footer>
@@ -24,11 +12,11 @@ const Footer: React.FC = () => {
         <div className="">Made with ❤️</div>
         <div className="author">
           by
-          <a href={contact} style={{ marginLeft: '4px' }} target="_blank">
-            {author}
+          <a href={`https://github.com/${user}`} style={{ marginLeft: '4px' }} target="_blank">
+            {user}
           </a>
         </div>
-        <a href={githubUrl} style={{ marginLeft: '8px' }} target="_blank">
+        <a href={'https://github.com/visiky/resume.git'} style={{ marginLeft: '8px' }} target="_blank">
           <GithubFilled style={{ color: '#fff' }} /> 源代码
         </a>
       </div>
