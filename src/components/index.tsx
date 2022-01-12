@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
-import { Button, Affix, Upload, message, Spin, Modal } from 'antd';
+import { Button, Affix, Upload, Spin, Modal, message, Alert } from 'antd';
 import fetch from 'cross-fetch';
 import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash';
@@ -23,6 +23,7 @@ export const Page: React.FC = () => {
   const [, mode, changeMode] = useModeSwitcher({});
 
   const originalConfig = useRef<ResumeConfig>();
+  const query = getSearchObj();
   const [config, setConfig] = useState<ResumeConfig>();
   const [loading, updateLoading] = useState<boolean>(true);
   const [template, updateTemplate] = useState<string>('template1');
@@ -32,20 +33,37 @@ export const Page: React.FC = () => {
   });
 
   const changeConfig = (v: Partial<ResumeConfig>) => {
-    setConfig(_.assign({}, { titleNameMap: getDefaultTitleNameMap({ i18n }) }, v));
+    setConfig(
+      _.assign({}, { titleNameMap: getDefaultTitleNameMap({ i18n }) }, v)
+    );
   };
 
   useEffect(() => {
-    const query = getSearchObj();
     if (query.template) {
       updateTemplate(query.template as string);
     }
   }, []);
 
+  /** 初始化空 demo */
+  const emptyInit = () => {
+    originalConfig.current = RESUME_INFO;
+    changeMode('edit');
+    changeConfig(
+      _.omit(
+        customAssign({}, RESUME_INFO, _.get(RESUME_INFO, ['locales', lang])),
+        ['locales']
+      )
+    );
+    updateLoading(false);
+  };
+
   useEffect(() => {
-    const query = getSearchObj();
     const user = query.user || '';
     const branch = query.branch || 'master';
+    if (!user) {
+      emptyInit();
+      return;
+    }
     fetch(
       `https://raw.githubusercontent.com/${user}/${user}/${branch}/resume.json`
     )
@@ -53,30 +71,7 @@ export const Page: React.FC = () => {
         if (data.status !== 200) {
           const link = `https://github.com/${user}/${user}/tree/${branch}`;
           if (mode === 'edit') {
-            Modal.info({
-              title: i18n.get('获取简历信息失败'),
-              content: (
-                <div>
-                  请检查用户名 {user} 是否正确或者简历信息是否在
-                  <a href={link} target="_blank">{`${link}/resume.json`}</a>下
-                </div>
-              ),
-              okText: i18n.get('确定'),
-              onOk: () => {
-                originalConfig.current = RESUME_INFO;
-                changeConfig(
-                  _.omit(
-                    customAssign(
-                      {},
-                      RESUME_INFO,
-                      _.get(RESUME_INFO, ['locales', lang])
-                    ),
-                    ['locales']
-                  )
-                );
-                updateLoading(false);
-              },
-            });
+            emptyInit();
           } else {
             Modal.info({
               title: i18n.get('获取简历信息失败'),
@@ -118,7 +113,7 @@ export const Page: React.FC = () => {
         );
         updateLoading(false);
       });
-  }, [lang]);
+  }, [lang, query]);
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
@@ -203,6 +198,39 @@ export const Page: React.FC = () => {
 
   return (
     <React.Fragment>
+      {mode === 'edit' && (
+        <Alert
+          message={
+            <span>
+              {i18n.get(`编辑之后，请及时存储个人信息到个人仓库中。`)}
+              <span>
+                <span style={{ marginRight: '4px' }}>
+                  👉 {!query.user && i18n.get('参考：')}
+                </span>
+                <span
+                  style={{
+                    color: `var(--primary-color, #1890ff)`,
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => {
+                    const user = query.user || 'visiky';
+                    window.open(`https://github.com/${user}/${user}`);
+                  }}
+                >
+                  {`${query.user || 'visiky'}'s resumeInfo`}
+                </span>
+                <span>
+                  {`（https://github.com/${query.user || 'visiky'}/${query.user || 'visiky'}/blob/${
+                    query.branch || 'master'
+                  }/resume.json）`}
+                </span>
+              </span>
+            </span>
+          }
+          banner
+          closable
+        />
+      )}
       <Spin spinning={loading}>
         <div className="page">
           {config && (
