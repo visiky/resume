@@ -113,7 +113,7 @@ export const Page: React.FC = () => {
         );
         updateLoading(false);
       });
-  }, [lang, query]);
+  }, [lang, query.user, query.branch, mode]);
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
