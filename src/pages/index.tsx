@@ -1,28 +1,33 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { createStore } from 'redux';
-import App from '../components/App';
-import rootReducer from '../reducers';
+import qs from 'query-string';
+import Header from '@/layout/header';
+import Footer from '@/layout/footer';
+import Content from '@/components';
+import { EN_US_LOCALE } from '@/locale/locales/en_US';
+import { registerLocale } from '@/locale';
+import './index.less';
 
-// 添加样式
-import '@/less/layout.less';
-
-const store = createStore(rootReducer);
+registerLocale('en_US', EN_US_LOCALE);
 
 const Page = () => {
+  const [title, changeTitle] = useState('Resume Generator');
+  useEffect(() => {
+    const search = typeof window !== 'undefined' && window.location.search;
+    const query = qs.parse(search);
+    if (query.user) {
+      changeTitle(`${query.user}'s resume`);
+    }
+  }, []);
+
   return (
     <React.Fragment>
       <Helmet>
-        <title>Resume Generator</title>
-        {/* for live demo */}
-        <link rel="stylesheet" href="/resume/font-awesome.min.css" />
-        {/* for local development */}
-        <link rel="stylesheet" href="/font-awesome.min.css" />
+        <title>{title}</title>
       </Helmet>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <Header />
+      <Content />
+      <Footer />
     </React.Fragment>
   );
 };

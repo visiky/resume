@@ -1,0 +1,41 @@
+.avatar {
+  position: relative;
+
+  .btn-upload {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .ant-upload-list-item-info {
+      display: none;
+    }
+
+    .ant-upload-list.ant-upload-list-picture-card {
+      width: 82px;
+      height: 82px;
+    }
+
+    .ant-upload-select.ant-upload-select-picture-card {
+      height: calc(100% + 4px);
+      width: calc(100% + 4px);
+      margin-top: -2px;
+      border-radius: 50%;
+    }
+    .ant-upload-list-picture-card-container {
+      height: 100%;
+      width: 100%;
+    }
+
+    .ant-upload-list-picture .ant-upload-list-item,
+    .ant-upload-list-picture-card .ant-upload-list-item {
+      border: none;
+    }
+  }
+
+  &:hover {
+    .btn-upload {
+      display: block !important;
+    }
+  }
+}

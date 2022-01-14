@@ -1,0 +1,38 @@
+.templates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 24px;
+  margin: 24px 0;
+
+  .template-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .template-id {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.65);
+    }
+    .template-description {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.45);
+    }
+
+    svg.template {
+      width: 160px;
+      border-radius: 4px;
+      border: 1px solid #efefef;
+    }
+
+    &.selected svg.template {
+      border: 1px solid #b3b3b3;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+    &.disabled:hover {
+      cursor: not-allowed;
+    }
+  }
+}

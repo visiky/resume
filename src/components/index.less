@@ -1,0 +1,106 @@
+/*
+* 全局变量
+*/
+@font-face {
+  font-family: 'roboto-regular';
+  src: url('https://dasstatic.alicdn.com/alisis3/fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'roboto-medium';
+  src: url('https://dasstatic.alicdn.com/alisis3/fonts/Roboto-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'roboto-light';
+  src: url('https://dasstatic.alicdn.com/alisis3/fonts/Roboto-Light.ttf');
+}
+
+body {
+  font-family: roboto-regular;
+  font-size: 14px; // normal-font-size
+
+  margin: 0 !important;
+
+  .page {
+    display: flex;
+    padding: 12px;
+    justify-content: center;
+
+    .btn-group {
+      margin-left: 12px;
+      display: block;
+
+      .ant-btn {
+        display: block;
+        margin-top: 8px;
+        padding: 4px 8px;
+        width: 106px;
+        border-radius: 0 !important;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page {
+      flex-direction: column-reverse;
+
+      .btn-group {
+        margin-left: 0px;
+
+        .ant-btn {
+          margin-top: 0;
+          margin-bottom: 8px;
+          margin-right: 8px;
+          display: inline-block;
+
+          &:not(.btn-upload):last-of-type {
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+  }
+
+  // 移动端不给编辑
+  @media (max-width: 414px) {
+    .page {
+      padding: 0;
+      .btn-group,
+      .box-size-info {
+        display: none;
+      }
+    }
+  }
+
+  .box-size-info {
+    position: absolute;
+    transform: translate(-100%, 50%);
+    font-size: 12px;
+    line-height: 15px;
+    background: rgba(139, 195, 74, 0.39);
+    color: #009688;
+    letter-spacing: 1.2px;
+    border-radius: 2px;
+    padding: 2px 4px;
+    margin: 4px 0px;
+  }
+}
+
+// 打印时的样式
+@media print {
+  @page {
+    size: A4;
+  }
+
+  body,
+  body .page {
+    padding: 0;
+    margin: 0;
+  }
+
+  .btn-group,
+  .box-size-info {
+    display: none !important;
+  }
+}

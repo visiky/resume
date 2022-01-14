@@ -1,0 +1,22 @@
+.language-switcher {
+  margin: 0 7px;
+  display: inline-block;
+  font-size: 12px;
+
+  .divider {
+    padding: 0 4px;
+  }
+}
+
+body[lang='en_US'] {
+  .language-switcher span[data-lang='zh_CN'] {
+    color: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+  }
+}
+body[lang='zh_CN'] {
+  .language-switcher span[data-lang='en_US'] {
+    color: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+  }
+}
