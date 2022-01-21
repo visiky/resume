@@ -1,4 +1,4 @@
-import { reduce } from 'lodash';
+import { reduce } from 'lodash-es';
 /**
  * 简单的模板引擎，使用方式如下（空格自动忽略）：
  * template('hello, {name}', { name: 'AntV' }); // hello, AntV
@@ -12,7 +12,8 @@ export function template(source: string, data?: object): string {
   return reduce(
     // @ts-ignore
     data,
-    (r: string, v: string, k: string) => r.replace(new RegExp(`{\\s*${k}\\s*}`, 'g'), v),
+    (r: string, v: string, k: string) =>
+      r.replace(new RegExp(`{\\s*${k}\\s*}`, 'g'), v),
     source
   );
 }

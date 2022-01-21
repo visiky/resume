@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, InputNumber, Button, Checkbox } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { ColorPicker } from './ColorPicker';
 import { getLocale } from '@/locale';
 

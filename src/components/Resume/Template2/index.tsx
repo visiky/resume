@@ -7,10 +7,12 @@ import {
   ZhihuCircleFilled,
   CheckCircleFilled,
   ScheduleFilled,
+  EnvironmentFilled,
+  HeartFilled,
   CrownFilled,
 } from '@ant-design/icons';
 import cx from 'classnames';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { getLocale } from '@/locale';
 import { getDefaultTitleNameMap } from '@/datas/constant';
 import { Avatar } from '../../Avatar';
@@ -125,6 +127,24 @@ export const Template2: React.FC<Props> = props => {
                   />
                   <span>
                     {i18n.get('工作经验')}: {profile.workExpYear}
+                  </span>
+                </div>
+              )}
+              {profile?.workPlace && (
+                <div className="work-place">
+                  <EnvironmentFilled
+                    style={{ color: theme.color, opacity: 0.85 }}
+                  />
+                  <span>
+                    {i18n.get('工作地')}: {profile.workPlace}
+                  </span>
+                </div>
+              )}
+              {profile?.expectJob && (
+                <div className="expect-job">
+                  <HeartFilled style={{ color: theme.color, opacity: 0.85 }} />
+                  <span>
+                    {i18n.get('求职意向')}: {profile.expectJob}
                   </span>
                 </div>
               )}
