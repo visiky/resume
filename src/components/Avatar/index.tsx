@@ -13,8 +13,10 @@ export const Avatar = ({ avatarSrc, className }) => {
   };
 
   return (
-    <div className="avatar">
-      {fileList.length > 0 && <AntdAvatar className={className} src={fileList[0]?.thumbUrl} />}
+    <div className={`avatar ${!fileList.length ? 'avatar-hidden' : ''}`}>
+      {fileList.length > 0 && (
+        <AntdAvatar className={className} src={fileList[0]?.thumbUrl} />
+      )}
       <Upload
         listType="picture-card"
         fileList={fileList}

@@ -200,6 +200,7 @@ export const Page: React.FC = () => {
     <React.Fragment>
       {mode === 'edit' && (
         <Alert
+          className="resume-alert"
           message={
             <span>
               {i18n.get(`编辑之后，请及时存储个人信息到个人仓库中。`)}
@@ -220,9 +221,9 @@ export const Page: React.FC = () => {
                   {`${query.user || 'visiky'}'s resumeInfo`}
                 </span>
                 <span>
-                  {`（https://github.com/${query.user || 'visiky'}/${query.user || 'visiky'}/blob/${
-                    query.branch || 'master'
-                  }/resume.json）`}
+                  {`（https://github.com/${query.user || 'visiky'}/${
+                    query.user || 'visiky'
+                  }/blob/${query.branch || 'master'}/resume.json）`}
                 </span>
               </span>
             </span>

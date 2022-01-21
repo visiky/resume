@@ -15,6 +15,10 @@ export type ResumeConfig = {
     zhihu?: string;
     /** 工作经验 xx 年 */
     workExpYear?: string;
+    /** 工作地 */
+    workPlace?: string;
+    /** 求职意向 */
+    expectJob?: string;
   };
 
   /** 标题名称映射 */
@@ -33,7 +37,7 @@ export type ResumeConfig = {
     workList?: string;
     /** 自我介绍 */
     aboutme?: string;
-  },
+  };
 
   /** 教育背景 */
   educationList?: Array<{
@@ -98,7 +102,7 @@ export type ResumeConfig = {
   /** 增加国际化 */
   locales?: {
     [key: string]: ResumeConfig;
-  }
+  };
 };
 
 /**

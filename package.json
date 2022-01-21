@@ -23,6 +23,7 @@
     "gatsby": "^2.26.1",
     "gatsby-plugin-antd": "^2.2.0",
     "gatsby-plugin-less": "^5.2.0",
+    "gatsby-plugin-pnpm": "^1.2.10",
     "gh-pages": "^3.1.0",
     "less": "^4.1.0",
     "prettier": "2.2.1",
