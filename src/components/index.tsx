@@ -198,40 +198,40 @@ export const Page: React.FC = () => {
 
   return (
     <React.Fragment>
-      {mode === 'edit' && (
-        <Alert
-          message={
-            <span>
-              {i18n.get(`编辑之后，请及时存储个人信息到个人仓库中。`)}
+      <Spin spinning={loading}>
+        {mode === 'edit' && (
+          <Alert
+            message={
               <span>
-                <span style={{ marginRight: '4px' }}>
-                  👉 {!query.user && i18n.get('参考：')}
-                </span>
-                <span
-                  style={{
-                    color: `var(--primary-color, #1890ff)`,
-                    cursor: 'pointer',
-                  }}
-                  onClick={() => {
-                    const user = query.user || 'visiky';
-                    window.open(`https://github.com/${user}/${user}`);
-                  }}
-                >
-                  {`${query.user || 'visiky'}'s resumeInfo`}
-                </span>
+                {i18n.get(`编辑之后，请及时存储个人信息到个人仓库中。`)}
                 <span>
-                  {`（https://github.com/${query.user || 'visiky'}/${query.user || 'visiky'}/blob/${
-                    query.branch || 'master'
-                  }/resume.json）`}
+                  <span style={{ marginRight: '4px' }}>
+                    👉 {!query.user && i18n.get('参考：')}
+                  </span>
+                  <span
+                    style={{
+                      color: `var(--primary-color, #1890ff)`,
+                      cursor: 'pointer',
+                    }}
+                    onClick={() => {
+                      const user = query.user || 'visiky';
+                      window.open(`https://github.com/${user}/${user}`);
+                    }}
+                  >
+                    {`${query.user || 'visiky'}'s resumeInfo`}
+                  </span>
+                  <span>
+                    {`（https://github.com/${query.user || 'visiky'}/${
+                      query.user || 'visiky'
+                    }/blob/${query.branch || 'master'}/resume.json）`}
+                  </span>
                 </span>
               </span>
-            </span>
-          }
-          banner
-          closable
-        />
-      )}
-      <Spin spinning={loading}>
+            }
+            banner
+            closable
+          />
+        )}
         <div className="page">
           {config && (
             <Resume value={config} theme={theme} template={template} />
