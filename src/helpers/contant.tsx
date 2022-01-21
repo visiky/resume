@@ -113,6 +113,16 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
         attributeId: 'workExpYear',
         displayName: i18n.get('工作经验'),
       },
+      {
+        type: 'input',
+        attributeId: 'workPlace',
+        displayName: i18n.get('工作地'),
+      },
+      {
+        type: 'input',
+        attributeId: 'positionTitle',
+        displayName: i18n.get('职位'),
+      },
     ],
     educationList: [
       {
