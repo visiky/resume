@@ -19,7 +19,6 @@
     "react-svg": "^14.1.6"
   },
   "devDependencies": {
-    "@types/antd": "^1.0.0",
     "@types/classnames": "^2.3.1",
     "@types/react": "^17.0.3",
     "babel-plugin-import": "^1.13.3",

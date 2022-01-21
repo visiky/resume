@@ -2,7 +2,6 @@ lockfileVersion: 5.3
 
 specifiers:
   '@ant-design/icons': ^4.6.2
-  '@types/antd': ^1.0.0
   '@types/classnames': ^2.3.1
   '@types/react': ^17.0.3
   antd: ^4.16.6
@@ -47,7 +46,6 @@ dependencies:
   react-svg: 14.1.8_react-dom@17.0.2+react@17.0.2
 
 devDependencies:
-  '@types/antd': 1.0.0_react-dom@17.0.2+react@17.0.2
   '@types/classnames': 2.3.1
   '@types/react': 17.0.38
   babel-plugin-import: 1.13.3
@@ -1862,16 +1860,6 @@ packages:
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
     dependencies:
       '@types/estree': 0.0.50
-    dev: true
-
-  /@types/antd/1.0.0_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha1-8E4qhO/Z6pNzZs09+62l08lJRx0=}
-    deprecated: This is a stub types definition for antd (https://github.com/ant-design/ant-design). antd provides its own type definitions, so you don't need @types/antd installed!
-    dependencies:
-      antd: 4.18.4_react-dom@17.0.2+react@17.0.2
-    transitivePeerDependencies:
-      - react
-      - react-dom
     dev: true
 
   /@types/classnames/2.3.1:
