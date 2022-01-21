@@ -14,7 +14,7 @@ export const RESUME_INFO: ResumeConfig = {
     zhihu: 'https://zhihu.com/people/visiky',
     workExpYear: '',
     workPlace: '浙江杭州',
-    expectJob: '前端工程师',
+    positionTitle: '前端工程师',
   },
   educationList: [
     {

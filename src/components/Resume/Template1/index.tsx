@@ -144,11 +144,11 @@ export const Template1: React.FC<Props> = props => {
                 </span>
               </div>
             )}
-            {profile?.expectJob && (
+            {profile?.positionTitle && (
               <div className="expect-job">
                 <HeartFilled style={{ color: theme.color, opacity: 0.85 }} />
                 <span>
-                  {i18n.get('求职意向')}: {profile.expectJob}
+                  {i18n.get('职位')}: {profile.positionTitle}
                 </span>
               </div>
             )}

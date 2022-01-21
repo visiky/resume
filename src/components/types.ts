@@ -17,8 +17,8 @@ export type ResumeConfig = {
     workExpYear?: string;
     /** 工作地 */
     workPlace?: string;
-    /** 求职意向 */
-    expectJob?: string;
+    /** 职位 */
+    positionTitle?: string;
   };
 
   /** 标题名称映射 */
