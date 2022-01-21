@@ -2,7 +2,7 @@ import { Dropdown } from 'antd';
 import React, { useMemo, useCallback } from 'react';
 import { SketchPicker } from 'react-color';
 import cx from 'classnames';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import './index.less';
 
 const DEFAULT_COLORS = [
@@ -30,7 +30,13 @@ type ColorPickerProps = {
 };
 
 export const ColorPicker: React.FC<ColorPickerProps> = props => {
-  const { value: color, onChange, style, canChangeColor = true, className } = props;
+  const {
+    value: color,
+    onChange,
+    style,
+    canChangeColor = true,
+    className,
+  } = props;
 
   const onColorChange = useCallback(
     newColor => {

@@ -12,7 +12,7 @@ import {
   EnvironmentFilled,
   HeartFilled,
 } from '@ant-design/icons';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { getLocale } from '@/locale';
 import { getDefaultTitleNameMap } from '@/datas/constant';
 import { Avatar } from '../../Avatar';

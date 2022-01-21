@@ -11,7 +11,7 @@ import {
 import { DeleteFilled, InfoCircleFilled } from '@ant-design/icons';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import arrayMove from 'array-move';
 import { FormCreator } from '../FormCreator';
 import { getDefaultTitleNameMap } from '@/datas/constant';

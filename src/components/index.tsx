@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { Button, Affix, Upload, Spin, Modal, message, Alert } from 'antd';
 import fetch from 'cross-fetch';
 import { RcFile } from 'antd/lib/upload';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { getLanguage, getLocale } from '@/locale';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
 import { getDefaultTitleNameMap } from '@/datas/constant';
