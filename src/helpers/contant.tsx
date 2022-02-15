@@ -152,7 +152,7 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       },
       {
         type: 'input',
-        attributeId: 'role',
+        attributeId: 'project_role',
         displayName: i18n.get('担任角色'),
       },
       {

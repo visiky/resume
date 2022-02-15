@@ -113,6 +113,7 @@ export const Drawer: React.FC<Props> = props => {
   }, [i18n]);
 
   const DEFAULT_TITLE_MAP = getDefaultTitleNameMap({ i18n });
+  const isList = _.endsWith(childrenDrawer, 'List');
 
   return (
     <>
@@ -268,8 +269,9 @@ export const Drawer: React.FC<Props> = props => {
                 <FormCreator
                   config={contentOfModule[childrenDrawer]}
                   value={currentContent}
+                  isList={isList}
                   onChange={v => {
-                    if (_.endsWith(childrenDrawer, 'List')) {
+                    if (isList) {
                       const newValue = _.get(props.value, childrenDrawer, []);
                       if (currentContent) {
                         newValue[currentContent.dataIndex] = _.merge(
@@ -283,16 +285,15 @@ export const Drawer: React.FC<Props> = props => {
                       props.onValueChange({
                         [childrenDrawer]: newValue,
                       });
+                      // 关闭抽屉
+                      setChildrenDrawer(null);
+                      // 清空当前选中内容
+                      updateCurrentContent(null);
                     } else {
                       props.onValueChange({
                         [childrenDrawer]: _.merge({}, currentContent, v),
                       });
                     }
-
-                    // 关闭抽屉
-                    setChildrenDrawer(null);
-                    // 清空当前选中内容
-                    updateCurrentContent(null);
                   }}
                 />
               </AntdDrawer>

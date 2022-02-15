@@ -21,6 +21,8 @@ type Props = {
     [key: string]: any;
   };
   onChange: (v: any) => void;
+  /** 列表型内容 */
+  isList: boolean;
 };
 
 const FormItemComponentMap = (type: string) => (
@@ -54,16 +56,20 @@ export const FormCreator: React.FC<Props> = props => {
     setFields(datas);
   }, [props.value]);
 
-  const onFinish = (values: any) => {
+  const handleChange = (values: any) => {
     props.onChange(values);
   };
+  const formProps = {
+    [props.isList ? 'onFinish' : 'onValuesChange']: handleChange,
+  };
+
   return (
     <div>
       <Form
         labelCol={{ span: 6 }}
         initialValues={props.value}
         fields={fields}
-        onFinish={onFinish}
+        {...formProps}
       >
         {_.map(props.config, c => {
           return (
@@ -81,11 +87,13 @@ export const FormCreator: React.FC<Props> = props => {
             </Form.Item>
           );
         })}
-        <Form.Item wrapperCol={{ offset: 6 }}>
-          <Button type="primary" htmlType="submit">
-            {i18n.get('提交')}
-          </Button>
-        </Form.Item>
+        {props.isList && (
+          <Form.Item wrapperCol={{ offset: 6 }}>
+            <Button type="primary" htmlType="submit">
+              {i18n.get('提交')}
+            </Button>
+          </Form.Item>
+        )}
       </Form>
     </div>
   );
