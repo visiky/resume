@@ -19,7 +19,7 @@
     "react-svg": "^14.1.6"
   },
   "devDependencies": {
-    "@types/classnames": "^2.3.1",
+    "@types/lodash-es": "^4.17.6",
     "@types/react": "^17.0.3",
     "babel-plugin-import": "^1.13.3",
     "gatsby": "^2.26.1",
