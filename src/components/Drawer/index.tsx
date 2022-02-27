@@ -21,6 +21,7 @@ import { ResumeConfig, ThemeConfig } from '../types';
 import { ConfigTheme } from './ConfigTheme';
 import { Templates } from './Templates';
 import './index.less';
+import useThrottle from '@/hooks/useThrottle';
 
 const { Panel } = Collapse;
 
@@ -86,6 +87,22 @@ export const Drawer: React.FC<Props> = props => {
   const [visible, setVisible] = useState(false);
   const [childrenDrawer, setChildrenDrawer] = useState(null);
   const [currentContent, updateCurrentContent] = useState(null);
+
+  /**
+   * 1. 更新currentContent State
+   * 2. 调用 props.onValueChange 更新模板
+   */
+  const updateContent = useThrottle(
+    v => {
+      const newConfig = _.merge({}, currentContent, v);
+      updateCurrentContent(newConfig);
+      props.onValueChange({
+        [childrenDrawer]: newConfig,
+      });
+    },
+    [currentContent],
+    800
+  );
 
   const [type, setType] = useState('template');
 
@@ -290,9 +307,7 @@ export const Drawer: React.FC<Props> = props => {
                       // 清空当前选中内容
                       updateCurrentContent(null);
                     } else {
-                      props.onValueChange({
-                        [childrenDrawer]: _.merge({}, currentContent, v),
-                      });
+                      updateContent(v);
                     }
                   }}
                 />
