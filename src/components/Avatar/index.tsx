@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Upload, Avatar as AntdAvatar } from 'antd';
 import './index.less';
 
-export const Avatar = ({ avatarSrc, className }) => {
+export const Avatar = ({ avatarSrc, className, shape = 'circle', size = 'default' }) => {
   const [fileList, setFileList] = useState<any[]>([{ thumbUrl: avatarSrc }]);
 
   const handleChange = ({ file: newFile, fileList: newFileList }) => {
@@ -15,7 +15,8 @@ export const Avatar = ({ avatarSrc, className }) => {
   return (
     <div className={`avatar ${!fileList.length ? 'avatar-hidden' : ''}`}>
       {fileList.length > 0 && (
-        <AntdAvatar className={className} src={fileList[0]?.thumbUrl} />
+        // @ts-ignore
+        <AntdAvatar className={className} src={fileList[0]?.thumbUrl} shape={shape} size={size} />
       )}
       <Upload
         listType="picture-card"

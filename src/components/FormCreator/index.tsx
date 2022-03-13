@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, InputNumber, Button, Checkbox } from 'antd';
+import { Form, Input, InputNumber, Button, Checkbox, Select } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 import _ from 'lodash-es';
 import { ColorPicker } from './ColorPicker';
@@ -31,6 +31,8 @@ const FormItemComponentMap = (type: string) => (
   switch (type) {
     case 'checkbox':
       return <Checkbox {...props} />;
+    case 'select':
+      return <Select {...props} />;
     case 'input':
       return <Input {...props} />;
     case 'number':
