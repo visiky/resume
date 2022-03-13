@@ -15,10 +15,12 @@ import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
+import { exportDataToLocal } from '@/helpers/export-to-local';
 
 export const Page: React.FC = () => {
   const lang = getLanguage();
   const i18n = getLocale();
+  const user = getSearchObj().user || 'visiky';
 
   const [, mode, changeMode] = useModeSwitcher({});
 
@@ -186,21 +188,30 @@ export const Page: React.FC = () => {
     return false;
   };
 
-  const copyConfig = () => {
+  function getConfigJson() {
     let fullConfig = config;
     if (lang !== 'zh_CN') {
       fullConfig = customAssign({}, originalConfig?.current, {
         locales: { [lang]: config },
       });
     }
-    copyToClipboard(JSON.stringify({ ...fullConfig, theme }));
+    return JSON.stringify({ ...fullConfig, theme });
+  }
+
+  const copyConfig = () => {
+    copyToClipboard(getConfigJson());
   };
+
+  const exportConfig = () => {
+    exportDataToLocal(getConfigJson(), `${user}'s resume info`);
+  }
 
   return (
     <React.Fragment>
       <Spin spinning={loading}>
         {mode === 'edit' && (
           <Alert
+            showIcon={false}
             message={
               <span>
                 {i18n.get(`编辑之后，请及时存储个人信息到个人仓库中。`)}
@@ -249,6 +260,12 @@ export const Page: React.FC = () => {
                     onTemplateChange={updateTemplate}
                     key={'1'}
                   />
+                  <Button type="primary" onClick={copyConfig} key="3">
+                    {i18n.get('复制配置')}
+                  </Button>
+                  <Button type="primary" onClick={exportConfig} key="3">
+                    {i18n.get('保存简历')}
+                  </Button>
                   <Upload
                     accept=".json"
                     showUploadList={false}
@@ -259,9 +276,6 @@ export const Page: React.FC = () => {
                       {i18n.get('导入配置')}
                     </Button>
                   </Upload>
-                  <Button type="primary" onClick={copyConfig} key="3">
-                    {i18n.get('复制配置')}
-                  </Button>
                   <Button type="primary" onClick={() => window.print()} key="4">
                     {i18n.get('PDF 下载')}
                   </Button>

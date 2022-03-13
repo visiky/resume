@@ -80,7 +80,7 @@ export const Template1: React.FC<Props> = props => {
       <div className="basic-info">
         {/* 头像 */}
         {!value?.avatar?.hidden && (
-          <Avatar avatarSrc={value?.avatar?.src} className="avatar" />
+          <Avatar avatarSrc={value?.avatar?.src} className="avatar" shape={value?.avatar?.shape} size={value?.avatar?.size} />
         )}
         {/* 个人信息 */}
         <div className="profile">

@@ -8,6 +8,7 @@ export const EN_US_LOCALE: Locale = {
 
   导入配置: 'Import config',
   复制配置: 'Copy config',
+  保存简历: 'Save ResumneInfo',
   'PDF 下载': 'Download pdf',
   进行配置: 'Enter config',
   选择模板: 'Choose template',
