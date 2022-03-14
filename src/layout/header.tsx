@@ -19,6 +19,9 @@ const Header: React.FC = () => {
       <span />
       <span>
         {ModeSwitcher}
+        <span className={'action-link'} onClick={() => window.print()}>
+          下载
+        </span>
         <span className={'action-link'} onClick={gotoOnlineVersion}>
           在线版本
         </span>
