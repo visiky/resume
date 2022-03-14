@@ -6,14 +6,22 @@ import './header.less';
 
 const Header: React.FC = () => {
   const [ModeSwitcher] = useModeSwitcher({});
-  const query = getSearchObj();
+
+  function gotoOnlineVersion() {
+    const query = getSearchObj();
+    if (typeof window !== 'undefined') {
+      window.open(`https://visiky.github.io/resume/?user=${query.user}`);
+    }
+  }
 
   return (
     <header>
       <span />
       <span>
         {ModeSwitcher}
-        <a className={'action-link'}  href={`/?user=${query.user}`} target="_blank">在线版本</a>
+        <span className={'action-link'} onClick={gotoOnlineVersion}>
+          在线版本
+        </span>
         <LangSwitcher />
       </span>
     </header>
