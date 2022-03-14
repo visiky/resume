@@ -33,7 +33,13 @@ export const ConfigTheme: React.FC<Props> = props => {
   }, [props.color, props.tagColor]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <div style={FormItemStyle}>
         <span style={{ marginRight: '4px' }}>{i18n.get('主题色')}</span>
         <ColorPicker

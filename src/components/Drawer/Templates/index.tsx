@@ -30,7 +30,7 @@ const TEMPLATES = [
 
 export const Templates: React.FC<Props> = props => {
   const i18n = getLocale();
-  
+
   return (
     <div className="templates">
       {TEMPLATES.map(item => {
@@ -50,7 +50,9 @@ export const Templates: React.FC<Props> = props => {
               }}
             />
             <span className="template-id">{item.id}</span>
-            <span className="template-description">{i18n.get(item.description)}</span>
+            <span className="template-description">
+              {i18n.get(item.description)}
+            </span>
           </div>
         );
       })}

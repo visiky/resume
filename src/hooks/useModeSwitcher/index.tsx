@@ -8,7 +8,12 @@ import './index.less';
 
 export function getMode() {
   const query = getSearchObj();
-  return (query ? query.mode : 'read') as string;
+  return (query ? query.mode : 'read') as Mode;
+}
+
+export enum Mode {
+  Edit = 'edit',
+  Read = 'read'
 }
 
 export const useModeSwitcher = ({
@@ -40,12 +45,12 @@ export const useModeSwitcher = ({
 
   return [
     <div className={cx('mode-switcher', className)}>
-      {mode !== 'edit' && (
+      {mode !== Mode.Edit && (
         <span className={cx('mode-item')} onClick={() => changeMode('edit')}>
           {i18n.get('编辑')}
         </span>
       )}
-      {mode === 'edit' &&
+      {mode === Mode.Edit &&
         (canPreview ? (
           <Popover content={i18n.get('无用户信息，不允许预览')}>
             <span>{i18n.get('预览')}</span>

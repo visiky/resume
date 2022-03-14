@@ -1,5 +1,4 @@
-import { ResumeConfig } from "@/components/types";
-
+import { ResumeConfig } from '@/components/types';
 
 export function getDefaultTitleNameMap({ i18n }): ResumeConfig['titleNameMap'] {
   return {
@@ -16,6 +15,6 @@ export function getDefaultTitleNameMap({ i18n }): ResumeConfig['titleNameMap'] {
     /** 默认: 作品 */
     workList: i18n.get('个人作品'),
     /** 默认: 自我介绍 */
-    aboutme: i18n.get('自我介绍')
-  }
-};
+    aboutme: i18n.get('自我介绍'),
+  };
+}

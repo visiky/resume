@@ -71,7 +71,10 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
         displayName: i18n.get('头像形状'),
         cfg: {
           defaultValue: 'circle',
-          options: [{ value: 'circle', label: i18n.get('圆形') }, { value: 'square', label: i18n.get('方形') }],
+          options: [
+            { value: 'circle', label: i18n.get('圆形') },
+            { value: 'square', label: i18n.get('方形') },
+          ],
         },
       },
     ],

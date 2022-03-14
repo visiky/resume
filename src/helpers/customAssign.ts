@@ -3,7 +3,8 @@ const MAX_MIX_LEVEL = 5; // 最大比对层级
 const toString = {}.toString;
 
 // 类型检测
-const isType = (value: any, type: string): boolean => toString.call(value) === '[object ' + type + ']';
+const isType = (value: any, type: string): boolean =>
+  toString.call(value) === '[object ' + type + ']';
 
 const isObjectLike = (value: any): value is object => {
   /**
@@ -56,12 +57,12 @@ const deep = (dist, src, level?, maxLevel?) => {
             // 层级过深直接赋值，性能问题
             dist[key] = src[key];
           }
-        } 
+        }
         // else if (isArray(value)) {
         //   // 如果为 undefined，才进行 concat
         //   dist[key] = [];
         //   dist[key] = dist[key].concat(value);
-        // } 
+        // }
         else {
           dist[key] = value;
         }
