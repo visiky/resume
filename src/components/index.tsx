@@ -1,21 +1,20 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
-import { Button, Affix, Upload, Spin, Modal, message, Alert } from 'antd';
-import fetch from 'cross-fetch';
+import { Button, Affix, Upload, Spin, message, Alert, Modal } from 'antd';
 import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash-es';
 import { getLanguage, getLocale } from '@/locale';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
 import { getDefaultTitleNameMap } from '@/datas/constant';
 import { getSearchObj } from '@/helpers/location';
-import { RESUME_INFO } from '@/datas/resume';
 import { customAssign } from '@/helpers/customAssign';
 import { copyToClipboard } from '@/helpers/copy-to-board';
 import { getDevice } from '@/helpers/detect-device';
+import { exportDataToLocal } from '@/helpers/export-to-local';
+import { getConfig, saveToLocalStorage } from '@/helpers/store-to-local';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
-import { exportDataToLocal } from '@/helpers/export-to-local';
 
 export const Page: React.FC = () => {
   const lang = getLanguage();
@@ -46,67 +45,27 @@ export const Page: React.FC = () => {
     }
   }, []);
 
-  /** 初始化空 demo */
-  const emptyInit = () => {
-    originalConfig.current = RESUME_INFO;
-    changeMode('edit');
-    changeConfig(
-      _.omit(
-        customAssign({}, RESUME_INFO, _.get(RESUME_INFO, ['locales', lang])),
-        ['locales']
-      )
-    );
-    updateLoading(false);
-  };
-
   useEffect(() => {
-    const user = query.user || '';
-    const branch = query.branch || 'master';
-    if (!user) {
-      emptyInit();
-      return;
-    }
-    fetch(
-      `https://raw.githubusercontent.com/${user}/${user}/${branch}/resume.json`
-    )
-      .then(data => {
-        if (data.status !== 200) {
-          const link = `https://github.com/${user}/${user}/tree/${branch}`;
-          if (mode === 'edit') {
-            emptyInit();
-          } else {
-            Modal.info({
-              title: i18n.get('获取简历信息失败'),
-              content: (
-                <div>
-                  请检查用户名 {user} 是否正确或者简历信息是否在
-                  <a href={link} target="_blank">{`${link}/resume.json`}</a>下
-                </div>
-              ),
-              okText: i18n.get('进入在线编辑'),
-              onOk: () => {
-                originalConfig.current = RESUME_INFO;
-                changeConfig(
-                  _.omit(
-                    customAssign(
-                      {},
-                      RESUME_INFO,
-                      _.get(RESUME_INFO, ['locales', lang])
-                    ),
-                    ['locales']
-                  )
-                );
-                updateLoading(false);
-                changeMode('edit');
-              },
-            });
-          }
-
-          return;
-        }
-        return data.json();
-      })
-      .then(data => {
+    const user = (query.user || '') as string;
+    const branch = (query.branch || 'master') as string;
+    const mode = query.mode;
+    if (!mode) {
+      const link = `https://github.com/${user}/${user}/tree/${branch}`;
+      Modal.info({
+        title: i18n.get('获取简历信息失败'),
+        content: (
+          <div>
+            请检查用户名 {user} 是否正确或者简历信息是否在
+            <a href={link} target="_blank">{`${link}/resume.json`}</a>下
+          </div>
+        ),
+        okText: i18n.get('进入在线编辑'),
+        onOk: () => {
+          changeMode('edit');
+        },
+      });
+    } else {
+      getConfig(lang, branch, user).then(data => {
         originalConfig.current = data;
         changeConfig(
           _.omit(customAssign({}, data, _.get(data, ['locales', lang])), [
@@ -115,11 +74,14 @@ export const Page: React.FC = () => {
         );
         updateLoading(false);
       });
+    }
   }, [lang, query.user, query.branch]);
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
-      changeConfig(_.assign({}, config, v));
+      const newC = _.assign({}, config, v);
+      changeConfig(newC);
+      saveToLocalStorage(query.user as string, newC);
     },
     [config, lang]
   );
@@ -204,7 +166,7 @@ export const Page: React.FC = () => {
 
   const exportConfig = () => {
     exportDataToLocal(getConfigJson(), `${user}'s resume info`);
-  }
+  };
 
   return (
     <React.Fragment>

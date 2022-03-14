@@ -6,6 +6,8 @@ export const EN_US_LOCALE: Locale = {
   预览: 'Preview',
   编辑: 'Edit',
 
+  已缓存在本地: 'Save to localStorage',
+
   导入配置: 'Import config',
   复制配置: 'Copy config',
   保存简历: 'Save ResumneInfo',
