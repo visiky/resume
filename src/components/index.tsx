@@ -11,6 +11,7 @@ import { copyToClipboard } from '@/helpers/copy-to-board';
 import { getDevice } from '@/helpers/detect-device';
 import { exportDataToLocal } from '@/helpers/export-to-local';
 import { getConfig, saveToLocalStorage } from '@/helpers/store-to-local';
+import { fetchResume } from '@/helpers/fetch-resume';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { ResumeConfig, ThemeConfig } from './types';
@@ -49,31 +50,38 @@ export const Page: React.FC = () => {
     const user = (query.user || '') as string;
     const branch = (query.branch || 'master') as string;
     const mode = query.mode;
+
+    function store(data) {
+      originalConfig.current = data;
+      changeConfig(
+        _.omit(customAssign({}, data, _.get(data, ['locales', lang])), [
+          'locales',
+        ])
+      );
+      updateLoading(false);
+    }
+
     if (!mode) {
       const link = `https://github.com/${user}/${user}/tree/${branch}`;
-      Modal.info({
-        title: i18n.get('获取简历信息失败'),
-        content: (
-          <div>
-            请检查用户名 {user} 是否正确或者简历信息是否在
-            <a href={link} target="_blank">{`${link}/resume.json`}</a>下
-          </div>
-        ),
-        okText: i18n.get('进入在线编辑'),
-        onOk: () => {
-          changeMode('edit');
-        },
-      });
+      fetchResume(lang, branch, user)
+        .then(data => store(data))
+        .catch(() => {
+          Modal.info({
+            title: i18n.get('获取简历信息失败'),
+            content: (
+              <div>
+                请检查用户名 {user} 是否正确或者简历信息是否在
+                <a href={link} target="_blank">{`${link}/resume.json`}</a>下
+              </div>
+            ),
+            okText: i18n.get('进入在线编辑'),
+            onOk: () => {
+              changeMode('edit');
+            },
+          });
+        });
     } else {
-      getConfig(lang, branch, user).then(data => {
-        originalConfig.current = data;
-        changeConfig(
-          _.omit(customAssign({}, data, _.get(data, ['locales', lang])), [
-            'locales',
-          ])
-        );
-        updateLoading(false);
-      });
+      getConfig(lang, branch, user).then(data => store(data));
     }
   }, [lang, query.user, query.branch]);
 

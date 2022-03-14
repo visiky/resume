@@ -1,10 +1,10 @@
-import fetch from 'cross-fetch';
 import { message } from 'antd';
 import { ResumeConfig } from "@/components/types";
 import { customAssign } from "@/helpers/customAssign";
 import _ from "lodash";
 import { getLocale } from '@/locale';
 import { RESUME_INFO } from '@/datas/resume';
+import { fetchResume } from './fetch-resume';
 
 export const LOCAL_KEY = (user) => `${user ?? ''}resume-config`;
 
@@ -22,24 +22,13 @@ export async function getConfig(lang: string, branch: string, user: string): Pro
     }
   }
 
-  return fetch(
-    `https://raw.githubusercontent.com/${user}/${user}/${branch}/resume.json`
-  )
-    .then(data => {
-      if (data.status !== 200) {
-        message.warn(i18n.get('从模板中获取'), 1);
-        return _.omit(
-          customAssign({}, RESUME_INFO, _.get(RESUME_INFO, ['locales', lang])),
-          ['locales']
-        );
-      }
-      return data.json();
-    })
-    .then(data => {
-      return _.omit(customAssign({}, data, _.get(data, ['locales', lang])), [
-        'locales',
-      ])
-    });
+  return fetchResume(lang, branch, user).catch(() => {
+    message.warn(i18n.get('从模板中获取'), 1);
+    return _.omit(
+      customAssign({}, RESUME_INFO, _.get(RESUME_INFO, ['locales', lang])),
+      ['locales']
+    );
+  })
 }
 
 export const saveToLocalStorage = _.throttle((user: string, config: ResumeConfig) => {
