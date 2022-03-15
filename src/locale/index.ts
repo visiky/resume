@@ -1,7 +1,7 @@
 import { get } from 'lodash-es';
-import { template } from '../helpers/template';
+import { template } from '@/helpers/template';
 import { getLanguage } from './language';
-import { Locale } from './types';
+import type { Locale } from './types';
 
 const LocaleMap = {};
 
