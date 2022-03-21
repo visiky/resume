@@ -27,7 +27,9 @@
     "gatsby-plugin-less": "^5.2.0",
     "gatsby-plugin-pnpm": "^1.2.10",
     "gh-pages": "^3.1.0",
+    "husky": "^7.0.4",
     "less": "^4.1.0",
+    "lint-staged": "^12.3.5",
     "prettier": "2.2.1",
     "rimraf": "^2.5.4",
     "ts-loader": "^8.0.18",
@@ -38,7 +40,14 @@
     "build": "gatsby build --prefix-paths",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "clean": "gatsby clean",
-    "deploy": "npm run clean && gatsby build --prefix-paths && gh-pages -d public"
+    "deploy": "npm run clean && gatsby build --prefix-paths && gh-pages -d public",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write"
+    ]
   },
   "repository": {
     "type": "git",
