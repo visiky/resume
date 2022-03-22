@@ -16,7 +16,7 @@ import arrayMove from 'array-move';
 import { FormCreator } from '../FormCreator';
 import { getDefaultTitleNameMap } from '@/datas/constant';
 import { getLocale } from '@/locale';
-import { MODULES, CONTENT_OF_MODULE } from '../../helpers/contant';
+import { MODULES, CONTENT_OF_MODULE } from '@/helpers/contant';
 import type { ResumeConfig, ThemeConfig } from '../types';
 import { ConfigTheme } from './ConfigTheme';
 import { Templates } from './Templates';
