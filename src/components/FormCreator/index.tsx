@@ -59,6 +59,9 @@ export const FormCreator: React.FC<Props> = props => {
   }, [props.value]);
 
   const handleChange = (values: any) => {
+    if ('edu_time' in values) {
+      values.edu_time = values.edu_time.split(',');
+    }
     props.onChange(values);
   };
   const formProps = {
