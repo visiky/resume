@@ -228,25 +228,23 @@ export const Page: React.FC = () => {
                     onThemeChange={onThemeChange}
                     template={template}
                     onTemplateChange={updateTemplate}
-                    key={'1'}
                   />
-                  <Button type="primary" onClick={copyConfig} key="3">
+                  <Button type="primary" onClick={copyConfig}>
                     {i18n.get('复制配置')}
                   </Button>
-                  <Button type="primary" onClick={exportConfig} key="3">
+                  <Button type="primary" onClick={exportConfig}>
                     {i18n.get('保存简历')}
                   </Button>
                   <Upload
                     accept=".json"
                     showUploadList={false}
                     beforeUpload={importConfig}
-                    key={'2'}
                   >
                     <Button className="btn-upload">
                       {i18n.get('导入配置')}
                     </Button>
                   </Upload>
-                  <Button type="primary" onClick={() => window.print()} key="4">
+                  <Button type="primary" onClick={() => window.print()}>
                     {i18n.get('PDF 下载')}
                   </Button>
                 </Button.Group>
