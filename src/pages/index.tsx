@@ -8,8 +8,6 @@ import { EN_US_LOCALE } from '@/locale/locales/en_US';
 import { registerLocale } from '@/locale';
 import './index.less';
 
-import { useRightClickMenu } from '../hooks';
-
 registerLocale('en_US', EN_US_LOCALE);
 
 const Page = () => {
@@ -21,8 +19,6 @@ const Page = () => {
       changeTitle(`${query.user}'s resume`);
     }
   }, []);
-
-  useRightClickMenu(<div>这是一个DEMO</div>);
 
   return (
     <React.Fragment>

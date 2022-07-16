@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useAppendRootNode } from '../useAppendRootNode';
+import _ from 'lodash-es';
 
-export const useRightClickMenu = (menu: null | JSX.Element) => {
+export const useRightClickMenu = (
+  menu: null | JSX.Element,
+  container: HTMLElement = document.body
+) => {
   const [contextMenu, setContextMenu] = useState({
     x: 0,
     y: 0,
@@ -30,21 +34,25 @@ export const useRightClickMenu = (menu: null | JSX.Element) => {
 
       const { clientHeight, clientWidth } = ref.current;
       const {
-        clientHeight: windowHeight,
-        clientWidth: windowWidth,
-      } = document.body;
+        scrollHeight: windowHeight,
+        scrollWidth: windowWidth,
+        scrollTop,
+        scrollLeft,
+      } = container;
 
       if (clientHeight > windowHeight || clientWidth > windowWidth) {
         throw new Error('the menu is longer than the browser');
       }
 
       const x =
-        clientWidth + clientX > windowWidth ? clientX - clientWidth : clientX;
+        (clientWidth + clientX > windowWidth
+          ? clientX - clientWidth
+          : clientX) + scrollLeft;
 
       const y =
-        clientHeight + clientY > windowHeight
+        (clientHeight + clientY > windowHeight
           ? clientY - clientHeight
-          : clientY;
+          : clientY) + scrollTop;
       setContextMenu({
         x,
         y,
@@ -63,13 +71,18 @@ export const useRightClickMenu = (menu: null | JSX.Element) => {
         visible: false,
       });
     };
+    const handleThrottleOutSideClick = _.throttle(handleOutsideClick, 800);
 
     document.addEventListener('contextmenu', handleContextMenuClick);
     document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('scroll', handleThrottleOutSideClick);
+    window.addEventListener('resize', handleThrottleOutSideClick);
 
     return () => {
       document.removeEventListener('contextmenu', handleContextMenuClick);
       document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('scroll', handleThrottleOutSideClick);
+      window.removeEventListener('resize', handleThrottleOutSideClick);
     };
   });
 };

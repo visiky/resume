@@ -1,4 +1,10 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+} from 'react';
 import { Button, Affix, Upload, Spin, message, Alert, Modal } from 'antd';
 import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash-es';
@@ -8,6 +14,7 @@ import { getDefaultTitleNameMap } from '@/datas/constant';
 import { getSearchObj } from '@/helpers/location';
 import { customAssign } from '@/helpers/customAssign';
 import { copyToClipboard } from '@/helpers/copy-to-board';
+// import { findScrollEle } from '@/helpers/scroll';
 import { getDevice } from '@/helpers/detect-device';
 import { exportDataToLocal } from '@/helpers/export-to-local';
 import { getConfig, saveToLocalStorage } from '@/helpers/store-to-local';
@@ -15,12 +22,21 @@ import { fetchResume } from '@/helpers/fetch-resume';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { ResumeConfig, ThemeConfig } from './types';
+
+import { useRightClickMenu } from '@/hooks';
+import { MagicStyleMenu } from '@/components/MagicStyleMenu';
+
 import './index.less';
 
 export const Page: React.FC = () => {
   const lang = getLanguage();
   const i18n = getLocale();
   const user = getSearchObj().user || 'visiky';
+
+  // findScrollEle为递归操作有性能压力，考虑之下选择直接选中document.body.parentElement
+  // const scrollContainer = findScrollEle(document.body);
+  const scrollContainer = document.body.parentElement;
+  useRightClickMenu(<MagicStyleMenu />, scrollContainer);
 
   const [, mode, changeMode] = useModeSwitcher({});
 
