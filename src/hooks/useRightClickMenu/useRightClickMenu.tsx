@@ -22,6 +22,7 @@ export const useRightClickMenu = (
         left: contextMenu.x,
         top: contextMenu.y,
         display: contextMenu.visible ? 'flex' : 'none',
+        zIndex: 9999999,
       }}
     >
       {menu}
@@ -62,7 +63,6 @@ export const useRightClickMenu = (
     const handleOutsideClick = (
       e: PointerEvent & { path: Array<HTMLElement> }
     ) => {
-      e.preventDefault();
       if (e.path.includes(ref.current)) {
         return;
       }
