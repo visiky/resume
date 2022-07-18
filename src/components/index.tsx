@@ -33,11 +33,6 @@ export const Page: React.FC = () => {
   const i18n = getLocale();
   const user = getSearchObj().user || 'visiky';
 
-  // findScrollEle为递归操作有性能压力，考虑之下选择直接选中document.body.parentElement
-  // const scrollContainer = findScrollEle(document.body);
-  const scrollContainer = document.body.parentElement;
-  useRightClickMenu(<MagicStyleMenu />, scrollContainer);
-
   const [, mode, changeMode] = useModeSwitcher({});
 
   const originalConfig = useRef<ResumeConfig>();
@@ -49,6 +44,26 @@ export const Page: React.FC = () => {
     color: '#2f5785',
     tagColor: '#8bc34a',
   });
+
+  // findScrollEle为递归操作有性能压力，考虑之下选择直接选中document.body.parentElement
+  // const scrollContainer = findScrollEle(document.body);
+  const scrollContainer = document.body.parentElement;
+  useRightClickMenu(
+    <MagicStyleMenu
+      onSign={([mountEffectList, unmountEffectList]) => {
+        // 无需重渲染
+        config.mountEffectList = mountEffectList;
+        config.unmountEffectList = unmountEffectList;
+      }}
+      {...(config?.mountEffectList
+        ? { defaultMount: config.mountEffectList }
+        : {})}
+      {...(config?.unmountEffectList
+        ? { defaultUnMount: config.unmountEffectList }
+        : {})}
+    />,
+    scrollContainer
+  );
 
   const changeConfig = (v: Partial<ResumeConfig>) => {
     setConfig(

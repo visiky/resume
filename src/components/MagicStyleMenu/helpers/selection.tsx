@@ -49,10 +49,10 @@ export const handleSelectionReplace = (
   render: ((arg0: string) => JSX.Element) | JSX.Element | string
 ) => {
   const { baseNode, extentNode } = selection;
-  // if (baseNode !== extentNode) {
-  //   console.warn("一次选中多个分片，暂未处理该部分")
-  //   return;
-  // }
+  if (baseNode.parentElement !== extentNode.parentElement) {
+    console.warn('一次选中多个分片，暂未处理该部分');
+    return;
+  }
   const [id, html] = selectionReplace(
     baseNode,
     selection.baseOffset,

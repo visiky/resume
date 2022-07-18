@@ -1,3 +1,5 @@
+import { ReplaceEffect } from './MagicStyleMenu/helpers/effect';
+
 /** 简历配置内容 */
 export type ResumeConfig = {
   /** 头像 */
@@ -105,6 +107,10 @@ export type ResumeConfig = {
   locales?: {
     [key: string]: ResumeConfig;
   };
+
+  /** 样式调整effect */
+  unmountEffectList?: Array<ReplaceEffect>;
+  mountEffectList?: Array<ReplaceEffect>;
 };
 
 /**

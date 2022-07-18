@@ -1,14 +1,14 @@
 import { getXPath } from './xpath';
 import { useEffect } from 'react';
 
-interface ReplaceEffect {
+export interface ReplaceEffect {
   xpath: string;
   insertID: string;
   html: string;
   text: string;
 }
 
-const effectList = [];
+const mountEffectList = [];
 const unmountEffectList = [];
 
 const getReplaceEffect = (
@@ -41,7 +41,7 @@ const mountEffect = (
   text: string
 ) => {
   const effect = getReplaceEffect(baseNode, id, html, text);
-  effectList.push(effect);
+  mountEffectList.push(effect);
 };
 
 const useReplaceEffect = () => {
@@ -53,14 +53,14 @@ const useReplaceEffect = () => {
         return;
       }
       if (!shiftKey) {
-        if (effectList.length === 0) return;
-        const effect = effectList.pop();
+        if (mountEffectList.length === 0) return;
+        const effect = mountEffectList.pop();
         unmountEffectList.push(effect);
         effectReback(effect);
       } else {
         if (unmountEffectList.length === 0) return;
         const effect = unmountEffectList.pop();
-        effectList.push(effect);
+        mountEffectList.push(effect);
         effectReplace(effect);
       }
     };
@@ -69,6 +69,8 @@ const useReplaceEffect = () => {
       document.removeEventListener('keydown', onKeyDown);
     };
   }, []);
+
+  return [mountEffectList, unmountEffectList];
 };
 
 export {
