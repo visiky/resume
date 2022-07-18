@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useAppendRootNode } from '../useAppendRootNode';
-import _ from 'lodash-es';
+import { throttle } from 'lodash-es';
 
 export const useRightClickMenu = (
   menu: null | JSX.Element,
@@ -71,7 +71,7 @@ export const useRightClickMenu = (
         visible: false,
       });
     };
-    const handleThrottleOutSideClick = _.throttle(handleOutsideClick, 800);
+    const handleThrottleOutSideClick = throttle(handleOutsideClick, 800);
 
     document.addEventListener('contextmenu', handleContextMenuClick);
     document.addEventListener('click', handleOutsideClick);

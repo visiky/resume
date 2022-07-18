@@ -1,7 +1,21 @@
 import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { Button } from 'antd';
+
 import './index.less';
 
-import { Button } from 'antd';
+const SignText = ({ children }) => {
+  return (
+    <span
+      style={{
+        backgroundColor: 'var(--primary-color)',
+        color: 'white',
+      }}
+    >
+      {children}
+    </span>
+  );
+};
 
 export const MagicStyleMenu = () => {
   const handleSign = () => {
@@ -9,14 +23,10 @@ export const MagicStyleMenu = () => {
     const baseText = window.getSelection().toString();
     const baseNode = selection.baseNode;
 
-    if (baseNode.nodeName === '#text') {
-      baseNode.textContent = baseNode.textContent.replace(
-        baseText,
-        '<div>TEXT</div>'
-      );
-    }
-
-    console.log('baseText', [baseNode], baseText);
+    baseNode.parentElement.outerHTML = baseNode.parentElement.outerHTML.replace(
+      baseText,
+      renderToString(<SignText>{baseText}</SignText>)
+    );
   };
 
   return (
