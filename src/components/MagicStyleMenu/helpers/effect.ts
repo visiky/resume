@@ -31,7 +31,7 @@ const effectReplace = (effect: ReplaceEffect) => {
 };
 const effectReback = (effect: ReplaceEffect) => {
   const parentElement = document.getElementById(effect.insertID);
-  parentElement.innerHTML = effect.text;
+  parentElement.outerText = effect.text;
 };
 
 const mountEffect = (
