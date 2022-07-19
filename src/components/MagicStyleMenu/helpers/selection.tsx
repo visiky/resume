@@ -41,6 +41,8 @@ export const selectionReplace = (
 
 export const handleSelectionReplace = (
   selection: Selection & {
+    anchorNode: HTMLElement;
+    anchorOffset: number;
     baseNode: HTMLElement;
     baseOffset: number;
     extentNode: HTMLElement;
@@ -48,14 +50,20 @@ export const handleSelectionReplace = (
   },
   render: ((arg0: string) => JSX.Element) | JSX.Element | string
 ) => {
-  const { baseNode, extentNode } = selection;
-  if (baseNode.parentElement !== extentNode.parentElement) {
+  const { anchorNode, extentNode } = selection;
+  if (anchorNode.parentElement !== extentNode.parentElement) {
     console.warn('一次选中多个分片，暂未处理该部分');
     return;
   }
+  const baseNode =
+    selection.anchorOffset < selection.extentOffset ? anchorNode : extentNode;
+  const baseOffset =
+    selection.anchorOffset < selection.extentOffset
+      ? selection.anchorOffset
+      : selection.extentOffset;
   const [id, html] = selectionReplace(
     baseNode,
-    selection.baseOffset,
+    baseOffset,
     selection.toString(),
     render
   );

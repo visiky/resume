@@ -33,10 +33,12 @@ export const MagicStyleMenu: React.FC<MagicStyleMenuProps> = ({
 }) => {
   const [mountEffectList, unmountEffectList] = useReplaceEffect();
 
-  console.log('default', { defaultMount, defaultUnMount });
+  // console.log('default', { defaultMount, defaultUnMount });
 
   const handleSign = () => {
     const selection = window.getSelection() as Selection & {
+      anchorNode: HTMLElement;
+      anchorOffset: number;
       baseNode: HTMLElement;
       baseOffset: number;
       extentNode: HTMLElement;
