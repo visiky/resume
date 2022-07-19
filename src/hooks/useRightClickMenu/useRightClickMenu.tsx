@@ -9,8 +9,9 @@ export const useRightClickMenu = (
   const [contextMenu, setContextMenu] = useState({
     x: 0,
     y: 0,
-    visible: false,
+    visible: true,
   });
+  const memoAttr = useRef(null);
   const ref = useRef(null);
 
   useAppendRootNode('right-click-context-menu', () => (
@@ -23,17 +24,33 @@ export const useRightClickMenu = (
         top: contextMenu.y,
         display: contextMenu.visible ? 'flex' : 'none',
         zIndex: 9999999,
+        visibility: memoAttr.current === null ? 'hidden' : 'visible',
       }}
     >
       {menu}
     </div>
   ));
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const { clientHeight, clientWidth } = ref.current;
+    memoAttr.current = {
+      clientHeight,
+      clientWidth,
+    };
+    setContextMenu({
+      x: 0,
+      y: 0,
+      visible: false,
+    });
+  }, [ref.current]);
+
   useEffect(() => {
     const handleContextMenuClick = (e: PointerEvent) => {
       e.preventDefault();
       const { clientX, clientY } = e;
 
-      const { clientHeight, clientWidth } = ref.current;
+      const { clientHeight, clientWidth } = memoAttr.current;
       const {
         scrollHeight: windowHeight,
         scrollWidth: windowWidth,
@@ -46,12 +63,12 @@ export const useRightClickMenu = (
       }
 
       const x =
-        (clientWidth + clientX > windowWidth
+        (clientWidth + clientX + scrollLeft > windowWidth
           ? clientX - clientWidth
           : clientX) + scrollLeft;
 
       const y =
-        (clientHeight + clientY > windowHeight
+        (clientHeight + clientY + scrollTop > windowHeight
           ? clientY - clientHeight
           : clientY) + scrollTop;
       setContextMenu({
