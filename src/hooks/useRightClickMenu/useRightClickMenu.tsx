@@ -102,6 +102,15 @@ export const useRightClickMenu = (
       window.removeEventListener('resize', handleThrottleOutSideClick);
     };
   });
+
+  return [
+    visible => {
+      setContextMenu({
+        ...contextMenu,
+        visible,
+      });
+    },
+  ];
 };
 
 export default useRightClickMenu;
