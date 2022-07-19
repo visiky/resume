@@ -52,8 +52,8 @@ export const handleSelectionReplace = (
 ) => {
   const { anchorNode, extentNode } = selection;
   if (anchorNode.parentElement !== extentNode.parentElement) {
-    console.warn('一次选中多个分片，暂未处理该部分');
-    return;
+    console.error('一次选中多个分片，暂未处理该部分');
+    throw new Error('一次选中多个分片，暂未处理该部分');
   }
   const baseNode =
     selection.anchorOffset < selection.extentOffset ? anchorNode : extentNode;

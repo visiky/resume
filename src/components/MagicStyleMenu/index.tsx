@@ -44,9 +44,13 @@ export const MagicStyleMenu: React.FC<MagicStyleMenuProps> = ({
       extentNode: HTMLElement;
       extentOffset: number;
     };
-    handleSelectionReplace(selection, text => <SignText>{text}</SignText>);
-    message.success('标注成功');
-    onSign?.([mountEffectList, unmountEffectList]);
+    try {
+      handleSelectionReplace(selection, text => <SignText>{text}</SignText>);
+      message.success('标注成功');
+      onSign?.([mountEffectList, unmountEffectList]);
+    } catch (error) {
+      message.error('一次选中多个分片，暂未处理该部分逻辑');
+    }
   };
 
   return (
