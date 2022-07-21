@@ -11,7 +11,6 @@ export const selectionReplace = (
 ): [string, string] => {
   const id = `selection-replace-${Date.now()}`;
 
-  // debugger;
   const baseText = baseNode.textContent.slice(
     baseOffset,
     baseOffset + text.length
@@ -26,8 +25,8 @@ export const selectionReplace = (
       {render instanceof Function ? render(baseText) : render}
     </span>
   );
-
   const contentHTML = renderToString(content);
+
   if (headLength === html.length) {
     newOuterHTML = html.replace(baseHTML, contentHTML);
   } else {
@@ -67,7 +66,6 @@ export const handleSelectionReplace = (
     selection.toString(),
     render
   );
-  // debugger;
   mountEffect(baseNode, id, html, selection.toString());
   baseNode.parentElement.outerHTML = html;
 };

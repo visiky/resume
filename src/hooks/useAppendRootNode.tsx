@@ -10,7 +10,7 @@ type AppendRootNodeResult = [string, AppendRootNodeInstance];
 
 export const useAppendRootNode = (
   id: string,
-  render: () => JSX.Element | null,
+  render: (() => JSX.Element) | JSX.Element,
   createElement?: () => HTMLElement,
   parent: HTMLElement = document.body
 ): AppendRootNodeResult => {
@@ -36,8 +36,11 @@ export const useAppendRootNode = (
   }, []);
 
   useEffect(() => {
-    ReactDOM.render(render(), document.getElementById(id));
-  }, [render]);
+    ReactDOM.render(
+      render instanceof Function ? render() : render,
+      document.getElementById(id)
+    );
+  }, [render, id]);
   return [id, { show, destory }];
 };
 
