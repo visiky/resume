@@ -2,10 +2,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useAppendRootNode } from '../useAppendRootNode';
 import { throttle } from 'lodash-es';
 
+type RightClickMenuInstance = [number, number, (visible: boolean) => void];
 export const useRightClickMenu = (
-  menu: null | JSX.Element,
-  container: HTMLElement = document.body
-) => {
+  menu: JSX.Element | (() => JSX.Element),
+  container: HTMLElement | Element = document.body,
+  overflow: 'auto' | 'visible' = 'auto'
+): RightClickMenuInstance => {
   const [contextMenu, setContextMenu] = useState({
     x: 0,
     y: 0,
@@ -14,7 +16,8 @@ export const useRightClickMenu = (
   const memoAttr = useRef(null);
   const ref = useRef(null);
 
-  useAppendRootNode('right-click-context-menu', () => (
+  useAppendRootNode(
+    'right-click-context-menu',
     <div
       className="absolute"
       ref={ref}
@@ -27,9 +30,9 @@ export const useRightClickMenu = (
         visibility: memoAttr.current === null ? 'hidden' : 'visible',
       }}
     >
-      {menu}
+      {menu instanceof Function ? menu() : menu}
     </div>
-  ));
+  );
 
   useEffect(() => {
     if (!ref.current) return;
@@ -46,31 +49,37 @@ export const useRightClickMenu = (
   }, [ref.current]);
 
   useEffect(() => {
+    if (!container) return;
     const handleContextMenuClick = (e: PointerEvent) => {
       e.preventDefault();
-      const { clientX, clientY } = e;
+      const { pageX, pageY } = e;
 
       const { clientHeight, clientWidth } = memoAttr.current;
       const {
         scrollHeight: windowHeight,
         scrollWidth: windowWidth,
-        scrollTop,
-        scrollLeft,
       } = container;
 
-      if (clientHeight > windowHeight || clientWidth > windowWidth) {
+      if (
+        (clientHeight > windowHeight || clientWidth > windowWidth) &&
+        overflow !== 'visible'
+      ) {
         throw new Error('the menu is longer than the browser');
       }
 
       const x =
-        (clientWidth + clientX + scrollLeft > windowWidth
-          ? clientX - clientWidth
-          : clientX) + scrollLeft;
+        overflow === 'auto'
+          ? clientWidth + pageX > windowWidth
+            ? pageX - clientWidth
+            : pageX
+          : pageX;
 
       const y =
-        (clientHeight + clientY + scrollTop > windowHeight
-          ? clientY - clientHeight
-          : clientY) + scrollTop;
+        overflow === 'auto'
+          ? clientHeight + pageY > windowHeight
+            ? pageY - clientHeight
+            : pageY
+          : pageY;
       setContextMenu({
         x,
         y,
@@ -90,20 +99,22 @@ export const useRightClickMenu = (
     };
     const handleThrottleOutSideClick = throttle(handleOutsideClick, 800);
 
-    document.addEventListener('contextmenu', handleContextMenuClick);
+    container.addEventListener('contextmenu', handleContextMenuClick);
     document.addEventListener('click', handleOutsideClick);
     document.addEventListener('scroll', handleThrottleOutSideClick);
     window.addEventListener('resize', handleThrottleOutSideClick);
 
     return () => {
-      document.removeEventListener('contextmenu', handleContextMenuClick);
+      container.removeEventListener('contextmenu', handleContextMenuClick);
       document.removeEventListener('click', handleOutsideClick);
       document.removeEventListener('scroll', handleThrottleOutSideClick);
       window.removeEventListener('resize', handleThrottleOutSideClick);
     };
-  });
+  }, [container]);
 
   return [
+    contextMenu.x,
+    contextMenu.y,
     visible => {
       setContextMenu({
         ...contextMenu,
