@@ -17,6 +17,16 @@ export const useRightClickMenu = (
   });
   const memoAttr = useRef(null);
   const ref = useRef(null);
+  const container = (() => {
+    if (!target) return null;
+    if (target instanceof Function) {
+      return target();
+    }
+    if (target instanceof HTMLElement) {
+      return target;
+    }
+    return target.current;
+  })();
 
   useAppendRootNode(
     'right-click-context-menu',
@@ -51,17 +61,6 @@ export const useRightClickMenu = (
   }, [ref.current]);
 
   useEffect(() => {
-    const container = (() => {
-      if (!target) return null;
-      if (target instanceof Function) {
-        return target();
-      }
-      if (target instanceof HTMLElement) {
-        return target;
-      }
-      return target.current;
-    })();
-
     if (!container) return;
     const handleContextMenuClick = (e: PointerEvent) => {
       e.preventDefault();
@@ -111,7 +110,7 @@ export const useRightClickMenu = (
       document.removeEventListener('scroll', handleThrottleOutSideClick);
       window.removeEventListener('resize', handleThrottleOutSideClick);
     };
-  }, [target]);
+  }, [container]);
 
   return [
     contextMenu.x,
