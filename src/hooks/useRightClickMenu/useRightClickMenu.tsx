@@ -5,8 +5,10 @@ import { throttle } from 'lodash-es';
 type RightClickMenuInstance = [number, number, (visible: boolean) => void];
 export const useRightClickMenu = (
   menu: JSX.Element | (() => JSX.Element),
-  container: HTMLElement | Element = document.body,
-  overflow: 'auto' | 'visible' = 'auto'
+  target:
+    | HTMLElement
+    | (() => HTMLElement)
+    | React.MutableRefObject<HTMLElement> = document.body
 ): RightClickMenuInstance => {
   const [contextMenu, setContextMenu] = useState({
     x: 0,
@@ -49,6 +51,17 @@ export const useRightClickMenu = (
   }, [ref.current]);
 
   useEffect(() => {
+    const container = (() => {
+      if (!target) return null;
+      if (target instanceof Function) {
+        return target();
+      }
+      if (target instanceof HTMLElement) {
+        return target;
+      }
+      return target.current;
+    })();
+
     if (!container) return;
     const handleContextMenuClick = (e: PointerEvent) => {
       e.preventDefault();
@@ -58,28 +71,16 @@ export const useRightClickMenu = (
       const {
         scrollHeight: windowHeight,
         scrollWidth: windowWidth,
-      } = container;
+      } = document.body;
 
-      if (
-        (clientHeight > windowHeight || clientWidth > windowWidth) &&
-        overflow !== 'visible'
-      ) {
+      if (clientHeight > windowHeight || clientWidth > windowWidth) {
         throw new Error('the menu is longer than the browser');
       }
 
-      const x =
-        overflow === 'auto'
-          ? clientWidth + pageX > windowWidth
-            ? pageX - clientWidth
-            : pageX
-          : pageX;
+      const x = clientWidth + pageX > windowWidth ? pageX - clientWidth : pageX;
 
       const y =
-        overflow === 'auto'
-          ? clientHeight + pageY > windowHeight
-            ? pageY - clientHeight
-            : pageY
-          : pageY;
+        clientHeight + pageY > windowHeight ? pageY - clientHeight : pageY;
       setContextMenu({
         x,
         y,
@@ -110,7 +111,7 @@ export const useRightClickMenu = (
       document.removeEventListener('scroll', handleThrottleOutSideClick);
       window.removeEventListener('resize', handleThrottleOutSideClick);
     };
-  }, [container]);
+  }, [target]);
 
   return [
     contextMenu.x,

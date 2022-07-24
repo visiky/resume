@@ -45,9 +45,7 @@ export const Page: React.FC = () => {
     tagColor: '#8bc34a',
   });
 
-  // findScrollEle为递归操作有性能压力，考虑之下选择直接选中document.body.parentElement
-  // const scrollContainer = findScrollEle(document.body);
-  const scrollContainer = document.body.parentElement;
+  const pageRef = useRef(null);
   useRightClickMenu(
     <MagicStyleMenu
       onSign={([mountEffectList, unmountEffectList]) => {
@@ -62,7 +60,7 @@ export const Page: React.FC = () => {
         ? { defaultUnMount: config.unmountEffectList }
         : {})}
     />,
-    scrollContainer
+    pageRef
   );
 
   const changeConfig = (v: Partial<ResumeConfig>) => {
@@ -244,7 +242,7 @@ export const Page: React.FC = () => {
             closable
           />
         )}
-        <div className="page">
+        <div className="page" ref={pageRef}>
           {config && (
             <Resume value={config} theme={theme} template={template} />
           )}
