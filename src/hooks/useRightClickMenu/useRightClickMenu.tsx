@@ -23,7 +23,7 @@ export const useRightClickMenu = (
       return target();
     }
     // @ts-ignore
-    if (target.current) {
+    if (target.current !== void 0) {
       // @ts-ignore
       return target.current;
     }
