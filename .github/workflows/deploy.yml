@@ -1,13 +1,10 @@
 name: github pages
-
 on:
   push:
     branches:
-      - master  # Set a branch name to trigger deployment
-  workflow_dispatch:
-
+      - master
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,7 +15,7 @@ jobs:
         with:
           node-version: 16
 
-       - name: Install and Build
+      - name: Install and Build
         run: |
           npm install -g pnpm
           pnpm install
@@ -34,4 +31,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ${{ github.workspace }}
-          
