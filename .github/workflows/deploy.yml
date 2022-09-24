@@ -21,10 +21,6 @@ jobs:
           pnpm install
           npm run build
 
-      - name: List files
-        run: ls -la
-        working-directory: ${{ github.workspace }}/public
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
