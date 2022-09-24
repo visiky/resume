@@ -3,7 +3,7 @@ import React, {
   useState,
   useEffect,
   useRef,
-  useMemo,
+  useLayoutEffect,
 } from 'react';
 import { Button, Affix, Upload, Spin, message, Alert, Modal } from 'antd';
 import { RcFile } from 'antd/lib/upload';
@@ -14,7 +14,6 @@ import { getDefaultTitleNameMap } from '@/datas/constant';
 import { getSearchObj } from '@/helpers/location';
 import { customAssign } from '@/helpers/customAssign';
 import { copyToClipboard } from '@/helpers/copy-to-board';
-// import { findScrollEle } from '@/helpers/scroll';
 import { getDevice } from '@/helpers/detect-device';
 import { exportDataToLocal } from '@/helpers/export-to-local';
 import { getConfig, saveToLocalStorage } from '@/helpers/store-to-local';
@@ -25,6 +24,10 @@ import { ResumeConfig, ThemeConfig } from './types';
 
 import { useRightClickMenu } from '@/hooks';
 import { MagicStyleMenu } from '@/components/MagicStyleMenu';
+import {
+  effectReplace,
+  connectEffect,
+} from '@/components/MagicStyleMenu/helpers/effect';
 
 import './index.less';
 
@@ -64,10 +67,35 @@ export const Page: React.FC = () => {
   );
 
   const changeConfig = (v: Partial<ResumeConfig>) => {
+    if (v.template) {
+      updateTemplate(v.template as string);
+    }
     setConfig(
-      _.assign({}, { titleNameMap: getDefaultTitleNameMap({ i18n }) }, v)
+      _.assign(
+        {},
+        { titleNameMap: getDefaultTitleNameMap({ i18n }), template },
+        v
+      )
     );
   };
+
+  useLayoutEffect(() => {
+    if (!config) return;
+    const { mountEffectList, unmountEffectList } = config;
+    if (unmountEffectList) {
+      connectEffect(mountEffectList, 'unmount');
+    }
+    if (mountEffectList) {
+      connectEffect(mountEffectList, 'mount');
+      Modal.confirm({
+        content: i18n.get('检测到存在未应用的标记，是否应用'),
+        onOk: () =>
+          mountEffectList.forEach(effect => {
+            effectReplace(effect);
+          }),
+      });
+    }
+  }, [config]);
 
   useEffect(() => {
     if (query.template) {

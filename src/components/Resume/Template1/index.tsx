@@ -80,7 +80,12 @@ export const Template1: React.FC<Props> = props => {
       <div className="basic-info">
         {/* 头像 */}
         {!value?.avatar?.hidden && (
-          <Avatar avatarSrc={value?.avatar?.src} className="avatar" shape={value?.avatar?.shape} size={value?.avatar?.size} />
+          <Avatar
+            avatarSrc={value?.avatar?.src}
+            className="avatar"
+            shape={value?.avatar?.shape}
+            size={value?.avatar?.size}
+          />
         )}
         {/* 个人信息 */}
         <div className="profile">
@@ -345,11 +350,11 @@ export const Template1: React.FC<Props> = props => {
                         )}
                       </div>
                       <div className="section-detail">
-                        <b>{i18n.get('项目描述')}：</b>
+                        <b>{titleNameMap?.projectDescribe}：</b>
                         <span>{project.project_desc}</span>
                       </div>
                       <div className="section-detail">
-                        <b>{i18n.get('主要工作')}：</b>
+                        <b>{titleNameMap?.projectMainWork}：</b>
                         <span className="project-content">
                           {project.project_content}
                         </span>

@@ -349,11 +349,11 @@ export const Template3: React.FC<Props> = props => {
                         )}
                       </div>
                       <div className="section-detail">
-                        <b>{i18n.get('项目描述')}：</b>
+                        <b>{titleNameMap?.projectDescribe}：</b>
                         <span>{project.project_desc}</span>
                       </div>
                       <div className="section-detail">
-                        <b>{i18n.get('主要工作')}：</b>
+                        <b>{titleNameMap?.projectMainWork}：</b>
                         <span className="project-content">
                           {project.project_content}
                         </span>
