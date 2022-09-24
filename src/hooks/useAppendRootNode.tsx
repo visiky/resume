@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { isBrowser } from '@/helpers/isBrowser';
 
 interface AppendRootNodeInstance {
   show: () => void;
@@ -12,7 +13,7 @@ export const useAppendRootNode = (
   id: string,
   render: (() => JSX.Element) | JSX.Element,
   createElement?: () => HTMLElement,
-  parent: HTMLElement = document.body
+  parent: HTMLElement = isBrowser() ? document.body : null
 ): AppendRootNodeResult => {
   const show = () => {
     if (document.getElementById(id)) {

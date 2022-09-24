@@ -22,10 +22,12 @@ export const useRightClickMenu = (
     if (target instanceof Function) {
       return target();
     }
-    if (target instanceof HTMLElement) {
-      return target;
+    // @ts-ignore
+    if (target.current) {
+      // @ts-ignore
+      return target.current;
     }
-    return target.current;
+    return target;
   })();
 
   useAppendRootNode(

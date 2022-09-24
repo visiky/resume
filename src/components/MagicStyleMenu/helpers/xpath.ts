@@ -1,4 +1,9 @@
+import { isBrowser } from '@/helpers/isBrowser';
+
 function getXPath(element) {
+  if (!isBrowser()) {
+    return '';
+  }
   if (element.id) return 'id("' + element.id + '")';
   if (element === document.body) return element.tagName;
 
