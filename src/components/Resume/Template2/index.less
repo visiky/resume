@@ -197,11 +197,14 @@
   }
 
   // main-info 内容样式
-  .main-info section {
+  .main-info .section {
     margin-bottom: 16px;
 
     .section-detail {
       letter-spacing: 1.2px;
+      & > span:nth-child(1){
+        font-weight: 700;
+      }
 
       &:not(:first-of-type) {
         margin-top: 4px;

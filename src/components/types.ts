@@ -1,3 +1,5 @@
+import { ReplaceEffect } from './MagicStyleMenu/helpers/effect';
+
 /** 简历配置内容 */
 export type ResumeConfig = {
   /** 头像 */
@@ -31,6 +33,10 @@ export type ResumeConfig = {
     workExpList?: string;
     /** 默认: 项目经历 */
     projectList?: string;
+    /** 默认: 项目经历-项目描述 */
+    projectDescribe: string;
+    /** 默认: 项目经历-主要工作 */
+    projectMainWork?: string;
     /** 默认: 个人技能 */
     skillList?: string;
     /** 默认: 更多信息 */
@@ -105,6 +111,13 @@ export type ResumeConfig = {
   locales?: {
     [key: string]: ResumeConfig;
   };
+
+  /** 样式调整effect */
+  unmountEffectList?: Array<ReplaceEffect>;
+  mountEffectList?: Array<ReplaceEffect>;
+
+  /** 模版指定 */
+  template?: string;
 };
 
 /**

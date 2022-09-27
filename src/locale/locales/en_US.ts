@@ -63,18 +63,26 @@ export const EN_US_LOCALE: Locale = {
   获奖时间: 'Awards time',
 
   '默认模板(适用于单页)': 'Default template, apply to single page',
-  '简易模板': 'Simple template',
+  简易模板: 'Simple template',
   '简易模板(适用于多页)': 'Simple template, apply to multiple page',
 
-  '移动端模式下，只支持预览，不支持配置': '',
-  '移动端只提供查看功能，在线制作请前往 PC 端': '',
-  '上传配置已应用': '',
-  '上传文件有误，请重新上传': '',
-  '您当前浏览器不支持 FileReader，建议使用谷歌浏览器': '',
-  '编辑模式下, 切换国际化会导致配置内容丢失，请及时保存': '',
-  '进入在线编辑': '',
-  '获取简历信息失败': '',
-  '确定': 'Ok',
+  '移动端模式下，只支持预览，不支持配置':
+    'In mobile terminal mode, only preview is supported, and configuration is not supported',
+  '移动端只提供查看功能，在线制作请前往 PC 端':
+    'The mobile terminal only provides the viewing function. Please go to the PC terminal for online production',
+  上传配置已应用: 'Uploading configuration has been applied',
+  '上传文件有误，请重新上传': 'Error in uploading file, please upload again',
+  '您当前浏览器不支持 FileReader，建议使用谷歌浏览器':
+    'Your current browser does not support FileReader. It is recommended to use Google Browser',
+  '编辑模式下, 切换国际化会导致配置内容丢失，请及时保存':
+    'In editing mode, switching internationalization will result in the loss of configuration content. Please save it in time',
+  进入在线编辑: 'Enter online editing',
+  获取简历信息失败: 'Failed to obtain resume information',
+  确定: 'Ok',
 
-  '无用户信息模式下，不允许预览': ''
-}
+  '无用户信息模式下，不允许预览':
+    'Preview is not allowed in the mode without user information',
+
+  '检测到存在未应用的标记，是否应用':
+    'Unapplied tags are detected, whether to apply',
+};

@@ -1,5 +1,4 @@
-import { ResumeConfig } from "@/components/types";
-
+import { ResumeConfig } from '@/components/types';
 
 export function getDefaultTitleNameMap({ i18n }): ResumeConfig['titleNameMap'] {
   return {
@@ -9,6 +8,10 @@ export function getDefaultTitleNameMap({ i18n }): ResumeConfig['titleNameMap'] {
     workExpList: i18n.get('工作经历'),
     /** 默认: 项目经历 */
     projectList: i18n.get('项目经历'),
+    /** 默认: 项目经历-项目描述 */
+    projectDescribe: i18n.get('项目描述'),
+    /** 默认: 项目经历-主要工作 */
+    projectMainWork: i18n.get('主要工作'),
     /** 默认: 个人技能 */
     skillList: i18n.get('个人技能'),
     /** 默认: 更多信息 */
@@ -16,6 +19,6 @@ export function getDefaultTitleNameMap({ i18n }): ResumeConfig['titleNameMap'] {
     /** 默认: 作品 */
     workList: i18n.get('个人作品'),
     /** 默认: 自我介绍 */
-    aboutme: i18n.get('自我介绍')
-  }
-};
+    aboutme: i18n.get('自我介绍'),
+  };
+}

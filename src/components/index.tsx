@@ -1,4 +1,10 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+} from 'react';
 import { Button, Affix, Upload, Spin, message, Alert, Modal } from 'antd';
 import { RcFile } from 'antd/lib/upload';
 import _ from 'lodash-es';
@@ -15,12 +21,21 @@ import { fetchResume } from '@/helpers/fetch-resume';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import { ResumeConfig, ThemeConfig } from './types';
+
+import { useRightClickMenu } from '@/hooks';
+import { MagicStyleMenu } from '@/components/MagicStyleMenu';
+import {
+  effectReplace,
+  connectEffect,
+} from '@/components/MagicStyleMenu/helpers/effect';
+
 import './index.less';
 
 export const Page: React.FC = () => {
   const lang = getLanguage();
   const i18n = getLocale();
   const user = getSearchObj().user || 'visiky';
+  const mountFlag = useRef(false);
 
   const [, mode, changeMode] = useModeSwitcher({});
 
@@ -30,15 +45,59 @@ export const Page: React.FC = () => {
   const [loading, updateLoading] = useState<boolean>(true);
   const [template, updateTemplate] = useState<string>('template1');
   const [theme, setTheme] = useState<ThemeConfig>({
-    color: '#2f5785',
-    tagColor: '#8bc34a',
+    color: 'var(--primary-color)',
+    tagColor: 'var(--tag-color)',
   });
 
+  const pageRef = useRef(null);
+  useRightClickMenu(
+    <MagicStyleMenu
+      onSign={([mountEffectList, unmountEffectList]) => {
+        // 无需重渲染
+        config.mountEffectList = mountEffectList;
+        config.unmountEffectList = unmountEffectList;
+      }}
+      {...(config?.mountEffectList
+        ? { defaultMount: config.mountEffectList }
+        : {})}
+      {...(config?.unmountEffectList
+        ? { defaultUnMount: config.unmountEffectList }
+        : {})}
+    />,
+    pageRef
+  );
+
   const changeConfig = (v: Partial<ResumeConfig>) => {
+    if (v.template) {
+      updateTemplate(v.template as string);
+    }
     setConfig(
-      _.assign({}, { titleNameMap: getDefaultTitleNameMap({ i18n }) }, v)
+      _.assign(
+        {},
+        { titleNameMap: getDefaultTitleNameMap({ i18n }), template },
+        v
+      )
     );
   };
+
+  useLayoutEffect(() => {
+    if (!config || mountFlag.current) return;
+    const { mountEffectList, unmountEffectList } = config;
+    if (unmountEffectList) {
+      connectEffect(mountEffectList, 'unmount');
+    }
+    if (mountEffectList) {
+      connectEffect(mountEffectList, 'mount');
+      Modal.confirm({
+        content: i18n.get('检测到存在未应用的标记，是否应用'),
+        onOk: () =>
+          mountEffectList.forEach(effect => {
+            effectReplace(effect);
+          }),
+      });
+    }
+    mountFlag.current = true;
+  }, [config]);
 
   useEffect(() => {
     if (query.template) {
@@ -134,6 +193,7 @@ export const Page: React.FC = () => {
   }, []);
 
   const importConfig = (file: RcFile) => {
+    mountFlag.current = false;
     if (window.FileReader) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -213,7 +273,7 @@ export const Page: React.FC = () => {
             closable
           />
         )}
-        <div className="page">
+        <div className="page" ref={pageRef}>
           {config && (
             <Resume value={config} theme={theme} template={template} />
           )}
