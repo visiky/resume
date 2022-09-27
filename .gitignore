@@ -17,7 +17,12 @@ node_modules
 # vscode editor
 .vscode
 
+# webstorm editor
+.idea
 
 # gatsby files
 .cache/
 public
+
+# package lock file
+package-lock.json

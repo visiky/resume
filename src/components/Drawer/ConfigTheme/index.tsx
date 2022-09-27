@@ -1,7 +1,7 @@
 import { getLocale } from '@/locale';
 import React, { useEffect } from 'react';
 import { ColorPicker } from '../../FormCreator/ColorPicker';
-import { ThemeConfig } from '../../types';
+import type { ThemeConfig } from '../../types';
 
 type Props = ThemeConfig & {
   onChange: (v: Partial<ThemeConfig>) => void;

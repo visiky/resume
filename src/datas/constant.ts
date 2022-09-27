@@ -1,4 +1,4 @@
-import { ResumeConfig } from "@/components/types";
+import type { ResumeConfig } from "@/components/types";
 
 
 export function getDefaultTitleNameMap({ i18n }): ResumeConfig['titleNameMap'] {

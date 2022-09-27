@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { ResumeConfig } from "@/components/types";
+import type { ResumeConfig } from "@/components/types";
 import { customAssign } from "@/helpers/customAssign";
 import _ from "lodash";
 import { getLocale } from '@/locale';

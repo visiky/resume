@@ -11,7 +11,7 @@ import {
   ScheduleTwoTone,
 } from '@ant-design/icons';
 import _ from 'lodash-es';
-import { ResumeConfig } from '@/components/types';
+import type { ResumeConfig } from '@/components/types';
 
 /**
  * ① 内置的简历模块

@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { Button, Affix, Upload, Spin, message, Alert, Modal } from 'antd';
-import { RcFile } from 'antd/lib/upload';
+import type { RcFile } from 'antd/lib/upload';
 import _ from 'lodash-es';
 import { getLanguage, getLocale } from '@/locale';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
@@ -14,7 +14,7 @@ import { getConfig, saveToLocalStorage } from '@/helpers/store-to-local';
 import { fetchResume } from '@/helpers/fetch-resume';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
-import { ResumeConfig, ThemeConfig } from './types';
+import type { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
 
 export const Page: React.FC = () => {

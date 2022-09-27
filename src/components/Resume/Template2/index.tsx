@@ -16,7 +16,7 @@ import _ from 'lodash-es';
 import { getLocale } from '@/locale';
 import { getDefaultTitleNameMap } from '@/datas/constant';
 import { Avatar } from '../../Avatar';
-import { ResumeConfig, ThemeConfig } from '../../types';
+import type { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
 
 type Props = {

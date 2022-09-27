@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch';
 import _ from "lodash";
-import { ResumeConfig } from "@/components/types";
+import type { ResumeConfig } from "@/components/types";
 import { customAssign } from "./customAssign";
 
 export function fetchResume(lang: string, branch: string, user: string): Promise<ResumeConfig> {
