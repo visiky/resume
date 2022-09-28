@@ -159,6 +159,13 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
     projectList: [
       {
         type: 'input',
+        attributeId: 'project_time',
+        displayName: i18n.get('起止时间'),
+        formItemProps: { rules: [{ required: true }] },
+        // cfg: { picker: 'month' },
+      },
+      {
+        type: 'input',
         attributeId: 'project_name',
         displayName: i18n.get('项目名称'),
       },
