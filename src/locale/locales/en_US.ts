@@ -44,7 +44,7 @@ export const EN_US_LOCALE: Locale = {
   邮箱: 'Email',
   知乎: 'Zhihu',
   职位: 'Position title',
-  工作地: 'work space',
+  期望工作地: 'work space',
   起始时间: 'Start time',
   学校: 'School',
   专业: 'Major in',

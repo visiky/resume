@@ -128,7 +128,7 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'input',
         attributeId: 'workPlace',
-        displayName: i18n.get('工作地'),
+        displayName: i18n.get('期望工作地'),
       },
       {
         type: 'input',
