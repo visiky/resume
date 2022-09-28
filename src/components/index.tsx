@@ -244,9 +244,6 @@ export const Page: React.FC = () => {
                       {i18n.get('导入配置')}
                     </Button>
                   </Upload>
-                  <Button type="primary" onClick={() => window.print()}>
-                    {i18n.get('PDF 下载')}
-                  </Button>
                 </Button.Group>
               </Affix>
               <div
