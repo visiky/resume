@@ -105,6 +105,8 @@ export type ResumeConfig = {
   locales?: {
     [key: string]: ResumeConfig;
   };
+
+  template?: string;
 };
 
 /**

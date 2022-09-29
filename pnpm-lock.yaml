@@ -21,6 +21,7 @@ specifiers:
   lint-staged: ^12.3.5
   lodash-es: ^4.17.21
   prettier: 2.2.1
+  query-string: ^7.1.1
   react: ^17.0.1
   react-color: ^2.19.3
   react-dnd: ^14.0.2
@@ -41,6 +42,7 @@ dependencies:
   cross-fetch: 3.1.5
   gatsby-plugin-google-gtag: 4.24.0_67zqrbeeco77wy6p2csmn6n6uq
   lodash-es: 4.17.21
+  query-string: 7.1.1
   react: 17.0.2
   react-color: 2.19.3_react@17.0.2
   react-dnd: 14.0.5_sudpmbbyhqtxq6t4xf6jlicdem
@@ -9769,6 +9771,16 @@ packages:
       filter-obj: 1.1.0
       split-on-first: 1.1.0
       strict-uri-encode: 2.0.0
+
+  /query-string/7.1.1:
+    resolution: {integrity: sha512-MplouLRDHBZSG9z7fpuAAcI7aAYjDLhtsiVZsevsfaHWDS2IDdORKbSd1kWUA+V4zyva/HZoSfpwnYMMQDhb0w==}
+    engines: {node: '>=6'}
+    dependencies:
+      decode-uri-component: 0.2.0
+      filter-obj: 1.1.0
+      split-on-first: 1.1.0
+      strict-uri-encode: 2.0.0
+    dev: false
 
   /querystring-es3/0.2.1:
     resolution: {integrity: sha512-773xhDQnZBMFobEiztv8LIl70ch5MSF/jUQVlhwFyBILqq96anmoctVIYz+ZRp0qbCKATTn6ev02M3r7Ga5vqA==}
