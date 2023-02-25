@@ -3,6 +3,7 @@ import { Button, Affix, Upload, Spin, message, Alert, Modal } from 'antd';
 import type { RcFile } from 'antd/lib/upload';
 import _ from 'lodash-es';
 import qs from 'query-string';
+import jsonUrl from 'json-url';
 import { getLanguage, getLocale } from '@/locale';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
 import { getDefaultTitleNameMap } from '@/datas/constant';
@@ -17,6 +18,8 @@ import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import type { ResumeConfig, ThemeConfig } from './types';
 import './index.less';
+
+const codec = jsonUrl('lzma');
 
 export const Page: React.FC = () => {
   const lang = getLanguage();
@@ -47,7 +50,6 @@ export const Page: React.FC = () => {
         template: config?.template || 'template1',
         ...qs.parse(currentSearch),
       });
-
       window.location.href = `${pathname}?${search}${hash}`;
     }
   }, [config]);
@@ -108,9 +110,17 @@ export const Page: React.FC = () => {
           });
         });
     } else {
-      getConfig(lang, branch, user).then(data => store(data));
+      if (query.data) {
+        codec.decompress(query.data).then(data => {
+          store(JSON.parse(data));
+        });
+      } else {
+        getConfig(lang, branch, user).then(data => {
+          store(data);
+        });
+      }
     }
-  }, [lang, query.user, query.branch]);
+  }, [lang, query.user, query.branch, query.data]);
 
   const onConfigChange = useCallback(
     (v: Partial<ResumeConfig>) => {
@@ -203,6 +213,17 @@ export const Page: React.FC = () => {
     exportDataToLocal(getConfigJson(), `${user}'s resume info`);
   };
 
+  const handleSharing = () => {
+    const fullConfig = getConfigJson();
+    codec.compress(fullConfig).then(data => {
+      const url = new URL(window.location.href);
+      url.searchParams.set('data', data);
+
+      console.log('sharing url', url.toString());
+      copyToClipboard(url.toString());
+    });
+  };
+
   return (
     <React.Fragment>
       <Spin spinning={loading}>
@@ -277,6 +298,9 @@ export const Page: React.FC = () => {
                   </Upload>
                   <Button type="primary" onClick={() => window.print()}>
                     {i18n.get('PDF 下载')}
+                  </Button>
+                  <Button type="primary" onClick={handleSharing}>
+                    {i18n.get('分享')}
                   </Button>
                 </Button.Group>
               </Affix>
