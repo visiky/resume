@@ -18,27 +18,55 @@ import type { ResumeConfig } from '@/components/types';
  * ② 后续支持添加自定义模块
  */
 export const MODULES = ({
-  i18n,
+  intl,
   titleNameMap,
 }: {
-  i18n: any;
+  intl: any;
   titleNameMap?: ResumeConfig['titleNameMap'];
 }) => {
   return [
-    { name: i18n.get('头像设置'), icon: <ContactsTwoTone />, key: 'avatar' },
-    { name: i18n.get('个人信息'), icon: <ProfileTwoTone />, key: 'profile' },
     {
-      name: i18n.get('教育背景'),
+      name: intl.formatMessage({ id: '头像设置' }),
+      icon: <ContactsTwoTone />,
+      key: 'avatar',
+    },
+    {
+      name: intl.formatMessage({ id: '个人信息' }),
+      icon: <ProfileTwoTone />,
+      key: 'profile',
+    },
+    {
+      name: intl.formatMessage({ id: '教育背景' }),
       icon: <ScheduleTwoTone />,
       key: 'educationList',
     },
-    { name: i18n.get('自我介绍'), icon: <SmileTwoTone />, key: 'aboutme' },
-    { name: i18n.get('更多信息'), icon: <TrophyTwoTone />, key: 'awardList' },
-    { name: i18n.get('个人作品'), icon: <ToolTwoTone />, key: 'workList' },
-    { name: i18n.get('专业技能'), icon: <RocketTwoTone />, key: 'skillList' },
-    { name: i18n.get('工作经历'), icon: <TagsTwoTone />, key: 'workExpList' },
     {
-      name: i18n.get('项目经历'),
+      name: intl.formatMessage({ id: '自我介绍' }),
+      icon: <SmileTwoTone />,
+      key: 'aboutme',
+    },
+    {
+      name: intl.formatMessage({ id: '更多信息' }),
+      icon: <TrophyTwoTone />,
+      key: 'awardList',
+    },
+    {
+      name: intl.formatMessage({ id: '个人作品' }),
+      icon: <ToolTwoTone />,
+      key: 'workList',
+    },
+    {
+      name: intl.formatMessage({ id: '专业技能' }),
+      icon: <RocketTwoTone />,
+      key: 'skillList',
+    },
+    {
+      name: intl.formatMessage({ id: '工作经历' }),
+      icon: <TagsTwoTone />,
+      key: 'workExpList',
+    },
+    {
+      name: intl.formatMessage({ id: '项目经历' }),
       icon: <ProjectTwoTone />,
       key: 'projectList',
     },
@@ -51,13 +79,13 @@ export const MODULES = ({
 /**
  * 模块对应配置内容
  */
-export const CONTENT_OF_MODULE = ({ i18n }) => {
+export const CONTENT_OF_MODULE = ({ intl }) => {
   return {
     avatar: [
       {
         type: 'checkbox',
         attributeId: 'hidden',
-        displayName: i18n.get('隐藏头像'),
+        displayName: intl.formatMessage({ id: '隐藏头像' }),
         formItemProps: {
           valuePropName: 'checked',
         },
@@ -68,12 +96,12 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'select',
         attributeId: 'shape',
-        displayName: i18n.get('头像形状'),
+        displayName: intl.formatMessage({ id: '头像形状' }),
         cfg: {
           defaultValue: 'circle',
           options: [
-            { value: 'circle', label: i18n.get('圆形') },
-            { value: 'square', label: i18n.get('方形') },
+            { value: 'circle', label: intl.formatMessage({ id: '圆形' }) },
+            { value: 'square', label: intl.formatMessage({ id: '方形' }) },
           ],
         },
       },
@@ -82,13 +110,13 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'input',
         attributeId: 'name',
-        displayName: i18n.get('姓名'),
+        displayName: intl.formatMessage({ id: '姓名' }),
         formItemProps: { rules: [{ required: true }] },
       },
       {
         type: 'input',
         attributeId: 'mobile',
-        displayName: i18n.get('手机号码'),
+        displayName: intl.formatMessage({ id: '手机号码' }),
         formItemProps: {
           rules: [
             { required: true, message: 'Please input your phone number!' },
@@ -98,7 +126,7 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'input',
         attributeId: 'email',
-        displayName: i18n.get('邮箱'),
+        displayName: intl.formatMessage({ id: '邮箱' }),
         formItemProps: {
           rules: [{ required: true, message: 'Please input your email!' }],
         },
@@ -106,7 +134,7 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'input',
         attributeId: 'github',
-        displayName: i18n.get('Github'),
+        displayName: intl.formatMessage({ id: 'Github' }),
         cfg: {
           placeholder: 'Please input your github account, optional',
         },
@@ -114,7 +142,7 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'input',
         attributeId: 'zhihu',
-        displayName: i18n.get('知乎'),
+        displayName: intl.formatMessage({ id: '知乎' }),
         cfg: {
           placeholder:
             'Please input the link to visit your zhihu account, optional',
@@ -123,67 +151,67 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'input',
         attributeId: 'workExpYear',
-        displayName: i18n.get('工作经验'),
+        displayName: intl.formatMessage({ id: '工作经验' }),
       },
       {
         type: 'input',
         attributeId: 'workPlace',
-        displayName: i18n.get('期望工作地'),
+        displayName: intl.formatMessage({ id: '期望工作地' }),
       },
       {
         type: 'input',
         attributeId: 'positionTitle',
-        displayName: i18n.get('职位'),
+        displayName: intl.formatMessage({ id: '职位' }),
       },
     ],
     educationList: [
       {
         type: 'input',
         attributeId: 'edu_time',
-        displayName: i18n.get('起始时间'),
+        displayName: intl.formatMessage({ id: '起始时间' }),
         formItemProps: { rules: [{ required: true }] },
         // cfg: { picker: 'month' },
       },
       {
         type: 'input',
         attributeId: 'school',
-        displayName: i18n.get('学校'),
+        displayName: intl.formatMessage({ id: '学校' }),
         formItemProps: { rules: [{ required: true }] },
       },
       {
         type: 'input',
         attributeId: 'major',
-        displayName: i18n.get('专业'),
+        displayName: intl.formatMessage({ id: '专业' }),
       },
     ],
     projectList: [
       {
         type: 'input',
         attributeId: 'project_time',
-        displayName: i18n.get('起止时间'),
+        displayName: intl.formatMessage({ id: '起止时间' }),
         formItemProps: { rules: [{ required: true }] },
         // cfg: { picker: 'month' },
       },
       {
         type: 'input',
         attributeId: 'project_name',
-        displayName: i18n.get('项目名称'),
+        displayName: intl.formatMessage({ id: '项目名称' }),
       },
       {
         type: 'input',
         attributeId: 'project_role',
-        displayName: i18n.get('担任角色'),
+        displayName: intl.formatMessage({ id: '担任角色' }),
       },
       {
         type: 'textArea',
         attributeId: 'project_desc',
-        displayName: i18n.get('项目描述'),
+        displayName: intl.formatMessage({ id: '项目描述' }),
         cfg: { autoSize: { minRows: 8 }, showCount: true },
       },
       {
         type: 'textArea',
         attributeId: 'project_content',
-        displayName: i18n.get('主要工作'),
+        displayName: intl.formatMessage({ id: '主要工作' }),
         cfg: {
           autoSize: { minRows: 8 },
           showCount: true,
@@ -197,54 +225,54 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'input',
         attributeId: 'work_time',
-        displayName: i18n.get('起止时间'),
+        displayName: intl.formatMessage({ id: '起止时间' }),
         formItemProps: { rules: [{ required: true }] },
         // cfg: { picker: 'month' },
       },
       {
         type: 'input',
         attributeId: 'company_name',
-        displayName: i18n.get('公司名称'),
+        displayName: intl.formatMessage({ id: '公司名称' }),
         formItemProps: { rules: [{ required: true }] },
       },
       {
         type: 'input',
         attributeId: 'department_name',
-        displayName: i18n.get('部门'),
+        displayName: intl.formatMessage({ id: '部门' }),
       },
       {
         type: 'textArea',
         attributeId: 'work_desc',
-        displayName: i18n.get('职位或描述'),
+        displayName: intl.formatMessage({ id: '职位或描述' }),
       },
     ],
     workList: [
       {
         type: 'input',
         attributeId: 'work_name',
-        displayName: i18n.get('作品名称'),
+        displayName: intl.formatMessage({ id: '作品名称' }),
       },
       {
         type: 'input',
         attributeId: 'work_desc',
-        displayName: i18n.get('作品描述'),
+        displayName: intl.formatMessage({ id: '作品描述' }),
       },
       {
         type: 'input',
         attributeId: 'visit_link',
-        displayName: i18n.get('作品链接'),
+        displayName: intl.formatMessage({ id: '作品链接' }),
       },
     ],
     skillList: [
       {
         type: 'input',
         attributeId: 'skill_name',
-        displayName: i18n.get('技能项'),
+        displayName: intl.formatMessage({ id: '技能项' }),
       },
       {
         type: 'number',
         attributeId: 'skill_level',
-        displayName: i18n.get('掌握程度'),
+        displayName: intl.formatMessage({ id: '掌握程度' }),
         cfg: {
           step: 20,
           min: 0,
@@ -256,21 +284,21 @@ export const CONTENT_OF_MODULE = ({ i18n }) => {
       {
         type: 'textArea',
         attributeId: 'skill_desc',
-        displayName: i18n.get('技能描述'),
+        displayName: intl.formatMessage({ id: '技能描述' }),
       },
     ],
     awardList: [
       {
         type: 'input',
         attributeId: 'award_time',
-        displayName: i18n.get('获奖时间'),
+        displayName: intl.formatMessage({ id: '获奖时间' }),
         formItemProps: { rules: [{ required: true }] },
         // cfg: { picker: 'month' },
       },
       {
         type: 'input',
         attributeId: 'award_info',
-        displayName: i18n.get('奖项内容'),
+        displayName: intl.formatMessage({ id: '奖项内容' }),
         formItemProps: { rules: [{ required: true }] },
       },
     ],

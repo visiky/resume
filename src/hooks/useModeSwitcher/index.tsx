@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { Popover } from 'antd';
 import qs from 'query-string';
-import { getLocale } from '@/locale';
+import { FormattedMessage } from 'react-intl';
 import { getSearchObj } from '@/helpers/location';
 import './index.less';
 
@@ -16,7 +16,6 @@ export const useModeSwitcher = ({
 }: {
   className?: string;
 }): [JSX.Element, string, (v) => void] => {
-  const i18n = getLocale();
   const mode = getMode();
   const query = getSearchObj();
 
@@ -42,17 +41,19 @@ export const useModeSwitcher = ({
     <div className={cx('mode-switcher', className)}>
       {mode !== 'edit' && (
         <span className={cx('mode-item')} onClick={() => changeMode('edit')}>
-          {i18n.get('编辑')}
+          <FormattedMessage id="编辑" />
         </span>
       )}
       {mode === 'edit' &&
         (canPreview ? (
-          <Popover content={i18n.get('无用户信息，不允许预览')}>
-            <span>{i18n.get('预览')}</span>
+          <Popover content={<FormattedMessage id="无用户信息，不允许预览" />}>
+            <span>
+              <FormattedMessage id="预览" />
+            </span>
           </Popover>
         ) : (
           <span className={cx('mode-item')} onClick={() => changeMode('read')}>
-            {i18n.get('预览')}
+            <FormattedMessage id="预览" />
           </span>
         ))}
     </div>,

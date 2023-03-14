@@ -13,8 +13,8 @@ import {
   HeartFilled,
 } from '@ant-design/icons';
 import _ from 'lodash-es';
-import { getLocale } from '@/locale';
-import { getDefaultTitleNameMap } from '@/datas/constant';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { getDefaultTitleNameMap } from '@/data/constant';
 import { Avatar } from '../../Avatar';
 import type { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';
@@ -42,7 +42,7 @@ const wrapper = ({ id, title, color }) => WrappedComponent => {
  * @description 简历内容区
  */
 export const Template1: React.FC<Props> = props => {
-  const i18n = getLocale();
+  const intl = useIntl();
   const { value, theme } = props;
 
   /** 个人基础信息 */
@@ -51,7 +51,7 @@ export const Template1: React.FC<Props> = props => {
   const titleNameMap = _.get(
     value,
     'titleNameMap',
-    getDefaultTitleNameMap({ i18n })
+    getDefaultTitleNameMap({ intl })
   );
 
   /** 教育背景 */
@@ -135,7 +135,7 @@ export const Template1: React.FC<Props> = props => {
               <div className="work-exp-year">
                 <ScheduleFilled style={{ color: theme.color, opacity: 0.85 }} />
                 <span>
-                  {i18n.get('工作经验')}: {profile.workExpYear}
+                  <FormattedMessage id="工作经验" />: {profile.workExpYear}
                 </span>
               </div>
             )}
@@ -145,7 +145,7 @@ export const Template1: React.FC<Props> = props => {
                   style={{ color: theme.color, opacity: 0.85 }}
                 />
                 <span>
-                  {i18n.get('期望工作地')}: {profile.workPlace}
+                  <FormattedMessage id="期望工作地" />: {profile.workPlace}
                 </span>
               </div>
             )}
@@ -153,7 +153,7 @@ export const Template1: React.FC<Props> = props => {
               <div className="expect-job">
                 <HeartFilled style={{ color: theme.color, opacity: 0.85 }} />
                 <span>
-                  {i18n.get('职位')}: {profile.positionTitle}
+                  <FormattedMessage id="职位" />: {profile.positionTitle}
                 </span>
               </div>
             )}
@@ -163,7 +163,7 @@ export const Template1: React.FC<Props> = props => {
         {!!_.trim(_.join(aboutme, '')) && (
           <section className="section section-aboutme">
             <div className="section-title" style={{ color: theme.color }}>
-              {i18n.get('自我介绍')}
+              <FormattedMessage id="自我介绍" />
             </div>
             {aboutme.map((d, idx) => (
               <div key={`${idx}`}>{d}</div>
@@ -174,7 +174,7 @@ export const Template1: React.FC<Props> = props => {
         {educationList?.length ? (
           <section className="section section-education">
             <div className="section-title" style={{ color: theme.color }}>
-              {/* {i18n.get('教育背景')} */}
+              {/* <FormattedMessage id="教育背景" /> */}
               {titleNameMap?.educationList}
             </div>
             {educationList.map((education, idx) => {
@@ -185,7 +185,7 @@ export const Template1: React.FC<Props> = props => {
                     <b>{education.school}</b>
                     <span className="sub-info" style={{ float: 'right' }}>
                       {start}
-                      {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
+                      {end ? ` ~ ${end}` : <FormattedMessage id=" 至今" />}
                     </span>
                   </div>
                   <div>
@@ -204,7 +204,7 @@ export const Template1: React.FC<Props> = props => {
         {workList?.length ? (
           <section className="section section-work">
             <div className="section-title" style={{ color: theme.color }}>
-              {/* {i18n.get('个人作品')} */}
+              {/* <FormattedMessage id="个人作品" /> */}
               {titleNameMap?.workList}
             </div>
             {workList.map((work, idx) => {
@@ -216,7 +216,7 @@ export const Template1: React.FC<Props> = props => {
                     />
                     <b className="info-name">{work.work_name}</b>
                     <a className="sub-info" href={work.visit_link}>
-                      {i18n.get('访问链接')}
+                      <FormattedMessage id="访问链接" />
                     </a>
                   </div>
                   {work.work_desc && <div>{work.work_desc}</div>}
@@ -229,7 +229,7 @@ export const Template1: React.FC<Props> = props => {
         {skillList?.length ? (
           <section className="section section-skill">
             <div className="section-title" style={{ color: theme.color }}>
-              {/* {i18n.get('专业技能')} */}
+              {/* <FormattedMessage id="专业技能" /> */}
               {titleNameMap?.skillList}
             </div>
             {skillList.map((skill, idx) => {
@@ -270,7 +270,7 @@ export const Template1: React.FC<Props> = props => {
         {awardList?.length ? (
           <section className="section section-award">
             <div className="section-title" style={{ color: theme.color }}>
-              {/* {i18n.get('更多信息')} */}
+              {/* <FormattedMessage id="更多信息" /> */}
               {titleNameMap?.awardList}
             </div>
             {awardList.map((award, idx) => {
@@ -295,7 +295,6 @@ export const Template1: React.FC<Props> = props => {
         {workExpList?.length
           ? wrapper({
               id: 'work-experience',
-              // title: i18n.get('工作经历'),
               title: titleNameMap?.workExpList,
               color: theme.color,
             })(
@@ -314,7 +313,7 @@ export const Template1: React.FC<Props> = props => {
                         </b>
                         <span className="info-time">
                           {start}
-                          {end ? ` ~ ${end}` : ` ${i18n.get('至今')}`}
+                          {end ? ` ~ ${end}` : <FormattedMessage id=" 至今" />}
                         </span>
                       </div>
                       <div className="work-description">{work.work_desc}</div>
@@ -328,7 +327,6 @@ export const Template1: React.FC<Props> = props => {
         {projectList?.length
           ? wrapper({
               id: 'skill',
-              // title: i18n.get('项目经历'),
               title: titleNameMap?.projectList,
               color: theme.color,
             })(
@@ -350,11 +348,15 @@ export const Template1: React.FC<Props> = props => {
                         )}
                       </div>
                       <div className="section-detail">
-                        <b>{i18n.get('项目描述')}：</b>
+                        <b>
+                          <FormattedMessage id="项目描述" />：
+                        </b>
                         <span>{project.project_desc}</span>
                       </div>
                       <div className="section-detail">
-                        <b>{i18n.get('主要工作')}：</b>
+                        <b>
+                          <FormattedMessage id="主要工作" />：
+                        </b>
                         <span className="project-content">
                           {project.project_content}
                         </span>

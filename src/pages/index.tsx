@@ -4,11 +4,12 @@ import qs from 'query-string';
 import Header from '@/layout/header';
 import Footer from '@/layout/footer';
 import Content from '@/components';
-import { EN_US_LOCALE } from '@/locale/locales/en_US';
-import { registerLocale } from '@/locale';
+import EN_US_LOCALE from '@/i18n/locales/en-US.json';
+import { getLanguage, registerLocale, getLocale } from '@/i18n';
+import { IntlProvider } from 'react-intl';
 import './index.less';
 
-registerLocale('en_US', EN_US_LOCALE);
+registerLocale('en-US', EN_US_LOCALE);
 
 const Page = () => {
   const [title, changeTitle] = useState('Resume Generator');
@@ -20,15 +21,16 @@ const Page = () => {
     }
   }, []);
 
+  const lang = getLanguage();
   return (
-    <React.Fragment>
+    <IntlProvider locale={lang} messages={getLocale(lang)}>
       <Helmet>
         <title>{title}</title>
       </Helmet>
       <Header />
       <Content />
       <Footer />
-    </React.Fragment>
+    </IntlProvider>
   );
 };
 

@@ -4,9 +4,10 @@ import type { RcFile } from 'antd/lib/upload';
 import _ from 'lodash-es';
 import qs from 'query-string';
 import jsonUrl from 'json-url';
-import { getLanguage, getLocale } from '@/locale';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { getLanguage } from '@/i18n';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
-import { getDefaultTitleNameMap } from '@/datas/constant';
+import { getDefaultTitleNameMap } from '@/data/constant';
 import { getSearchObj } from '@/helpers/location';
 import { customAssign } from '@/helpers/customAssign';
 import { copyToClipboard } from '@/helpers/copy-to-board';
@@ -17,13 +18,14 @@ import { fetchResume } from '@/helpers/fetch-resume';
 import { Drawer } from './Drawer';
 import { Resume } from './Resume';
 import type { ResumeConfig, ThemeConfig } from './types';
+
 import './index.less';
 
 const codec = jsonUrl('lzma');
 
 export const Page: React.FC = () => {
   const lang = getLanguage();
-  const i18n = getLocale();
+  const intl = useIntl();
   const user = getSearchObj().user || 'visiky';
 
   const [, mode, changeMode] = useModeSwitcher({});
@@ -71,7 +73,7 @@ export const Page: React.FC = () => {
 
   const changeConfig = (v: Partial<ResumeConfig>) => {
     setConfig(
-      _.assign({}, { titleNameMap: getDefaultTitleNameMap({ i18n }) }, v)
+      _.assign({}, { titleNameMap: getDefaultTitleNameMap({ intl }) }, v)
     );
   };
 
@@ -96,14 +98,14 @@ export const Page: React.FC = () => {
         .then(data => store(data))
         .catch(() => {
           Modal.info({
-            title: i18n.get('获取简历信息失败'),
+            title: <FormattedMessage id="获取简历信息失败" />,
             content: (
               <div>
                 请检查用户名 {user} 是否正确或者简历信息是否在
                 <a href={link} target="_blank">{`${link}/resume.json`}</a>下
               </div>
             ),
-            okText: i18n.get('进入在线编辑'),
+            okText: <FormattedMessage id="进入在线编辑" />, // intl.formatMessage({ id: '进入在线编辑' }),
             onOk: () => {
               changeMode('edit');
             },
@@ -140,7 +142,9 @@ export const Page: React.FC = () => {
 
   useEffect(() => {
     if (getDevice() === 'mobile') {
-      message.info(i18n.get('移动端只提供查看功能，在线制作请前往 PC 端'));
+      message.info(
+        intl.formatMessage({ id: '移动端只提供查看功能，在线制作请前往 PC 端' })
+      );
     }
   }, []);
 
@@ -181,15 +185,17 @@ export const Page: React.FC = () => {
             onThemeChange(newConfig.theme);
             onConfigChange(_.omit(newConfig, 'theme'));
           }
-          message.success(i18n.get('上传配置已应用'));
+          message.success(intl.formatMessage({ id: '上传配置已应用' }));
         } catch (err) {
-          message.error(i18n.get('上传文件有误，请重新上传'));
+          message.error(intl.formatMessage({ id: '上传文件有误，请重新上传' }));
         }
       };
       reader.readAsText(file);
     } else {
       message.error(
-        i18n.get('您当前浏览器不支持 FileReader，建议使用谷歌浏览器')
+        intl.formatMessage({
+          id: '您当前浏览器不支持 FileReader，建议使用谷歌浏览器',
+        })
       );
     }
     return false;
@@ -197,7 +203,7 @@ export const Page: React.FC = () => {
 
   function getConfigJson() {
     let fullConfig = config;
-    if (lang !== 'zh_CN') {
+    if (lang !== 'zh-CN') {
       fullConfig = customAssign({}, originalConfig?.current, {
         locales: { [lang]: config },
       });
@@ -232,10 +238,12 @@ export const Page: React.FC = () => {
             showIcon={false}
             message={
               <span>
-                {i18n.get(`编辑之后，请及时存储个人信息到个人仓库中。`)}
+                {intl.formatMessage({
+                  id: `编辑之后，请及时存储个人信息到个人仓库中。`,
+                })}
                 <span>
                   <span style={{ marginRight: '4px' }}>
-                    👉 {!query.user && i18n.get('参考：')}
+                    👉 {!query.user && intl.formatMessage({ id: '参考：' })}
                   </span>
                   <span
                     style={{
@@ -278,14 +286,15 @@ export const Page: React.FC = () => {
                     onValueChange={onConfigChange}
                     theme={theme}
                     onThemeChange={onThemeChange}
+                    // @ts-ignore
                     template={query.template || 'template1'}
                     onTemplateChange={updateTemplate}
                   />
                   <Button type="primary" onClick={copyConfig}>
-                    {i18n.get('复制配置')}
+                    <FormattedMessage id="复制配置" />
                   </Button>
                   <Button type="primary" onClick={exportConfig}>
-                    {i18n.get('保存简历')}
+                    <FormattedMessage id="保存简历" />
                   </Button>
                   <Upload
                     accept=".json"
@@ -293,14 +302,14 @@ export const Page: React.FC = () => {
                     beforeUpload={importConfig}
                   >
                     <Button className="btn-upload">
-                      {i18n.get('导入配置')}
+                      <FormattedMessage id="导入配置" />
                     </Button>
                   </Upload>
                   <Button type="primary" onClick={() => window.print()}>
-                    {i18n.get('PDF 下载')}
+                    <FormattedMessage id="下载 PDF" />
                   </Button>
                   <Button type="primary" onClick={handleSharing}>
-                    {i18n.get('分享')}
+                    <FormattedMessage id="分享" />
                   </Button>
                 </Button.Group>
               </Affix>
