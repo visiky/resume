@@ -57,9 +57,7 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "i18n-pick": "node ./scripts/i18n-pick.js",
-    "extract": "formatjs extract 'src/**/*.ts*' --ignore '**/locales/**' --format i18n.formatter.js --out-file i18n.temp.json --flatten",
-    "compile": "formatjs compile 'temp.json' --out-file i18n/en.json && rm i18n.temp.json",
-    "extract-compile": "npm run extract && npm run compile"
+    "extract": "formatjs extract 'src/**/*.ts*' --ignore '**/locales/**' --format i18n.formatter.js --out-file i18n.temp.json --flatten"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
