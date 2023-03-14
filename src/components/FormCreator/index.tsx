@@ -61,6 +61,9 @@ export const FormCreator: React.FC<Props> = props => {
     if ('edu_time' in values && typeof values.edu_time === 'string') {
       values.edu_time = values.edu_time.split(',');
     }
+    if ('work_time' in values) {
+      values.work_time = values.work_time.split(',');
+    }
     props.onChange(values);
   };
   const formProps = {
