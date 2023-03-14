@@ -4,7 +4,7 @@ import qs from 'query-string';
 import Header from '@/layout/header';
 import Footer from '@/layout/footer';
 import Content from '@/components';
-import { EN_US_LOCALE } from '@/i18n/locales/en-US';
+import EN_US_LOCALE from '@/i18n/locales/en-US.json';
 import { getLanguage, registerLocale, getLocale } from '@/i18n';
 import { IntlProvider } from 'react-intl';
 import './index.less';

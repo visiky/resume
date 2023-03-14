@@ -192,7 +192,7 @@ export const Template3: React.FC<Props> = props => {
                     </span>
                     <span className="sub-info" style={{ float: 'right' }}>
                       {start}
-                      {end ? ` ~ ${end}` : ` $<FormattedMessage id="至今" />`}
+                      {end ? ` ~ ${end}` : <FormattedMessage id=" 至今" />}
                     </span>
                   </div>
                 </div>
@@ -312,9 +312,7 @@ export const Template3: React.FC<Props> = props => {
                         </b>
                         <span className="info-time">
                           {start}
-                          {end
-                            ? ` ~ ${end}`
-                            : ` $<FormattedMessage id="至今" />`}
+                          {end ? ` ~ ${end}` : <FormattedMessage id=" 至今" />}
                         </span>
                       </div>
                       <div className="work-description">{work.work_desc}</div>
