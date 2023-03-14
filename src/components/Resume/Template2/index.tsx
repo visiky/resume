@@ -14,7 +14,7 @@ import {
 import cx from 'classnames';
 import _ from 'lodash-es';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { getDefaultTitleNameMap } from '@/datas/constant';
+import { getDefaultTitleNameMap } from '@/data/constant';
 import { Avatar } from '../../Avatar';
 import type { ResumeConfig, ThemeConfig } from '../../types';
 import './index.less';

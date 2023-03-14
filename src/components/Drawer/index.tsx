@@ -14,7 +14,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import _ from 'lodash-es';
 import arrayMove from 'array-move';
 import { FormCreator } from '../FormCreator';
-import { getDefaultTitleNameMap } from '@/datas/constant';
+import { getDefaultTitleNameMap } from '@/data/constant';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { MODULES, CONTENT_OF_MODULE } from '@/helpers/contant';
 import type { ResumeConfig, ThemeConfig } from '../types';

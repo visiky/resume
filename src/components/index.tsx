@@ -7,7 +7,7 @@ import jsonUrl from 'json-url';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { getLanguage } from '@/i18n';
 import { useModeSwitcher } from '@/hooks/useModeSwitcher';
-import { getDefaultTitleNameMap } from '@/datas/constant';
+import { getDefaultTitleNameMap } from '@/data/constant';
 import { getSearchObj } from '@/helpers/location';
 import { customAssign } from '@/helpers/customAssign';
 import { copyToClipboard } from '@/helpers/copy-to-board';
