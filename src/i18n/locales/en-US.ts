@@ -1,7 +1,7 @@
 import type { Locale } from '../types';
 
 export const EN_US_LOCALE: Locale = {
-  locale: 'en_US',
+  locale: 'en-US',
 
   预览: 'Preview',
   编辑: 'Edit',
@@ -19,14 +19,14 @@ export const EN_US_LOCALE: Locale = {
   继续添加: 'Continue add',
   提交: 'Submit',
   主题色: 'Brand color',
-  'tag 标签色': 'Tag color',
+  'Tag 标签色': 'Tag color',
 
   工作经验: 'Work experience',
   自我介绍: 'Introduction',
   教育背景: 'Educational background',
   个人作品: 'Personal works',
   专业技能: 'Professional skills',
-  更多信息: 'More informations',
+  更多信息: 'More information',
   工作经历: 'Work experience',
   项目经历: 'Project experience',
   项目描述: 'Description',
@@ -35,7 +35,7 @@ export const EN_US_LOCALE: Locale = {
   访问链接: 'link',
 
   头像设置: 'Avatar',
-  个人信息: 'Personal infomation',
+  个人信息: 'Personal information',
   个人技能: 'Personal skills',
 
   隐藏头像: 'Hide avatar',

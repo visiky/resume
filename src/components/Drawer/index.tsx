@@ -15,7 +15,7 @@ import _ from 'lodash-es';
 import arrayMove from 'array-move';
 import { FormCreator } from '../FormCreator';
 import { getDefaultTitleNameMap } from '@/datas/constant';
-import { getLocale } from '@/locale';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { MODULES, CONTENT_OF_MODULE } from '@/helpers/contant';
 import type { ResumeConfig, ThemeConfig } from '../types';
 import { ConfigTheme } from './ConfigTheme';
@@ -82,7 +82,7 @@ const DragableRow = ({ index, moveRow, ...restProps }) => {
  * @description 简历配置区
  */
 export const Drawer: React.FC<Props> = props => {
-  const i18n = getLocale();
+  const intl = useIntl();
 
   const [visible, setVisible] = useState(false);
   const [childrenDrawer, setChildrenDrawer] = useState(null);
@@ -122,14 +122,14 @@ export const Drawer: React.FC<Props> = props => {
 
   const modules = useMemo(() => {
     const titleNameMap = props.value?.titleNameMap;
-    return MODULES({ i18n, titleNameMap });
-  }, [i18n, props.value?.titleNameMap]);
+    return MODULES({ intl, titleNameMap });
+  }, [intl, props.value?.titleNameMap]);
 
   const contentOfModule = useMemo(() => {
-    return CONTENT_OF_MODULE({ i18n });
-  }, [i18n]);
+    return CONTENT_OF_MODULE({ intl });
+  }, [intl]);
 
-  const DEFAULT_TITLE_MAP = getDefaultTitleNameMap({ i18n });
+  const DEFAULT_TITLE_MAP = getDefaultTitleNameMap({ intl });
   const isList = _.endsWith(childrenDrawer, 'List');
 
   // #region 1 render: moduleContent
@@ -182,7 +182,7 @@ export const Drawer: React.FC<Props> = props => {
         <DeleteFilled
           onClick={() => {
             Modal.confirm({
-              content: i18n.get('确认删除'),
+              content: intl.formatMessage({ id: '确认删除' }),
               onOk: () => deleteItem(key, idx),
             });
           }}
@@ -203,7 +203,7 @@ export const Drawer: React.FC<Props> = props => {
                   updateCurrentContent(null);
                 }}
               >
-                {i18n.get('继续添加')}
+                <FormattedMessage id="继续添加" />
               </div>
             </div>
           </Panel>
@@ -301,16 +301,24 @@ export const Drawer: React.FC<Props> = props => {
         onClick={() => setVisible(true)}
         style={props.style}
       >
-        {i18n.get('进行配置')}
-        <Popover content={i18n.get('移动端模式下，只支持预览，不支持配置')}>
+        <FormattedMessage id="进行配置" />
+        <Popover
+          content={
+            <FormattedMessage id="移动端模式下，只支持预览，不支持配置" />
+          }
+        >
           <InfoCircleFilled style={{ marginLeft: '4px' }} />
         </Popover>
       </Button>
       <AntdDrawer
         title={
           <Radio.Group value={type} onChange={e => setType(e.target.value)}>
-            <Radio.Button value="template">{i18n.get('选择模板')}</Radio.Button>
-            <Radio.Button value="module">{i18n.get('配置简历')}</Radio.Button>
+            <Radio.Button value="template">
+              <FormattedMessage id="选择模板" />
+            </Radio.Button>
+            <Radio.Button value="module">
+              <FormattedMessage id="配置简历" />
+            </Radio.Button>
           </Radio.Group>
         }
         width={480}

@@ -3,7 +3,7 @@ import { Form, Input, InputNumber, Button, Checkbox, Select } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 import _ from 'lodash-es';
 import { ColorPicker } from './ColorPicker';
-import { getLocale } from '@/locale';
+import { FormattedMessage } from 'react-intl';
 
 type Props = {
   /** 表单配置 */
@@ -47,7 +47,6 @@ const FormItemComponentMap = (type: string) => (
 };
 
 export const FormCreator: React.FC<Props> = props => {
-  const i18n = getLocale();
   const [fields, setFields] = useState([]);
 
   useEffect(() => {
@@ -95,7 +94,7 @@ export const FormCreator: React.FC<Props> = props => {
         {props.isList && (
           <Form.Item wrapperCol={{ offset: 6 }}>
             <Button type="primary" htmlType="submit">
-              {i18n.get('提交')}
+              <FormattedMessage id="提交" />
             </Button>
           </Form.Item>
         )}

@@ -139,7 +139,7 @@ export const RESUME_INFO: ResumeConfig = {
   },
   // 国际化
   locales: {
-    en_US: {
+    'en-US': {
       profile: {
         name: 'Xiaojuan Liao',
         email: '736****86@qq.com',
