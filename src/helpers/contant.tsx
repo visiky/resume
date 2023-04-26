@@ -94,6 +94,14 @@ export const CONTENT_OF_MODULE = ({ intl }) => {
         },
       },
       {
+        type: 'input',
+        attributeId: 'src',
+        displayName: i18n.get('头像地址'),
+        cfg: {
+          placeholder: 'https://xxx.png',
+        },
+      },
+      {
         type: 'select',
         attributeId: 'shape',
         displayName: intl.formatMessage({ id: '头像形状' }),
