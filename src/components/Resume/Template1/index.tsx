@@ -300,8 +300,10 @@ export const Template1: React.FC<Props> = props => {
             })(
               <div className="section section-work-exp">
                 {_.map(workExpList, (work, idx) => {
-                  const start = work.work_time[0];
-                  const end = work.work_time[1] ? work.work_time[1] : null;
+                  const [start = null, end = null] =
+                    typeof work.work_time === 'string'
+                      ? `${work.work_time || ''}`.split(',')
+                      : work.work_time;
                   return work ? (
                     <div className="section-item" key={idx.toString()}>
                       <div className="section-info">
