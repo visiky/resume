@@ -11,6 +11,7 @@ import {
   ScheduleTwoTone,
 } from '@ant-design/icons';
 import _ from 'lodash-es';
+import { intl } from '@/i18n';
 import type { ResumeConfig } from '@/components/types';
 
 /**
@@ -96,7 +97,7 @@ export const CONTENT_OF_MODULE = ({ intl }) => {
       {
         type: 'input',
         attributeId: 'src',
-        displayName: i18n.get('头像地址'),
+        displayName: intl.get('头像地址'),
         cfg: {
           placeholder: 'https://xxx.png',
         },
