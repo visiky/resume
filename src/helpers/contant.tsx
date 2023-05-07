@@ -97,7 +97,7 @@ export const CONTENT_OF_MODULE = ({ intl }) => {
       {
         type: 'input',
         attributeId: 'src',
-        displayName: intl.get('头像地址'),
+        displayName: intl.formatMessage({ id: '头像地址' }),
         cfg: {
           placeholder: 'https://xxx.png',
         },
