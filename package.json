@@ -33,7 +33,7 @@
     "@types/react": "^17.0.3",
     "babel-plugin-import": "^1.13.3",
     "cross-env": "^7.0.3",
-    "gatsby": "^2.32.13",
+    "gatsby": "^4.25.7",
     "gatsby-plugin-antd": "^2.2.0",
     "gatsby-plugin-less": "^5.2.0",
     "gatsby-plugin-pnpm": "^1.2.10",
