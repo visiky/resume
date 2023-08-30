@@ -28,8 +28,9 @@ const Wrapper = ({ className, title, color, children }) => {
   return (
     <div className={cx('section', className)}>
       <div className="section-title" style={{ color }}>
-        <span className="title">{title}</span>
-        <span className="title-addon" />
+        <span className="title">{title}&nbsp;&nbsp;</span>
+        {/*<span className="title-addon" />*/}
+        <hr className="title-hr-addon" />
       </div>
       <div className="section-body">{children}</div>
     </div>
@@ -92,6 +93,24 @@ export const Template2: React.FC<Props> = props => {
                   {profile.email}
                 </div>
               )}
+              {profile?.positionTitle && (
+                <div className="expect-job">
+                  <HeartFilled style={{ color: theme.color, opacity: 0.85 }} />
+                  <span>
+                    <FormattedMessage id="职位" />: {profile.positionTitle}
+                  </span>
+                </div>
+              )}
+              {profile?.workPlace && (
+                <div className="work-place">
+                  <EnvironmentFilled
+                    style={{ color: theme.color, opacity: 0.85 }}
+                  />
+                  <span>
+                    <FormattedMessage id="期望工作地" />: {profile.workPlace}
+                  </span>
+                </div>
+              )}
               {profile?.github && (
                 <div className="github">
                   <GithubFilled style={{ color: theme.color, opacity: 0.85 }} />
@@ -130,24 +149,8 @@ export const Template2: React.FC<Props> = props => {
                   </span>
                 </div>
               )}
-              {profile?.workPlace && (
-                <div className="work-place">
-                  <EnvironmentFilled
-                    style={{ color: theme.color, opacity: 0.85 }}
-                  />
-                  <span>
-                    <FormattedMessage id="期望工作地" />: {profile.workPlace}
-                  </span>
-                </div>
-              )}
-              {profile?.positionTitle && (
-                <div className="expect-job">
-                  <HeartFilled style={{ color: theme.color, opacity: 0.85 }} />
-                  <span>
-                    <FormattedMessage id="职位" />: {profile.positionTitle}
-                  </span>
-                </div>
-              )}
+
+
             </div>
           </div>
           {/* 头像 */}
@@ -241,7 +244,7 @@ export const Template2: React.FC<Props> = props => {
             color={theme.color}
           >
             {skillList.map((skill, idx) => {
-              const skills = _.split(skill.skill_desc, '\n').join('；');
+              const skills = _.split(skill.skill_name, '\n').join('；');
               return skills ? (
                 <div className="skill-item" key={idx.toString()}>
                   <span>
